@@ -1,0 +1,5 @@
+.contract-section--link {}
+    .contract-section--link .is-normal { display: inline-block;}
+    .contract-section--link .is-white { display: none;}
+    .contract-section--link.is-selected .is-normal { display: none;}
+    .contract-section--link.is-selected .is-white { display: inline-block;}

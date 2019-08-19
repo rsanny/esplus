@@ -1,0 +1,111 @@
+.configurator-type {}
+    .configurator-type label {
+        position: relative;
+        font-size: 12px;
+        font-weight: 300;
+        padding: 0 16px;
+        margin: 0;
+    }
+        .configurator-type label input {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            opacity: 0;
+        }
+        .configurator-type label i {
+            display: block;
+            width: 56px;
+            height: 56px;
+            margin: 0 auto 10px;
+            background-position: top center;
+            background-repeat: no-repeat;
+        }
+            .configurator-type .configurator-type--gaz i {
+                background-image: url(/local/media/icons/icon-plate--gaz.png);
+            }
+            .configurator-type .configurator-type--elec i {
+                background-image: url(/local/media/icons/icon-plate--elec.png);
+            }
+            .configurator-type input + i + span:after {
+                opacity: 0;
+                font: 11px FontAwesome;
+                content: " \f00c";
+            }
+            .configurator-type .configurator-type--gaz input:checked + i {background-position: bottom;}
+            .configurator-type .configurator-type--elec input:checked + i {background-position: bottom;}
+            .configurator-type input:checked + i + span {color: #f05b25;}
+                .configurator-type input:checked + i + span:after {
+                    opacity: 1;
+                    font: 11px FontAwesome;
+                    content: " \f00c";
+                }
+.tariff-label {
+    background: #fff;
+    border: 1px solid #1f2f35;
+    text-align: center;
+    border-radius: 5px 5px 0 0 ;
+    overflow: hidden;
+}   
+    .tariff-label b {
+        display: block;
+        background: #1f2f35;
+        padding: 8px;
+        color: #fff;
+    }
+    .tariff-label div {
+        padding: 15px;
+    }
+.is-selected .tariff-label {border-color: #f05b25;}
+    .is-selected .tariff-label b { background: #f05b25;} 
+.is-selected .btn-grey--dark {
+    background: #f05b25
+}
+.configurator-range {
+    margin: 20px 0 15px;
+    min-height: 37px;
+}
+    .irs {
+        height: 37px;
+    }
+    .irs-line {
+        height: 3px;
+        background: #c14640;
+        top: 18px;
+    }
+    .irs-bar {
+        height: 3px;
+        background: #83cc29;
+        top: 18px;
+    }
+    .irs-slider {
+        width: 23px;
+        height: 23px;
+        background-color: #f05b25;
+        box-shadow: 0 0 0 6px rgba(255, 255, 255, 0.69);
+        border-radius: 50%;
+        top: 7px;
+    }
+    .irs-right-bar {
+        height: 3px;
+        right: 0;
+        background: #1e202f;
+        position: absolute;
+        top: 18px;
+    }
+.tariff-details {}
+    .tariff-details .table td,
+    .tariff-details .table th {font-size: 14px; line-height: 1.2;}
+
+@media (max-width: 767px){
+    .tariffs-digs--bottom {
+        position: relative;
+        padding-bottom: 39px;
+    }
+        .tariffs-digs--bottom .fs-30 {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+        }
+}

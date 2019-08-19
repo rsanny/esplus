@@ -1,0 +1,15 @@
+.guide-item {
+    display: block;
+    text-decoration: none;
+    font-size: 14px;
+}
+    .guide-item img {border-radius: 5px;}
+    .guide-item span {
+        display: block;
+        font-size: 16px;
+        margin: 15px 0 5px;
+    }
+    .guide-item b {
+        font-weight: 300;
+        color: #ff6414;
+    }

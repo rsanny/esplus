@@ -1,0 +1,38 @@
+.news-detail--share {}
+    .news-detail--share .ya-share2__list,
+    .news-detail--share .ya-share2__list li.ya-share2__item {
+        list-style:none;
+        padding:0;
+        margin:0;
+        display: inline-block;
+        vertical-align: top;
+        text-align: right;
+    }
+    .news-detail--share .ya-share2__list li:before {display:none;}
+    .news-detail--share .ya-share2__list li.ya-share2__item + li {margin:0 0 0 10px!important;}
+    .news-detail--share .ya-share2__container_size_m .ya-share2__icon {
+        font:18px FontAwesome;
+        color:#62707d;
+        background:none;
+        height:auto;
+        width:auto;
+        box-shadow:none;
+        height: 47px;
+        width: 47px;
+        border: 1px solid #e1e6ea;
+        border-radius: 50%;
+        text-align: center;
+        line-height: 47px;
+    }
+    .news-detail--share .ya-share2__container_size_m .ya-share2__icon:hover {color:#f05b25;}
+    .news-detail--share .ya-share2__container_size_m .ya-share2__badge {background:none;}
+    .news-detail--share .ya-share2__item_service_facebook .ya-share2__icon:after {content:"\f09a";}
+    .news-detail--share .ya-share2__item_service_twitter .ya-share2__icon:after {content:"\f099";}
+    .news-detail--share .ya-share2__item_service_odnoklassniki .ya-share2__icon:after {content:"\f263";}
+    .news-detail--share .ya-share2__item_service_vkontakte .ya-share2__icon:after {content:"\f189";}
+    .news-detail--share .ya-share2__item_service_gplus .ya-share2__icon:after {content:"\f0d5";}
+    .news-detail--share .ya-share2__container_size_m .ya-share2__icon:hover {
+        background: #ff6414;
+        border-color: #ff6414;
+    }
+    .news-detail--share .ya-share2__container_size_m .ya-share2__icon:hover:after {color: #fff;}

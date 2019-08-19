@@ -1,0 +1,4 @@
+AuthType Basic
+AuthName "Payment Auth"
+AuthUserFile /home/bitrix/www/personal/payment/.htpasswd
+Require valid-user

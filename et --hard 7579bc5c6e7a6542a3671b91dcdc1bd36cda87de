@@ -1,0 +1,73 @@
+[33mcommit a248a197dddee0e87b541852db85e4c72df948bf[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m)[m
+Author: Viktor <vsanzharevsky@gmail.com>
+Date:   Mon Aug 19 15:03:50 2019 +0300
+
+    Revert "Снимок сервера esplus.ru 09.08.2019 15.30"
+    
+    This reverts commit 7579bc5c6e7a6542a3671b91dcdc1bd36cda87de.
+
+[33mcommit 7579bc5c6e7a6542a3671b91dcdc1bd36cda87de[m
+Author: Viktor <vsanzharevsky@gmail.com>
+Date:   Mon Aug 19 15:02:40 2019 +0300
+
+    Снимок сервера esplus.ru 09.08.2019 15.30
+
+[33mcommit 4f71ed79c64659cfa3c468720b7d496a01f10182[m[33m ([m[1;31morigin/master[m[33m)[m
+Author: DorrBitt <vsanzharevsky@gmail.com>
+Date:   Fri Aug 9 15:46:45 2019 +0300
+
+    Снимок сервера esplus.ru 09.08.2019 15.30
+
+[33mcommit 5d0270a9212bac860bfb0caddc9f83dae40464a8[m
+Author: Viktor <vsanzharevsky@gmail.com>
+Date:   Mon Jun 3 14:58:07 2019 +0300
+
+    репозиторий E2
+
+[33mcommit 6d13896c18afadab67a362c238369cb2208e3d92[m
+Author: Viktor <vsanzharevsky@gmail.com>
+Date:   Mon Jun 3 14:57:28 2019 +0300
+
+    репозиторий ES
+
+[33mcommit 06578cc852d0c48071622fea32162366906abc3b[m
+Author: Viktor <vsanzharevsky@gmail.com>
+Date:   Fri May 31 16:58:23 2019 +0300
+
+     PHP
+
+[33mcommit 553423448f78cefb29b6c0e3a54a37f4ac4fc15e[m
+Author: Viktor <vsanzharevsky@gmail.com>
+Date:   Fri May 31 16:48:07 2019 +0300
+
+    Update test.txt
+
+[33mcommit d4bcf54d5e9d3d8ff63acd1f1b643c29de1f6c47[m
+Author: Viktor <vsanzharevsky@gmail.com>
+Date:   Fri May 31 16:12:48 2019 +0300
+
+    new
+
+[33mcommit 2e3f282a2cb25124032f967e116f2512f8ededc6[m
+Author: Viktor <22767005+rsanny@users.noreply.github.com>
+Date:   Fri May 31 16:00:04 2019 +0300
+
+    Delete README.md
+
+[33mcommit b8b7a805f738e721dcfd1b569dfee8776c50cb87[m
+Author: Viktor <22767005+rsanny@users.noreply.github.com>
+Date:   Fri May 31 15:59:55 2019 +0300
+
+    Delete LICENSE
+
+[33mcommit 3cf7b16c865e6421c8a5784ecc5eb720ffcfc465[m
+Author: Viktor <22767005+rsanny@users.noreply.github.com>
+Date:   Fri May 31 15:59:44 2019 +0300
+
+    Delete .gitignore
+
+[33mcommit 193b097879c2e099eede90360db247ca41cd3a3b[m
+Author: Viktor <22767005+rsanny@users.noreply.github.com>
+Date:   Thu May 30 09:09:17 2019 +0000
+
+    Initial commit

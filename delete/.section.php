@@ -1,0 +1,6 @@
+<?
+$sSectionName = "delete";
+$arDirProperties = Array(
+
+);
+?>

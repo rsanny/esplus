@@ -1,0 +1,18 @@
+Array
+(
+    [trx_id] => AC622FBC53BFCE52DA4F04B7E4C62D12
+    [merch_id] => 7D8EB98FED4BC3C7CF3B7B25DF33DEBD
+    [result_code] => 1
+    [amount] => 1000
+    [account_id] => 82255B568E76B047D3BA116968B3754B
+    [o_order_id] => 123
+    [p_isFullyAuthenticated] => Y
+    [p_maskedPan] => 900000xxxxxxxxx0001
+    [p_cardholder] => 
+    [ts] => 20171220 11:22:54
+    [signature] => jk9CSPMRkDhpOygDudPtqhYxpFLLXIe5qithpfDOBzvbyJ7XIbU+W2RyRlQO6IU0I3s0uecOJKNm
+yZqcg/DnaFj881ijfE3p1aFp+aUpz5uLOBq/GfcOBsesVHkJBluSNRmrSiX+nMeJ/UFwzuNw8qDr
+byXjwkUArYUB0wsryhhZM2TfeUjG9+X5IwOcMwyzr2VPcqUEf/Wea0Qy+Z/kg737rSZ9XcM6o7O7
+Xp93z0JWdOyScGQCnANeDaEmfw4n3PXsAE7pwlh6lABWuIebjjDEepRY2ZASOF6yg4jyF6ckgkcc
+ZB82QycjFHWe6N1f2RSJ63SW53kIroRuLljpnQ==
+)

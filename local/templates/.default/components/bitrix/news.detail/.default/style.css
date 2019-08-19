@@ -1,0 +1,15 @@
+.news-detail {
+    font-size:16px;
+    line-height:24px;
+}
+    .news-date-time {
+        line-height:1;
+        color:#9c9c9c;
+    }
+    .news-title {
+        font-size:30px;
+        font-weight:bold;
+        color:#333;
+        margin:33px 0;
+    }
+.visible-share.news-item--share .ya-share2__list li.ya-share2__item + li {margin-left:40px !important;}

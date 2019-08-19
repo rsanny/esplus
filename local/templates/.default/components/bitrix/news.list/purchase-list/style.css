@@ -1,0 +1,100 @@
+.project-filter {
+    background:#fff;
+    padding:24px 20px 20px 26px;
+    margin-bottom:22px;
+}
+    .project-filter--row {
+        font-size:14px;
+        color:#454747;
+    }
+        .project-filter--row__label {
+            border-bottom-color:transparent;
+            font-weight:600;
+            color:#454747;
+            display:block;
+            float:left;
+            margin-right:10px;
+            width:50px;
+        }
+    .project-filter--row + .project-filter--row {margin-top:20px;}
+
+        .project-filter--row .is-selected {
+            border-bottom-color:transparent;
+            font-weight:600;
+            color:#454747;
+            display:inline-block;
+            vertical-align:middle;
+         }
+         .project-filter--row span {margin-right:30px;}
+        .project-filter--row a {
+            display:inline-block;
+            vertical-align:middle;
+            margin:0 10px;
+        }
+.purchase-filter {
+   
+}
+    .purchase-filter .project-filter--row {
+        padding-top:18px;
+        line-height:50px;
+    }
+        .purchase-filter .project-filter--row a,
+        .purchase-filter .project-filter--row span,
+        .purchase-filter .project-filter--row div {line-height:1;}
+    .purchase-search {
+        position:relative;
+        margin:0 0 15px;
+    }
+        .purchase-search .form-control {
+        }
+        .purchase-search .btn {
+            position: absolute;
+            top: 1px;
+            right: 1px;
+            border-radius: 0 5px 5px 0;
+            bottom: 1px;
+        }        
+.date-inputs--label {
+    padding:10px 0 0;
+}
+.date-inputs {
+    display:table;
+}
+    .date-inputs .form-control--middle {
+        padding:0 15px;
+        display:table-cell;
+    }
+    .date-inputs .form-control--date {
+        position:relative;
+        display:table-cell;
+    }
+        .date-inputs .form-control--date input {
+            cursor:pointer;
+            background: #fff;
+        }
+        .date-inputs .form-control--date i {
+            position:absolute;
+            right:0;
+            top:0;
+            height:100%;
+            width:50px;
+            z-index:2;
+            cursor:pointer;
+            line-height:50px;
+            text-align:center;
+        }        
+.purchase-table {
+    border: 0!important;
+}
+    .purchase-table th,
+    .purchase-table td {
+        padding:20px 10px !important;
+        text-align:center;
+    }
+    .purchase-table th {
+        font-weight:bold;
+        color:#f05b25;
+        background: none!important;
+        border: 0!important;
+        border-bottom:2px solid #f05b25 !important;
+    }        

@@ -1,0 +1,75 @@
+.business-service {}
+    .business-service--item {
+        position: relative;
+        border: 1px solid #d9e2e9;
+        background: #fff;
+        border-radius: 5px;
+        overflow: hidden;
+        margin-bottom: 30px;
+    }
+    .business-service--item__head {
+        padding: 15px 20px;
+        font-size: 16px;
+        font-weight: 700;
+        color: #444;
+        background: #fff;
+        position: relative;
+        z-index: 3;
+        transition: .2s;
+    }
+    .business-service--item__rules {
+        padding:0 20px 15px;
+        font-size: 14px;
+        min-height: 105px;
+        color: #6e7b87;
+        background: #fff;
+        position: relative;
+        z-index: 3;
+        transition: .2s;
+    }
+    .business-service--item__hover {
+        height: 220px;
+        z-index: 1;
+        overflow: hidden;
+        display: block;
+        background-repeat: no-repeat;
+        background-position: top center;
+        background-size:cover;
+        transition: all .3s linear;
+    }
+.business-service--item__btn {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: #fff;
+    padding: 0 20px 15px;
+    z-index: 2;
+}
+    .business-service--item__btn div {
+        transform: translateY(200%);
+        transition: .4s;
+        opacity: 0;
+    }
+    .business-service--item__btn div + div {transition-delay: .08s;}
+.business-service--item:hover .business-service--item__hover {
+    transform: scale(1.04);
+}
+
+.business-service--item:hover .business-service--item__rules { transform: translateY(100%)}   
+.business-service--item:hover .business-service--item__btn div {
+    transform: translateY(0);
+    opacity: 1;
+}
+.business-service--filter {}
+    .business-service--filter span {
+        text-transform: uppercase;
+        color: #64707e;
+    }
+    .business-service--filter a {
+        margin-left: 30px;
+        display: inline-block;
+        font-size: 16px;
+        text-decoration: none;
+    }
+    

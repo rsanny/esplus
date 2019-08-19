@@ -1,0 +1,8 @@
+Array
+(
+    [trx_id] => 943676016A8A6C753BB48320A2EBF884
+    [lang_code] => RU
+    [merch_id] => 7D8EB98FED4BC3C7CF3B7B25DF33DEBD
+    [o_order_id] => 123
+    [ts] => 20171220 11:07:53
+)

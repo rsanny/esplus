@@ -1,0 +1,88 @@
+<?
+$aMenuLinks = Array(
+	Array(
+		"О компании", 
+		"/about/", 
+		Array(), 
+		Array(), 
+		"" 
+	),
+	Array(
+		"О филиале", 
+		"/company/", 
+		Array(), 
+		Array(), 
+		"" 
+	),
+	Array(
+		"Руководство", 
+		"/company/guide/", 
+		Array(), 
+		Array(), 
+		"" 
+	),
+	Array(
+		"Реквизиты", 
+		"/company/requisites/", 
+		Array(), 
+		Array(), 
+		"" 
+	),
+	Array(
+		"Закупки", 
+		"/about/purchase/", 
+		Array(), 
+		Array(), 
+		"" 
+	),
+	Array(
+		"Акционерам и инвесторам", 
+		"/company/copies_providing/", 
+		Array(), 
+		Array(),
+		"" 
+	),
+	Array(
+		"Раскрытие информации", 
+		"/company/disclosure_of_information/", 
+		Array(), 
+		Array(), 
+		"" 
+	),
+	Array(
+		"Карьера", 
+		"/career/", 
+		Array(), 
+		Array(), 
+		"" 
+	),
+	Array(
+		"Новости", 
+		"/news/", 
+		Array(), 
+		Array(), 
+		"" 
+	),
+	Array(
+		"Акции для клиентов", 
+		"/promo/", 
+		Array(), 
+		Array(), 
+		"" 
+	),
+	Array(
+		"Стандарт качества обслуживания", 
+		"/company/standard_of_quality_of_service/", 
+		Array(), 
+		Array(), 
+		"" 
+	),
+	Array(
+		"Контакты", 
+		"/offices/", 
+		Array(), 
+		Array(), 
+		"" 
+	)
+);
+?>

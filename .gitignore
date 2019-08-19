@@ -1,20 +1,51 @@
-vendor/
-node_modules/
-npm-debug.log
+/bitrix/*
+!/bitrix/templates
+!/bitrix/components
+/bitrix/components/bitrix
+/bitrix/templates/landing24/
+/bitrix/templates/desktop_app/
 
-# Laravel 4 specific
-bootstrap/compiled.php
-app/storage/
+!/bitrix/gadgets
+/bitrix/gadgets/bitrix
 
-# Laravel 5 & Lumen specific
-public/storage
-public/hot
-storage/*.key
-.env.*.php
-.env.php
-.env
-Homestead.yaml
-Homestead.json
+!/bitrix/php_interface/
+/bitrix/php_interface/dbconn.php
 
-# Rocketeer PHP task runner and deployment package. https://github.com/rocketeers/rocketeer
-.rocketeer/
+/for-dev/
+/test/
+/_delete/
+/web.config
+/*web.config
+/*.jpg
+/*.JPEG
+/*.png
+/*.gif
+/*.JPG
+/*.jpeg
+/*.tiff
+/*.log
+/*.sql
+/sitemap*.xml
+/*.rar
+/*.zip
+/*.txt
+/*.dt
+/*.tar.gz
+/*.gz
+/*.tar
+/*.bak
+/*.old
+/*~
+/robots.txt
+/.htaccess
+/.htpassword
+/upload/
+/uploads/
+/uploads_new/
+/uploads_new/
+/cgi-bin/
+/composer.*
+/.cache
+/.config
+/.local
+/_temp

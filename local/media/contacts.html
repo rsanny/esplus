@@ -1,0 +1,458 @@
+<!DOCTYPE HTML>
+<html class="no-js">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&amp;subset=cyrillic" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro&amp;subset=cyrillic" rel="stylesheet">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+		<title>Mark UP</title>
+		<link rel="shortcut icon" href="/favicon.ico" />
+		<link href="/favicon.ico" rel="icon" type="image/x-icon" />
+		<link href="css/lib/grid.css" rel="stylesheet">
+		<link href="css/reset.css" rel="stylesheet">
+		<link href="js/lib/slick/slick.css" rel="stylesheet">
+		<link href="js/lib/chosen/chosen.css" rel="stylesheet">
+		<link href="js/lib/FontAwesome/font-awesome.css" rel="stylesheet">
+		<link href="css/base.css" rel="stylesheet">
+		<link href="css/style.css" rel="stylesheet">
+	</head>
+	
+	<body>
+		<div class="page">
+            <div class="is-current--city">
+                <div class="container">
+                    <i class="fa fa-map-marker"></i>  Вы действительно находитесь в Екатеринбурге ? (Свердловская обл.) <span>— <a href="#" class="dotted">Да, все верно</a></span> <span>— <a href="#" class="dotted">Нет, сменить регион</a></span>
+                </div>
+            </div>
+		    <header class="top">
+                <div class="header-top">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col col-3">
+                                <div class="menu-switch">
+                                    <a href="#" class="ink-reaction is-selected"><i></i>Для дома</a>
+                                    <a href="#" class="ink-reaction"><i></i>Для бизнеса</a>
+                                </div>
+                            </div>
+                            <div class="col col-7 text-right">
+                                <div class="header-city is-visible">
+                                    <a href="#"><i class="fa fa-map-marker"></i><span>Екатеринбург</span></a>
+                                </div>
+                                <div class="header-address"><a href="#" class="ink-reaction header-link">Адреса офисов</a></div>
+                                <div class="header-search">
+                                    <a href="#" class="ink-reaction header-link"><i class="fa fa-search"></i>Поиск</a>
+                                    <div class="header-search--hide-btn-shadow"></div>
+                                    <form class="header-search--form none">
+                                        <div class="clearfix">
+                                            <button class="btn btn-orange w-170 pull-right">Найти</button>
+                                            <div class="header-search--form__input overflow">
+                                                <i class="fa fa-search"></i>
+                                                <input type="search" class="form-control" value="" placeholder="Поиск информации, товаров или услуг">
+                                                <a href="#" class="js-input-clear"></a>
+                                            </div>
+                                        </div>                                            
+                                        <div class="header-search--form--title">Где искать</div>
+                                        <div class="header-search--form--where">
+                                            <div class="row">
+                                                <div class="col col-12 col-sm-4">
+                                                    <ul class="item-list">
+                                                        <li class="radio"><label><input type="radio" name="1"><i></i><span>Везде</span></label></li>
+                                                        <li class="radio"><label><input type="radio" name="1"><i></i><span>Информация для клиентов</span></label></li>
+                                                        <li class="radio"><label><input type="radio" name="1"><i></i><span>Новости</span></label></li>
+                                                    </ul>
+                                                </div>
+                                                <div class="col col-12 col-sm-4">
+                                                    <ul class="item-list">
+                                                        <li class="checkbox"><label><input type="checkbox" name="1"><i></i><span>Интернет-магазин (каталог товаров)</span></label></li>
+                                                        <li class="checkbox"><label><input type="checkbox" name="1"><i></i><span>Услуги для частных лиц</span></label></li>
+                                                        <li class="checkbox"><label><input type="checkbox" name="1"><i></i><span>Услуги для бизнеса</span></label></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="header-support"><a href="#" class="ink-reaction header-link">Помощь и поддержка</a></div>
+                            </div>
+                            <div class="col col-5 col-md-3 col-lg-2 header-auth">
+                                <a href="#" class="btn btn-auth block js-AuthForm">Личный кабинет</a>
+                                <div class="header-auth--hide-btn-shadow"></div>
+                                <div class="header-auth--form none">
+                                    <form>
+                                        <div class="one-radio js-OneRadio">
+                                            <label data-value="1" class="is-selected"><i></i>Для дома</label>
+                                            <label data-value="2"><i></i>Для бизнеса</label>
+                                            <input type="hidden" value="1">
+                                            <span></span>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="form-label">Номер лицевого счета или e-mail</label>
+                                            <input type="text" placeholder="Лицевой счет или e-mail" class="form-control">
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="clearfix">
+                                                <label class="form-label pull-left">Пароль</label>
+                                                <div class="pull-right">
+                                                    <a href="#" class="dashed">Забыли пароль ?</a>
+                                                </div>
+                                            </div>
+                                            <div class="form-control--container">
+                                                <a class="password-show fa-eye-slash fa js-PasswordText"></a>
+                                                <input type="password" placeholder="Пароль" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="btn-action text-center">
+                                            <p><button class="btn btn-grey w-170"><span class="fa-angle-btn">Войти</span></button></p>
+                                            <a href="#" class="dashed">Зарегистрироваться</a>
+                                        </div>
+                                    </form>                                        
+                                </div>
+                            </div>
+                        </div>    
+                    </div>
+                <!--/header top-->                    
+                </div>
+                <div class="header-bottom">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col col-2"><a href="/" class="logo"><img src="images/logo.png" alt=""></a></div>
+                            <div class="col col-10">
+                                <menu class="no-list left-list main-menu">
+                                    <li>
+                                        <a href="#" class="main-menu--link">Электроэнергия</a>
+                                        <div class="menu-container">
+                                            <div class="row">
+                                                <div class="col col-6">
+                                                    <div class="row">
+                                                        <div class="col col-6">
+                                                            <div class="menu-container--title">Онлайн-сервисы</div>
+                                                            <ul class="no-list main-menu--second-level">
+                                                                <li><a href="#">Передать показания</a></li>
+                                                                <li><a href="#">Оплатить онлайн</a></li>
+                                                                <li><a href="#">Проверить задолженность</a></li>
+                                                                <li><a href="#">Получать квитанцию на e-mail</a></li>
+                                                                <li><a href="#">Заключение договора онлайн</a></li>
+                                                            </ul>
+                                                        </div>
+                                                        <div class="col col-6">
+                                                            <div class="menu-container--title">Информация</div>
+                                                            <ul class="no-list main-menu--second-level">
+                                                                <li><a href="#">Тарифы и нормативы</a></li>
+                                                                <li><a href="#">Информация для клиентов</a></li>
+                                                                <li><a href="#">Как оплатить</a></li>
+                                                                <li><a href="#">Как передать показания</a></li>
+                                                                <li><a href="#">Помощь и поддержка</a></li>
+                                                                <li><a href="#">Адреса отделений</a></li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                    <a href="#" class="btn btn-grey block w-270"><span class="fa-angle-btn">Вход в личный кабинет</span></a>
+                                                <!--/Menu contaner left-->                                                    
+                                                </div>
+                                                <div class="col col-6">
+                                                    <div class="row">
+                                                        <div class="col col-6">
+                                                            <div class="menu-container--title">Счетчики учета воды</div>
+                                                            <div class="menu-product">
+                                                                <a href="#" class="menu-product--img"><img src="images/replace-img.jpg" alt=""></a>
+                                                                <a href="#" class="btn btn-tranparent-border w-270"><span class="fa-angle-btn">Смотреть каталог</span></a>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col col-6">
+                                                            <div class="menu-container--title">Установка счетчиков</div>
+                                                            <div class="menu-product">
+                                                                <a href="#" class="menu-product--img"><img src="images/replace-img.jpg" alt=""></a>
+                                                                <a href="#" class="btn btn-tranparent-border w-270"><span class="fa-angle-btn">Вызвать мастера</span></a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                <!--/Menu contaner right-->                                                                                                        
+                                                </div>
+                                            </div>
+                                        <!--/menu container-->
+                                        </div>
+                                    </li>
+                                    <li><a href="#" class="main-menu--link">Горячая вода</a></li>
+                                    <li><a href="#" class="main-menu--link">Отопление</a></li>
+                                    <li><a href="#" class="main-menu--link">ЖКУ</a></li>
+                                    <li><a href="#" class="main-menu--link">Интернет-магазин</a></li>
+                                </menu>
+                            </div>
+                        </div>
+                    </div>
+                <!--/header bottom-->                    
+                </div>
+            </header>
+            
+            
+            
+            
+            
+            <main class="content">
+                <div class="container">
+                    <nav class="breadcrumb">
+                        <a href="#">T Плюс</a>  /  <a href="#">Контакты</a>
+                    </nav>
+                    <h1>Контакты</h1>
+                    
+                    <div class="contacts-filter">
+                        <div class="row">
+                            <div class="col col-12 col-sm-3">
+                                <div class="form-group">
+                                    <label class="form-label block">Регион</label>
+                                    <div class="form-select js-select">
+                                        <select>
+                                            <option value="0">Удмуртия</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col col-12 col-sm-3">
+                                <div class="form-group">
+                                    <label class="form-label block">Город</label>
+                                    <div class="form-select js-select">
+                                        <select>
+                                            <option value="0">Ижевск</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col col-12 col-sm-2">
+                                <div class="form-group">
+                                    <label class="form-label block"></label>
+                                    <div class="form-control--like">
+                                        <div class="checkbox"><label><input type="checkbox"><i></i><span>Работает в субботу</span></label></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col col-12 col-sm-4">
+                                <div class="form-group">
+                                    <label class="form-label block"></label>
+                                    <div class="one-radio js-Tabs" data-container=".contacts-tab">
+                                        <a href="#tab-list" class="is-selected"><i></i>Списком</a>
+                                        <a href="#tab-map" class=""><i></i>На карте</a>
+                                        <span class="is-selected-0"></span>
+                                    </div>
+                                </div>                                    
+                            </div>
+                            <div class="col col-12">
+                                <div class="clearfix">
+                                    <button class="btn btn-orange w-170 pull-right">Найти</button>
+                                    <div class="header-search--form__input overflow">
+                                        <i class="fa fa-search"></i>
+                                        <input type="search" class="form-control" value="" placeholder="Поиск информации, товаров или услуг">
+                                        <a href="#" class="js-input-clear"></a>
+                                    </div>
+                                </div>
+                            </div>                            
+                        </div>
+                    <!--/Contacts filter-->                        
+                    </div>
+                </div><!--Close container @magic disign@-->                    
+                <div class="contacts-tab" id="tab-list">      
+                    <div class="container">
+                        <div class="contacts-list">
+                            <div class="contacts-item">
+                                <div class="row">
+                                    <div class="col col-12 col-sm-4">
+                                        <div class="contacts-item--address"><i class="fa fa-map-marker"></i>427621, <a href="#" class="dashed">г. Ижевск, ул. Ленина, 27</a></div>
+                                        <div class="contacts-item--phone"><i class="fa fa-phone"></i>+7 (3412) 57-37-37</div>
+                                        <div class="contacts-item--person"><b>Руководитель:</b>  Коньков Александр Николаевич</div>
+                                    </div>
+                                    <div class="col col-12 col-sm-3">
+                                        <div class="contacts-item--time"><i class="fa fa-clock-o"></i>пн - пт:	09:00 - 18:00<br>сб: 10:00 - 15:00<br>вс:	выходной<br>без перерыва</div>
+                                    </div>
+                                    <div class="col col-12 col-sm-5">
+                                        <div class="contacts-item--text">25 число каждого месяца нерабочий день</div>
+                                        <div class="contacts-item--action">
+                                            <a href="#" class="btn btn-tranparent-border w-280"><i class="fa fa-print btn-fa"></i>Распечатать карту проезда</a>
+                                            <a href="#" class="btn btn-grey w-170">Обратная связь</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="contacts-item">
+                                <div class="row">
+                                    <div class="col col-12 col-sm-4">
+                                        <div class="contacts-item--address"><i class="fa fa-map-marker"></i>427621, <a href="#" class="dashed">г. Ижевск, ул. Ленина, 27</a></div>
+                                        <div class="contacts-item--phone"><i class="fa fa-phone"></i>+7 (3412) 57-37-37</div>
+                                        <div class="contacts-item--person"><b>Руководитель:</b>  Коньков Александр Николаевич</div>
+                                    </div>
+                                    <div class="col col-12 col-sm-3">
+                                        <div class="contacts-item--time"><i class="fa fa-clock-o"></i>пн - пт:	09:00 - 18:00<br>сб: 10:00 - 15:00<br>вс:	выходной<br>без перерыва</div>
+                                    </div>
+                                    <div class="col col-12 col-sm-5">
+                                        <div class="contacts-item--text">25 число каждого месяца нерабочий день</div>
+                                        <div class="contacts-item--action">
+                                            <a href="#" class="btn btn-tranparent-border w-280"><i class="fa fa-print btn-fa"></i>Распечатать карту проезда</a>
+                                            <a href="#" class="btn btn-grey w-170">Обратная связь</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>                        
+                </div>
+                <div class="contacts-tab none" id="tab-map">
+                    <div class="contacts-map" id="map"></div>
+                    <script>
+                        ContactsPlaceMarks = [
+                            {
+                                "CENTER":["56.881470820353","60.621138440475"],
+                                "ID":"88",
+                                "REGION":"49",
+                                "CONTENT":{
+                                    "ADDRESS":"427621, г. Ижевск, ул. Ленина, 27",
+                                    "PHONE":"+7 (3412) 57-37-37",
+                                    "PERSON":"<b>Руководитель:</b> Коньков Александр Николаевич",
+                                    "TIME":"пн - пт:	09:00 - 18:00<br>сб: 10:00 - 15:00<br>вс:	выходной<br>без перерыва",
+                                    "TEXT":"25 число каждого месяца нерабочий день"
+                                }
+                            },
+                            {
+                                "CENTER":["56.84491318838","53.233353626984"],
+                                "ID":"88",
+                                "REGION":"49",
+                                "CONTENT":{
+                                    "ADDRESS":"427621, г. Ижевск, ул. Ленина, 27",
+                                    "PHONE":"+7 (3412) 57-37-37",
+                                    "PERSON":"<b>Руководитель:</b> Коньков Александр Николаевич",
+                                    "TIME":"пн - пт:	09:00 - 18:00<br>сб: 10:00 - 15:00<br>вс:	выходной<br>без перерыва",
+                                    "TEXT":"25 число каждого месяца нерабочий день"
+                                }
+                            }
+                            ];
+                    </script>
+                </div>
+                <div class="container">
+                    <div class="contacts-footer">
+                        <div class="row">
+                            <div class="col col-12 col-sm-3">
+                                <div class="contacts-footer--title">Контроль качества</div>
+                                <div class="contacts-item--phone"><i class="fa fa-phone"></i>+7 (3412) 57-37-37</div>
+                                <div class="contacts-item--email"><i class="fa fa-envelope-o"></i><a href="mailto:mail@esplus.ru">mail@esplus.ru</a></div>
+                            </div>
+                            <div class="col col-12 col-sm-5 offset-4">
+                                <div class="contacts-footer--title">Юридические реквизиты</div>
+                                <a href="#" class="dashed">Удмуртский филиал ОАО «ЭнергосбыТ Плюс»</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            <footer class="bottom">
+                <div class="container">
+                    <div class="row footer-top">
+                        <div class="col col-3">
+                            <div class="footer-logo"><a href="/"><img src="images/logo.png" alt=""></a></div>
+                            <ul class="no-list footer-menu">
+                                <li><a href="#">О компании</a></li>
+                                <li><a href="#">Карьера в ЭнергосбыТ</a></li>
+                                <li><a href="#">Раскрытие информации</a></li>
+                                <li><a href="#">Политика конфиденциальности</a></li>
+                            </ul>
+                            <div class="footer-address">
+                                Горячая линия<br>
+                                <a href="tel:+7 1234 56 78 99">+7 1234 56 78 99</a>
+                            </div>
+                        </div>
+                        <div class="col col-3">
+                            <div class="footer-menu--title">Онлайн сервисы</div>
+                            <ul class="no-list footer-menu">
+                                <li><a href="#">Передать показания</a></li>
+                                <li><a href="#">Оплатить онлайн</a></li>
+                                <li><a href="#">Проверить задолженность</a></li>
+                                <li><a href="#">Получать квитанцию на e-mail</a></li>
+                                <li><a href="#">Заключить договор онлайн</a></li>
+                            </ul>
+                            <ul class="no-list footer-menu footer-magic-margin">
+                                <li><a href="#">Помощь и поддержка</a></li>
+                                <li><a href="#">Вопрос-ответ</a></li>
+                            </ul>
+                        </div>
+                        <div class="col col-3">
+                            <div class="footer-menu--title">Для дома</div>
+                            <ul class="no-list footer-menu">
+                                <li><a href="#">Информация для клиентов</a></li>
+                                <li><a href="#">Тарифы и нормативы</a></li>
+                                <li><a href="#">Электроэнергия</a></li>
+                                <li><a href="#">Горячая вода</a></li>
+                                <li><a href="#">Отопление</a></li>
+                                <li><a href="#">ЖКУ</a></li>
+                                <li><a href="#">Услуги электромонтажа</a></li>
+                            </ul>
+                        </div>
+                        <div class="col col-3">
+                            <div class="footer-menu--title">Для бизнеса</div>
+                            <ul class="no-list footer-menu">
+                                <li><a href="#">Информация для клиентов</a></li>
+                                <li><a href="#">Тарифы и нормативы</a></li>
+                                <li><a href="#">Электроэнергия</a></li>
+                                <li><a href="#">Горячая вода</a></li>
+                                <li><a href="#">Отопление</a></li>
+                                <li><a href="#">Дополнительные услуги</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="footer-middle row">
+                        <div class="col col-6">
+                            <a href="#" class="btn btn-icon block w-270"><span><i class="fa fa-envelope"></i></span>Обратная связь</a>
+                            <a href="#" class="btn btn-icon block w-270"><span><i class="fa fa-filter"></i></span>Контроль качества</a>
+                        </div>
+                        <div class="col col-6">
+                            <div class="row">
+                                <div class="col col-6">
+                                    <a href="#" class="btn btn-icon block w-270"><span><i class="fa fa-bolt"></i></span>Вызвать электрика</a>
+                                    <a href="#" class="btn btn-icon block"><span><i class="fa fa-shopping-cart"></i></span>Интернет-магазин</a>
+                                </div>
+                                <div class="col col-6">
+                                    <a href="#" class="btn btn-icon block"><span><i class="fa fa-download"></i></span>Скачать прайс-лист</a>
+                                    <a href="#" class="btn btn-icon block"><span><i class="fa fa-question"></i></span>Как подключиться к сети</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="footer-bottom row">
+                        <div class="col col-3 footer-copyr">Свердлов ЭнергосбыТ © 2017</div>
+                        <div class="col col-7">
+                            <div class="footer-socials">
+                                <a href="#" class=""><i class="fa fa-facebook"></i></a>
+                                <a href="#" class=""><i class="fa fa-youtube-play"></i></a>
+                            </div>
+                        </div>
+                        <div class="col col-2 text-right"><a href="https://optimalgroup.ru/" target="_blank" class="optimalgroup">OptimalGroup</a></div>
+                    </div>
+                </div>
+            </footer>
+            
+		</div>
+		<script src="js/library.js"></script>
+		<script src="js/lib/slick/slick.min.js"></script>
+		<script src="js/lib/chosen/chosen.jquery.min.js"></script>
+		<script src="js/lib/jquery.imagesloaded.min.js"></script>
+		<script src="js/optimalgroup.js"></script>
+		<script src="js/material.js"></script>
+		<script src="js/script.js"></script>
+        <!--Move to contacts component-->
+        <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
+        <script src="js/contacs.js"></script>
+        <script>
+        $(function(){
+        });
+        </script>
+        <!--/!mover-->
+	</body>
+</html>

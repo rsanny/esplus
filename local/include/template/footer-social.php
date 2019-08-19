@@ -1,0 +1,2 @@
+<a href="//www.facebook.com/ЭнергосбыТ-Плюс-650600995063392/" target="_blank"><i class="fa fa-facebook"></i></a>
+<a href="//www.youtube.com/channel/UC9aLZtJ9qvEN9GtJ2dlUcPA" target="_blank"><i class="fa fa-youtube-play"></i></a>

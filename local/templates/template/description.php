@@ -1,0 +1,1 @@
+<?$arTemplate = Array("NAME"=>"Основной шаблон [local]", "DESCRIPTION"=> "Шаблон OptimalGroup");?>

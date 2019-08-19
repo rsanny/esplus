@@ -1,0 +1,6 @@
+<?
+$sSectionName = "Электросчетчик";
+$arDirProperties = Array(
+
+);
+?>

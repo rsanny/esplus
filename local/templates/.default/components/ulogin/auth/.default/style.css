@@ -1,0 +1,19 @@
+.ulogin-buttons-container {
+    width: auto !important;
+    height: auto!important;
+}
+    .ulogin-buttons-container div {
+        margin: 0 !important;
+        height: 30px !important;
+        width: 80px !important;
+        background-position: center !important;
+        background-repeat: no-repeat !important;
+        background-size: 100% !important;
+        box-sizing: border-box !important;
+        display: inline-block !important;
+        float: none !important;
+    }
+    .ulogin-buttons-container div + div {margin-left: 10px !important;}
+    .ulogin-button-vkontakte {background: url(images/icon-vk.jpg) !important;}
+    .ulogin-button-facebook {background-image: url(images/icon-fb.jpg) !important;}
+    .ulogin-button-googleplus {background-image: url(images/icon-gp.jpg) !important;}
