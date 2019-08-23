@@ -13,6 +13,7 @@
 $this->setFrameMode(true);
 $currentSection = end($arResult['SECTION']['PATH']);
 ?>
+
 <? if ($currentSection['DESCRIPTION']):?>
     <div class="mb-40"><?=$currentSection['DESCRIPTION'];?></div>
 <? endif;?>
@@ -42,11 +43,21 @@ $currentSection = end($arResult['SECTION']['PATH']);
             $fileType = "zip";
         ?>
         <div class="file-list--item" id="<?=$this->GetEditAreaId($arItem['ID']);?>">
-            <a class="file-list--item__text" href="<?=$arFile['SRC'];?>" target="_blank"><?=$arItem['PREVIEW_TEXT']?$arItem['PREVIEW_TEXT']:$arItem['NAME'];?></a>
-            <a href="<?=$arFile['SRC'];?>" class="file-list--item__file" target="_blank">
+        <?php if(!empty($arFile['FILE_SIZE'])):?>
+            <a class="file-list--item__text" href="<?=$arFile['SRC'];?>" target="_blank">
+                <?=$arItem['PREVIEW_TEXT']?$arItem['PREVIEW_TEXT']:$arItem['NAME'];?>
+            </a>
+        <?php else:?>
+            <div>
+            <?=$arItem['PREVIEW_TEXT']?$arItem['PREVIEW_TEXT']:$arItem['NAME'];?>
+            </div>
+        <?php endif;?>
+        <?php if(!empty($arFile['FILE_SIZE'])):?>
+            <a href="<?=$arFile['SRC'];?>" class="file-list--item__file" target="_blank" >
                 <i class="icon-file--<?=$fileType;?>"></i>
                 <span><?=FormatHelper::FileSize($arFile['FILE_SIZE']);?></span>
             </a>
+        <?php endif;?>
         </div>
         <?endforeach;?>
     </div>
