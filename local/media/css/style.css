@@ -2437,3 +2437,10 @@ footer.bottom {
     font-size:12px;
     text-align:right;
 }
+
+.recaptcha-item--center {
+    display: flex;
+    justify-content: center;
+    margin: 15px 0px;
+    width: 100%;
+}

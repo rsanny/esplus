@@ -4,8 +4,9 @@
         <? endif;?>
         <?php 
         use DorrBitt\ClassDebug\ClassDebug;
-        use DorrBitt\dbapi\DGAPI;
-        $dev = DGAPI::dev("2efde51ebcd8b747826a400b3eb33467")?: ""; //($dev == 1) ? ClassDebug::debug($OptimalGroup) : "";
+        use DorrBitt\dbapi\DGAPI; 
+        //print DGAPI::ses();
+        $dev = DGAPI::dev("c37ebf99b7924386821cd50e7948a375")?: ""; //($dev == 1) ? ClassDebug::debug($OptimalGroup) : "";
         ?>
         <footer class="bottom">
             <div class="container">
@@ -26,11 +27,35 @@
         <div class="page-overlay none"></div>
     </div>
 <? if ($OptimalGroup['BRANCH']['YA_COUNT_CODE']):?>
-<!-- Yandex.Metrika counter --> 
-<script type="text/javascript" data-skip-moving="true" > 
-(function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)}; m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)}) (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym"); ym(<?=$OptimalGroup['BRANCH']['YA_COUNT_CODE'];?>, "init", { clickmap:true, trackLinks:true, accurateTrackBounce:true, webvisor:true, ecommerce:"dataLayer" }); 
-</script> 
-<noscript><div><img src="https://mc.yandex.ru/watch/<?=$OptimalGroup['BRANCH']['YA_COUNT_CODE'];?>" style="position:absolute; left:-9999px;" alt="" /></div></noscript> 
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript" data-skip-moving="true">
+    (function (d, w, c) {
+        (w[c] = w[c] || []).push(function() {
+            try {
+                w.yaCounter<?=$OptimalGroup['BRANCH']['YA_COUNT_CODE'];?> = new Ya.Metrika({
+                    id:<?=$OptimalGroup['BRANCH']['YA_COUNT_CODE'];?>,
+                    clickmap:true,
+                    trackLinks:true,
+                    accurateTrackBounce:true,
+                    ecommerce:"dataLayer"
+                });
+                w.yaCounterCode = "yaCounter<?=$OptimalGroup['BRANCH']['YA_COUNT_CODE'];?>";
+            } catch(e) { }
+        });
+
+        var n = d.getElementsByTagName("script")[0],
+            s = d.createElement("script"),
+            f = function () { n.parentNode.insertBefore(s, n); };
+        s.type = "text/javascript";
+        s.async = true;
+        s.src = "https://mc.yandex.ru/metrika/watch.js";
+
+        if (w.opera == "[object Opera]") {
+            d.addEventListener("DOMContentLoaded", f, false);
+        } else { f(); }
+    })(document, window, "yandex_metrika_callbacks");
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/<?=$OptimalGroup['BRANCH']['YA_COUNT_CODE'];?>" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
 <!-- /Yandex.Metrika counter -->
 <? endif;?>
 <? if ($OptimalGroup['BRANCH']['GA_COUNT_CODE']):?>
@@ -54,5 +79,11 @@
 	),
 	false
 );?>
+
+<?php //print $dev;
+if($dev == 1){
+    ClassDebug::debug($_SERVER['HTTP_REFERER']);
+}
+?>
 </body>
 </html>

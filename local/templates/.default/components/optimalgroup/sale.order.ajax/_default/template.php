@@ -178,6 +178,9 @@ else
                             <label class="form-group--label mb-10">Комментарии к заказу</label>
                             <input type="text" name="ORDER_DESCRIPTION" value="" class="form-control">
                         </div>
+                        <div class="form-group">
+                            <div id="saveOrderAjax" class="recaptcha-item"></div>
+                        </div>
                         <div class="cart-order--total clearfix cart-group--total cart-group none">
                             <div class="cart-order--total__table pull-left">
                                 <table width="100%">

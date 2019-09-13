@@ -560,3 +560,24 @@ var authCallbackInline = function(data){
         $('#authInline').find('input[name="pass"]').after('<div class="form-group-error">'+errMsg+'</div>');
     }
 }
+
+var onloadCallback = function() {
+
+    $('.recaptcha-item').each(function(index) {
+        grecaptcha.render($(this).attr('id'), {
+            'sitekey' : G_SITE_KEY
+        });
+    });
+
+};
+
+$(function() {
+
+    $("body").on("submit", "form[name='SIMPLE_FORM_27']", function (e) {
+        if (!$("textarea#g-recaptcha-response").val() && !$(this).find('.is-error').length) {
+            e.preventDefault();
+            alert("Проверка на робота не пройдена");
+        }
+    })
+
+});

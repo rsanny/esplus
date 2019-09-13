@@ -1,4 +1,8 @@
 <?
+
+define("G_SITE_KEY", "6LchObYUAAAAAEnXZ4jfGP6LhqWM7VtHpG8ws7-6");
+define("G_SECRET_KEY", "6LchObYUAAAAADzpP6To_v9BghgD5SLLTFFyMfCA");
+
 $eventManager = \Bitrix\Main\EventManager::getInstance();
 if(file_exists(dirname(__FILE__).'/include/OptimalGroup/constants.php'))
 	require dirname(__FILE__).'/include/OptimalGroup/constants.php';
@@ -47,6 +51,19 @@ if(file_exists(dirname(__FILE__).'/include/DorrBitt/categoryTovarsShop.php'))
 
 if(file_exists(dirname(__FILE__).'/include/DorrBitt/dbCity.php'))
    require dirname(__FILE__).'/include/DorrBitt/dbCity.php';
+
+if(file_exists(dirname(__FILE__).'/include/DorrBitt/blokSite.php'))
+   require dirname(__FILE__).'/include/DorrBitt/blokSite.php';
+   
+if(file_exists(dirname(__FILE__).'/include/DorrBitt/dataarefmetikacapchy.php'))
+   require dirname(__FILE__).'/include/DorrBitt/dataarefmetikacapchy.php';
+
+if(file_exists(dirname(__FILE__).'/include/DorrBitt/isbot.php'))
+   require dirname(__FILE__).'/include/DorrBitt/isbot.php';
+
+if(file_exists(dirname(__FILE__).'/include/DorrBitt/parsetype.php'))
+   require dirname(__FILE__).'/include/DorrBitt/parsetype.php';
+
 
 //	
 //Скрипты для обмена с 1С
@@ -130,6 +147,14 @@ function RedirectAndSetRegion()
     }
     
 }
+
+use DorrBitt\bloksite\BlokSite;
+AddEventHandler("main", "OnBeforeProlog", "RedirectBlockSite", 50);
+function RedirectBlockSite() {
+    $dataRe = new BlokSite();
+    $dataRe->bloks_site();
+}
+
 
 function getRealCurDir() {
     global $APPLICATION;
@@ -273,4 +298,70 @@ function my_onAfterResultAddUpdate($WEB_FORM_ID, $RESULT_ID)
 function spr($arr)
 {
     echo "<pre>" . print_r($arr,1) . "</pre>";
+}
+
+AddEventHandler('form', 'onBeforeResultAdd', 'reCaptcha');
+
+function reCaptcha($WEB_FORM_ID, &$arFields, &$arrVALUES)
+{
+	global $APPLICATION;
+
+	if (
+
+        // Не нашли ответ на свой вопрос?
+        $WEB_FORM_ID == 27
+        /*||
+        // Обратная связь
+        $WEB_FORM_ID == 24
+        ||
+        // Оценить качество услуг
+        $WEB_FORM_ID == 4
+        ||
+        // Отправить резюме
+        $WEB_FORM_ID == 8
+        ||
+        // Задать вопрос по закупочной деятельности
+        $WEB_FORM_ID == 3
+        ||
+        // Рассчитать стоимость услуги
+        $WEB_FORM_ID == 16
+        ||
+        // Задать вопрос ЖКУ
+        $WEB_FORM_ID == 31
+        ||
+        // Заявка на расчет стоимости
+        $WEB_FORM_ID == 7
+        ||
+        // Оставить заявку на установку ОДПУ
+        $WEB_FORM_ID == 29
+        */
+        )
+	{
+		if ($_POST['g-recaptcha-response']) {
+			$url = "https://www.google.com/recaptcha/api/siteverify";
+			$secret_code = G_SECRET_KEY;
+			$params = array(
+				'secret' => $secret_code,
+				'response' => $_POST['g-recaptcha-response'],
+				'remoteip' => $_SERVER['REMOTE_ADDR']
+			);
+
+			$curl = curl_init();
+			curl_setopt($curl, CURLOPT_URL, $url);
+			curl_setopt($curl, CURLOPT_USERAGENT, "Opera/10.00 (Windows NT 5.1; U; ru) Presto/2.2.0");
+			curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+			curl_setopt($curl, CURLOPT_POST, true);
+			curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query($params));
+
+			$result = curl_exec($curl);
+			curl_close($curl);
+			$result = json_decode((string) $result, true);
+			if (!$result["success"]) {
+				$APPLICATION->ThrowException("Капча не пройдена");
+			}
+		} else {
+			$APPLICATION->ThrowException("Пройдите капчу");
+		}
+	}
+
 }

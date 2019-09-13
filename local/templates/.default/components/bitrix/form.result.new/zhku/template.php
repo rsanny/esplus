@@ -93,7 +93,16 @@ foreach ($arResult['QUESTIONS'] as $code=>$arQuestion):
         </div>
     </div>                
     <? endif;?>
-<? endforeach;?>    
+<? endforeach;?>
+    <?/*
+
+    if (
+        // Заявка на расчет стоимости
+        $arParams["WEB_FORM_ID"] == 7
+    )
+    { ?>
+        <div id="recaptchaResponse_<?= $arParams["WEB_FORM_ID"] ?>" class="recaptcha-item recaptcha-item--center"></div>
+    <? } */?>
     <div class="row">
         <div class="col col-12 <?=$oneInLineCol;?>">
             <button class="btn btn-orange w-170" name="web_form_submit" value="<?=$arResult['arForm']['BUTTON'];?>"><?=$arResult['arForm']['BUTTON'];?></button>

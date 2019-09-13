@@ -34,6 +34,7 @@ $arJsFiles = array(
 	'library',
     'lib/jquery.matchHeight',
     'lib/jquery.inputmask',
+    'lib/imask',
     'lib/slick/slick.min',
     'lib/jquery.md5',
     'lib/chosen/chosen.jquery.min',
@@ -54,6 +55,8 @@ foreach ($arCssForJs as $src)
 	Asset::getInstance()->addCss(MEDIA_PATH . $src);
 Core::AddCss($arCssFiles);
 Core::AddJs($arJsFiles);
+
+Asset::getInstance()->addJs(MEDIA_PATH."js/script_site.js");
 
 CJSCore::Init(
     array(
@@ -106,6 +109,10 @@ CJSCore::Init(
         2. USE BITRIX API TO ICLUDE STYLES AND JS
         */
         ?>
+        <script>
+            var G_SITE_KEY = "<?=G_SITE_KEY?>";
+        </script>
+        <script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit" async defer>
         <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css">
         <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>

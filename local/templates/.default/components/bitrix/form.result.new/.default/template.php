@@ -12,13 +12,14 @@ extra components params
 @var URL //url of page to send
 @var SUBSCRIBE_ID //Id of subscribtion, to which will sign up user after success form send
 */
-
+//$code = $APPLICATION->CaptchaGetCode(); print "---".$code;
 if ($arParams['HIDE_TITLE'] != "Y" || $arParams['FORM_TITLE']):
     $FormTitle = $arResult['arForm']['NAME'];
     if ($arParams['FORM_TITLE'])
         $FormTitle = $arParams['FORM_TITLE'];
     ?>
     <div class="section-title text-center"><span><?= $FormTitle; ?></span></div>
+	<?if ($arResult["isFormErrors"] == "Y"):?><?=$arResult["FORM_ERRORS_TEXT"];?><?endif;?>
 <? endif; ?>
 <!--<pre>--><? //print_r($arResult)?><!--</pre>-->
 <? if ($arResult['arForm']['DESCRIPTION']): ?>
@@ -417,6 +418,47 @@ if ($arResult["isFormNote"] != "Y") {
                 });
             </script>
         <? endif; ?>
+        <?
+
+        if ($arParams["WEB_FORM_ID"] == 27
+            ||
+            // Обратная связь
+            $arParams["WEB_FORM_ID"] == 24
+                /*
+
+            ||
+            // Не нашли ответ на свой вопрос?
+            $arParams['WEB_FORM_ID'] == 28
+            ||
+            // Задать вопрос по закупочной деятельности
+            $arParams['WEB_FORM_ID'] == 3
+            ||
+            // Задать вопрос ЖКУ
+            $arParams['WEB_FORM_ID'] == 31
+            ||
+            // Задать вопрос ЖКУ
+            $arParams['WEB_FORM_ID'] == 29
+            */
+
+        )
+        { ?>
+        <div id="recaptchaResponse_<?= $arParams["WEB_FORM_ID"] ?>" class="recaptcha-item recaptcha-item--center"></div>
+        <? } ?>
+        <?/*if(
+            // Отправить резюме
+            $arParams['WEB_FORM_ID'] == 8
+            ||
+            // Заказать услугу
+            $arParams['WEB_FORM_ID'] == 17
+        )
+        { ?>
+            <div id="recaptchaResponse_<?= $arParams["WEB_FORM_ID"] ?>" class="recaptcha-item--center"></div>
+            <script>
+                grecaptcha.render('recaptchaResponse_<?= $arParams['WEB_FORM_ID'] ?>', {
+                    'sitekey' : G_SITE_KEY
+                });
+            </script>
+        <? } */?>
         <div class="row form-group">
             <div class="col col-12 <?= $oneInLineCol; ?>">
                 <button class="btn btn-orange w-170 1" name="web_form_submit"

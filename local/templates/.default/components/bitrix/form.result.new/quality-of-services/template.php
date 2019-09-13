@@ -165,7 +165,16 @@ foreach ($arResult['QUESTIONS'] as $code=>$arQuestion):
         </div>
     </div>                
     <? endif;?>
-<? endforeach;?>    
+<? endforeach;?>
+    <?/*
+
+    if (
+        // Оценить качество услуг
+        $arParams["WEB_FORM_ID"] == 4
+    )
+    { ?>
+        <div id="recaptchaResponse_<?= $arParams["WEB_FORM_ID"] ?>" class="recaptcha-item"></div>
+    <? } */?>
     <div class="row form-group">
         <div class="col col-12 <?=$oneInLineCol;?>">
             <button class="btn btn-orange w-170" name="web_form_submit" value="<?=$arResult['arForm']['BUTTON'];?>"><?=$arResult['arForm']['BUTTON'];?></button>

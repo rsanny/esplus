@@ -26,7 +26,8 @@ function modalOkno(){
 function modals(id,results){
     $("#"+id).html(results);
  }
-
+ 
+/*
 var timerId = setTimeout(function() {
     modalOkno();
   }, 2000);
@@ -36,6 +37,7 @@ setTimeout(function() {
     closeID('#mw_close','#modals','#mw_overlay');
     servise_show('#foot-data-re');
   }, 6000);
+*/
 
  function aniOpacity(id1,id2){
      $(id1).fadeIn(900,
@@ -79,3 +81,27 @@ function footDataRe(){
     $("#foot-data-re").css('display', 'none');
     modalOkno();
 }
+
+setInterval(function(){ 
+    var id = $('#xyz_text input').attr('id');
+    var name = $('#xyz_text input').attr('name');
+    //console.log(id);
+    //console.log(name);
+    $.ajax({
+        url:'/local/include/ajax/data-arefmetika-capchy-ajax.php',
+        data: { name:name,id:id },
+        type: 'GET',
+        beforeSend: function() {
+            $('#loader').show();
+         },
+         complete: function(){
+            $('#loader').hide();
+         },
+        success: function(res){
+            modals('xyz_text',res);
+        },
+        error: function(){
+            alert('Error!');
+        }
+    });
+}, 10000);

@@ -6,10 +6,24 @@ var OptimalGroup = {
         return /Android|webOS|iPhone|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
     },
     ajaxReloadFunction: function(){
-        $('.js-InputMask').inputmask({
+        $('.js-InputMask[data-type="email"]').inputmask({
             clearMaskOnLostFocus: true,
             showMaskOnHover: false,
         });
+
+        $('.js-InputMask:not([data-type="email"])').each(function () {
+            var options = $(this).attr('data-inputmask');
+            options = options.replace(/'/g, '"');
+            options = JSON.parse("{" + options + "}");
+
+            var mask = new IMask($(this)[0], {
+                mask: "+{7} 000 000 00 00",
+                lazy: false,
+                placeholderChar: options && options.placeholder ? options.placeholder : 'X'
+            });
+
+        });
+
         $('.js-select select').chosen({"width":"100%", disable_search: true});
         $('body').on('ready keyup', '.like-input', OptimalGroup.textAdjust);
     },

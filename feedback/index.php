@@ -26,8 +26,8 @@ if ($OptimalGroup['SITE']['CODE'] == "business"){
                     <div class="row">
                         <div class="col col-12 col-lg-10 offset-lg-1">
                             <?$APPLICATION->IncludeComponent(
-                                "bitrix:form.result.new",
-                                "",
+                                "dorrbitt:form.result.new",
+                                ".default",
                                 Array(
                                     "EMAIL_SEND" => $_SESSION['BXExtra']['REGION']['IBLOCK']['E_FEEDBACK'],
                                     "ANALYTICS" => $Analytics,
@@ -35,7 +35,7 @@ if ($OptimalGroup['SITE']['CODE'] == "business"){
                                     "TITLE"=>"Обратная связь",
                                     "URL"=>$APPLICATION->GetCurPage(),
                                     "BRANCH_HIDDEN"=>true,
-                                    "AJAX_MODE" => "Y",
+                                    "AJAX_MODE" => "N",
                                     "AJAX_OPTION_JUMP" => "N",
                                     "CACHE_TIME" => "3600",
                                     "CACHE_TYPE" => "N",

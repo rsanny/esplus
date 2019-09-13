@@ -146,6 +146,16 @@ foreach ($arResult['QUESTIONS'] as $code=>$arQuestion):
 endforeach;?>
     </div>
     <?=$checkbox;?>
+    <?
+
+    if (
+        // Не нашли ответ на свой вопрос?
+        $arParams["WEB_FORM_ID"] == 27
+
+    )
+    { ?>
+        <div id="recaptchaResponse_<?= $arParams["WEB_FORM_ID"] ?>" class="recaptcha-item recaptcha-item--center"></div>
+    <? } ?>
     <div class="col col-12 text-center form-group">
         <button class="btn btn-orange w-170" data-action="btn-ajax-load" name="web_form_submit" value="<?=$arResult['arForm']['BUTTON'];?>"><?=$arResult['arForm']['BUTTON'];?></button>
     </div>  
