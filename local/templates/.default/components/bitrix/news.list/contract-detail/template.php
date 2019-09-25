@@ -19,4 +19,9 @@ if(property_exists($component, 'arResultCacheKeys')) {
    $component->arResultCacheKeys[] = $sVarName;
    $component->arResult[$sVarName] = $$sVarName;
 }
+
+/*print("<pre>");
+print_r($arResult);
+print("</pre>");*/
 ?>
+

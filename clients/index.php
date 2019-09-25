@@ -147,5 +147,4 @@ if (!$_REQUEST['site_section']){
 );?>
     </div>
 </div>
-
 <?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php");?>

@@ -258,7 +258,13 @@ if ($arResult["isFormNote"] != "Y") {
                 </div>
 
             <? else: ?>
-                <?php if($inputName == "form_text_853"):?>
+                <?php if($inputName == "form_text_853" || $inputName == "form_text_854" || $inputName == "form_text_856" || $inputName == "form_text_857" 
+             || $inputName == "form_text_858" || $inputName == "form_text_859" || $inputName == "form_text_860" 
+             || $inputName == "form_text_861" || $inputName == "form_text_862" || $inputName == "form_text_863" 
+             || $inputName == "form_text_864" || $inputName == "form_text_865" || $inputName == "form_text_866" 
+             || $inputName == "form_text_867" || $inputName == "form_text_868" || $inputName == "form_text_869" 
+             || $inputName == "form_text_870" || $inputName == "form_text_871" || $inputName == "form_text_872" 
+             || $inputName == "form_text_874"):?>
                     <?php if(IBOT::is_bot() == 0):?>
                         <div id="xyz_text" >
                           <input id="<?= $code; ?>" type="hidden" data-name="<?= $inputName; ?>" name="<?= $inputName; ?>" class="form-control<?= $class ?>" placeholder="" value="capcha" >

@@ -76,4 +76,3 @@ if ($OptimalGroup['DOMAIN'] == "penza"){
 
 
 
-

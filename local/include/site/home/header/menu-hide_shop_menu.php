@@ -7,8 +7,12 @@
             <li><a href="/clients/kak-oplatit/">Как оплатить</a></li>
             <li><a href="<?=$tariffLink;?>">Тарифы и нормативы</a></li>
             <li><a href="/clients/">Информация для клиентов</a></li>
-            <? if ($OptimalGroup['DOMAIN'] == "penza"):?><li><a href="/service/contract/hot_water_supply/new/">Заключить договор онлайн</a></li><? endif;?>
-            <li><a href="/service/contract/">Заключить договор онлайн</a></li>
+            <? if ($OptimalGroup['DOMAIN'] == "penza"):?>
+            <?php 
+            //print("<li><a href=\"/service/contract/hot_water_supply/new/\">Заключить договор онлайн</a></li>"); 
+            ?>
+            <? endif;?>
+            <li><a href="/service/contract/" >Заключить договор онлайн</a></li>
         </ul>
     </div>
 </li>
@@ -21,7 +25,11 @@
             <li><a href="/clients/kak-oplatit/">Как оплатить</a></li>
             <li><a href="<?=$tariffLink;?>">Тарифы и нормативы</a></li>
             <li><a href="/clients/">Информация для клиентов</a></li>
-            <? if ($OptimalGroup['DOMAIN'] == "penza"):?><li><a href="/service/contract/heating_supply/new/">Заключить договор онлайн</a></li><? endif;?>
+            <? if ($OptimalGroup['DOMAIN'] == "penza"):?>
+            <?php 
+               //print("<li><a href=\"/service/contract/heating_supply/new/\">Заключить договор онлайн</a></li>");
+            ?>
+            <? endif;?>
             <? if ($OptimalGroup['DOMAIN'] != "ulianovsk" && $OptimalGroup['DOMAIN'] != "chuvashia"):?>
             <li><a href="/service/contract/">Заключить договор онлайн</a></li>
             <? endif;?>

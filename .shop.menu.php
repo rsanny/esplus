@@ -16,7 +16,7 @@ $aMenuLinks = Array(
 	),
 	Array(
 		"Комплексные услуги", 
-		"#", 
+		"/", 
 		Array(), 
 		Array(), 
 		"" 
@@ -48,6 +48,6 @@ $aMenuLinks = Array(
 		Array(), 
 		Array(), 
 		"" 
-	),
+	)
 );
 ?>

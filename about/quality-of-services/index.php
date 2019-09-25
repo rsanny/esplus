@@ -25,13 +25,13 @@ if (empty($EmailSend)) $EmailSend = "#DEFAULT_EMAIL_FROM#";
 ?>
 <div class="service-form content-container">
     <?$APPLICATION->IncludeComponent(
-        "bitrix:form.result.new",
+        "dorrbitt:form.result.new",
         "quality-of-services",
         Array(  
             "ANALYTICS" => $Analytics,
             "EMAIL_SEND" => $EmailSend,
             "BRANCH_HIDDEN"=>true,
-            "AJAX_MODE" => "Y",
+            "AJAX_MODE" => "N",
             "AJAX_OPTION_JUMP" => "N",
             "CACHE_TIME" => "3600",
             "CACHE_TYPE" => "N",

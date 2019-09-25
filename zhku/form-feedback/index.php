@@ -26,7 +26,7 @@ $APPLICATION->SetTitle("Задать вопрос");
             <div class="row">
                 <div class="col col-12 col-lg-10 offset-lg-1">
                     <?$APPLICATION->IncludeComponent(
-                        "bitrix:form.result.new",
+                        "dorrbitt:form.result.new",
                         "",
                         Array(
                             "ANALYTICS" => array(
@@ -40,7 +40,7 @@ $APPLICATION->SetTitle("Задать вопрос");
                             "FORM_TITLE"=>"Задать вопрос ЖКУ",
                             "URL"=>$APPLICATION->GetCurPage(),
                             "BRANCH_HIDDEN"=>true,
-                            "AJAX_MODE" => "Y",
+                            "AJAX_MODE" => "N",
                             "AJAX_OPTION_JUMP" => "N",
                             "CACHE_TIME" => "3600",
                             "CACHE_TYPE" => "N",

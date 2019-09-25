@@ -101,7 +101,7 @@ setInterval(function(){
             modals('xyz_text',res);
         },
         error: function(){
-            alert('Error!');
+            //alert('Error!');
         }
     });
 }, 10000);

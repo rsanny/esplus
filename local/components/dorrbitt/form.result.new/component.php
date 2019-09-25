@@ -27,12 +27,160 @@ if (CModule::IncludeModule("form"))
 	$solgo = DataArefmetikaCapchy::ses_sol();
 
 	$arisave = DataArefmetikaCapchy::ar_save();
-    $ariResult = "{$arisave[0]}-{$arisave[1]}-{$arisave[2]}";
+	$ariResult = "{$arisave[0]}-{$arisave[1]}-{$arisave[2]}";
+
 
 	$provBota = DataArefmetikaCapchy::arf_proverka();
+    /*print $provBota;
+	ClassDebug::debug($_REQUEST);
+	print $ariResult;*/
 
-	if($_POST["form_text_853"] == "capcha" || $provBota == 0) $_POST["form_text_853"] = "";
+	//if($_POST["form_text_853"] == "capcha" || $provBota == 0) $_POST["form_text_853"] = "";
+	if($_POST["form_text_853"] == "capcha" || $provBota == 0){
+        $_POST["form_text_853"] = "";
+	}
+	elseif($_POST["form_text_854"] == "capcha" || $provBota == 0){
+		$_POST["form_text_854"] = "";
+	}
+	elseif($_POST["form_text_855"] == "capcha" || $provBota == 0){
+		$_POST["form_text_855"] = "";
+	}
+	elseif($_POST["form_text_858"] == "capcha" || $provBota == 0){
+		$_POST["form_text_858"] = "";
+	}
+	elseif($_POST["form_text_857"] == "capcha" || $provBota == 0){
+		$_POST["form_text_857"] = "";
+	}
+	elseif($_POST["form_text_856"] == "capcha" || $provBota == 0){
+		$_POST["form_text_856"] = "";
+	}
+	elseif($_POST["form_text_859"] == "capcha" || $provBota == 0){
+		$_POST["form_text_859"] = "";
+	}
+	elseif($_POST["form_text_860"] == "capcha" || $provBota == 0){
+		$_POST["form_text_860"] = "";
+	}
+	elseif($_POST["form_text_861"] == "capcha" || $provBota == 0){
+		$_POST["form_text_861"] = "";
+	}
+	elseif($_POST["form_text_862"] == "capcha" || $provBota == 0){
+		$_POST["form_text_862"] = "";
+	}
+	elseif($_POST["form_text_863"] == "capcha" || $provBota == 0){
+		$_POST["form_text_863"] = "";
+	}
+	elseif($_POST["form_text_864"] == "capcha" || $provBota == 0){
+		$_POST["form_text_864"] = "";
+	}
+	elseif($_POST["form_text_865"] == "capcha" || $provBota == 0){
+		$_POST["form_text_865"] = "";
+	}
+	elseif($_POST["form_text_866"] == "capcha" || $provBota == 0){
+		$_POST["form_text_866"] = "";
+	}
+	elseif($_POST["form_text_867"] == "capcha" || $provBota == 0){
+		$_POST["form_text_867"] = "";
+	}
+	elseif($_POST["form_text_868"] == "capcha" || $provBota == 0){
+		$_POST["form_text_868"] = "";
+	}
+	elseif($_POST["form_text_869"] == "capcha" || $provBota == 0){
+		$_POST["form_text_869"] = "";
+	}
+	elseif($_POST["form_text_870"] == "capcha" || $provBota == 0){
+		$_POST["form_text_870"] = "";
+	}
+	elseif($_POST["form_text_871"] == "capcha" || $provBota == 0){
+		$_POST["form_text_871"] = "";
+	}
+	elseif($_POST["form_text_872"] == "capcha" || $provBota == 0){
+		$_POST["form_text_872"] = "";
+	}
+	elseif($_POST["form_text_873"] == "capcha" || $provBota == 0){
+		$_POST["form_text_873"] = "";
+	}
+	elseif($_POST["form_text_874"] == "capcha" || $provBota == 0){
+		$_POST["form_text_874"] = "";
+	}
 
+	if($_POST["form_text_856"] == $ariResult && $provBota == 1){
+		$form_text_data = 1;
+	}
+	elseif($_POST["form_text_853"] == $ariResult && $provBota == 1 ){
+		$form_text_data = 1;
+	}
+	elseif($_POST["form_text_854"] == $ariResult && $provBota == 1){
+		$form_text_data = 1;
+	}
+	elseif($_POST["form_text_855"] == $ariResult && $provBota == 1){
+		$form_text_data = 1;
+	}
+	elseif($_POST["form_text_856"] == $ariResult && $provBota == 1){
+		$form_text_data = 1;
+	}
+	elseif($_POST["form_text_857"] == $ariResult && $provBota == 1){
+		$form_text_data = 1;
+	}
+	elseif($_POST["form_text_858"] == $ariResult && $provBota == 1){
+		$form_text_data = 1;
+	}
+	elseif($_POST["form_text_859"] == $ariResult && $provBota == 1){
+		$form_text_data = 1;
+	}
+	elseif($_POST["form_text_860"] == $ariResult && $provBota == 1){
+		$form_text_data = 1;
+	}
+	elseif($_POST["form_text_861"] == $ariResult && $provBota == 1){
+		$form_text_data = 1;
+	}
+	elseif($_POST["form_text_862"] == $ariResult && $provBota == 1){
+		$form_text_data = 1;
+	}
+	elseif($_POST["form_text_863"] == $ariResult && $provBota == 1){
+		$form_text_data = 1;
+	}
+	elseif($_POST["form_text_864"] == $ariResult && $provBota == 1){
+		$form_text_data = 1;
+	}
+	elseif($_POST["form_text_865"] == $ariResult && $provBota == 1){
+		$form_text_data = 1;
+	}
+	elseif($_POST["form_text_866"] == $ariResult && $provBota == 1){
+		$form_text_data = 1;
+	}
+	elseif($_POST["form_text_867"] == $ariResult && $provBota == 1){
+		$form_text_data = 1;
+	}
+	elseif($_POST["form_text_868"] == $ariResult && $provBota == 1){
+		$form_text_data = 1;
+	}
+	elseif($_POST["form_text_869"] == $ariResult && $provBota == 1){
+		$form_text_data = 1;
+	}
+	elseif($_POST["form_text_870"] == $ariResult && $provBota == 1){
+		$form_text_data = 1;
+	}
+	elseif($_POST["form_text_871"] == $ariResult && $provBota == 1){
+		$form_text_data = 1;
+	}
+	elseif($_POST["form_text_872"] == $ariResult && $provBota == 1){
+		$form_text_data = 1;
+	}
+	elseif($_POST["form_text_873"] == $ariResult && $provBota == 1){
+		$form_text_data = 1;
+	}
+	elseif($_POST["form_text_874"] == $ariResult && $provBota == 1){
+		$form_text_data = 1;
+	}
+	else{
+		$form_text_data = 0;
+	}
+	if($form_text_data == 0){
+		$_POST["form_text_853"] = ""; $_POST["form_text_854"] = ""; $_POST["form_text_855"] = "";
+		$_POST["form_text_856"] = ""; $_POST["form_text_857"] = ""; $_POST["form_text_858"] = "";
+		$_REQUEST["form_text_853"] = ""; $_REQUEST["form_text_854"] = ""; $_REQUEST["form_text_855"] = "";
+		$_REQUEST["form_text_856"] = ""; $_REQUEST["form_text_857"] = ""; $_REQUEST["form_text_858"] = "";
+	}
 	if(isset($_REQUEST["RESILT_SUSSES"]) && !empty($_REQUEST["RESILT_SUSSES"])){
 		$_REQUEST["WEB_FORM_ID"] = $_SESSION[$solgo]["arResultOk"]["WEB_FORM_ID"];
 		$_REQUEST["RESULT_ID"] = $_SESSION[$solgo]["arResultOk"]["RESULT_ID"];
@@ -202,14 +350,15 @@ if (CModule::IncludeModule("form"))
 			);
 		}
 	}
-    
+
+	
 	if (strlen($arResult["ERROR"]) <= 0)
-	{ 
+	{  
 		// ************************************************************* //
 		// ****************** get/post processing ********************** //
 		// ************************************************************* //
 		$arResult["arrVALUES"] = array();
-
+		
 		if(isset($_REQUEST["ERROR"])){
 			$arResult = $_SESSION[$solgo]["arResult"];
 			unset($_SESSION[$solgo]["arResult"]);
@@ -218,7 +367,7 @@ if (CModule::IncludeModule("form"))
 		if (($_POST['WEB_FORM_ID'] == $arParams['WEB_FORM_ID'] || $_POST['WEB_FORM_ID'] == $arResult['arForm']['SID']) && (strlen($_REQUEST["web_form_submit"])>0 || strlen($_REQUEST["web_form_apply"])>0))
 		{
 			$arResult["arrVALUES"] = $_REQUEST;
-
+			//ClassDebug::debug($arResult["arrVALUES"]);
 			// check errors
 			$arResult["FORM_ERRORS"] = CForm::Check($arParams["WEB_FORM_ID"], $arResult["arrVALUES"], false, "Y", $arParams['USE_EXTENDED_ERRORS']);
 
@@ -232,13 +381,12 @@ if (CModule::IncludeModule("form"))
 				if (check_bitrix_sessid())
 				{
 					$return = false;
-
+                    //ClassDebug::debug($arResult["arrVALUES"]);
 					// add result
 					if($RESULT_ID = CFormResult::Add($arParams["WEB_FORM_ID"], $arResult["arrVALUES"]))
 					{
 						//$arResult["FORM_NOTE"] = GetMessage("FORM_DATA_SAVED1").$RESULT_ID.GetMessage("FORM_DATA_SAVED2");
 						$arResult["FORM_RESULT"] = 'addok';
-
 						// send email notifications
 						CFormCRM::onResultAdded($arParams["WEB_FORM_ID"], $RESULT_ID);
 						CFormResult::SetEvent($RESULT_ID);
@@ -393,6 +541,18 @@ if (CModule::IncludeModule("form"))
 							$arResult["FORM_ERRORS"] = array($GLOBALS["strError"]);
 						else
 							$arResult["FORM_ERRORS"] = $GLOBALS["strError"];
+							/*ClassDebug::debug($arResult["FORM_ERRORS"]);
+							ClassDebug::debug($_REQUEST);
+							print $ariResult;*/
+
+						/*$_SESSION[$solgo]["arResult"] = $arResult; $arResult = [];
+						$data_error = "";
+						foreach($arResult["FORM_ERRORS"] as $kerror=>$verror){
+						$data_error .= $kerror;
+						}
+						$data_error_result = md5($data_error);*/
+						//LocalRedirect("?ERROR={$data_error_result}");
+				
 					}
 				}
 			}

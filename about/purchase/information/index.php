@@ -27,7 +27,7 @@ $APPLICATION->SetTitle("Информация о закупках");
             <div class="row">
                 <div class="col col-12 offset-md-0 col-lg-11 offset-lg-0 col-xl-9 offset-xl-1">
                 <? $APPLICATION->IncludeComponent(
-                    "bitrix:form.result.new",
+                    "dorrbitt:form.result.new",
                     "",
                     Array(
                         "EMAIL_SEND" => $_SESSION['BXExtra']['REGION']['IBLOCK']['E_PURCHASE'],              
@@ -40,7 +40,7 @@ $APPLICATION->SetTitle("Информация о закупках");
                         ),
                         "SUBSCRIBE_ID" => SUBSCRIBE_PURCHASE,
                         "HIDE_TITLE" => "Y",
-                        "AJAX_MODE" => "Y",
+                        "AJAX_MODE" => "N",
                         "AJAX_OPTION_JUMP" => "N",
                         "CACHE_TIME" => "3600",
                         "CACHE_TYPE" => "N",

@@ -47,7 +47,7 @@
             }
             ?>
             <?$APPLICATION->IncludeComponent(
-	"bitrix:form.result.new", 
+	"dorrbitt:form.result.new", 
 	".default", 
 	array(
 		"ANALYTICS" => $Analytics,
@@ -56,7 +56,7 @@
 		"EMAIL_SEND" => $EmailSend,
 		"URL" => $_SERVER["SCRIPT_URI"]?$_SERVER["SCRIPT_URI"]:$APPLICATION->GetCurPage(),
 		"BRANCH_HIDDEN" => true,
-		"AJAX_MODE" => "Y",
+		"AJAX_MODE" => "N",
 		"AJAX_OPTION_JUMP" => "N",
 		"CACHE_TIME" => "3600",
 		"CACHE_TYPE" => "N",

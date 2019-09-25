@@ -571,7 +571,7 @@ var onloadCallback = function() {
 
 };
 
-$(function() {
+/*$(function() {
 
     $("body").on("submit", "form[name='SIMPLE_FORM_27']", function (e) {
         if (!$("textarea#g-recaptcha-response").val() && !$(this).find('.is-error').length) {
@@ -580,4 +580,4 @@ $(function() {
         }
     })
 
-});
+});*/

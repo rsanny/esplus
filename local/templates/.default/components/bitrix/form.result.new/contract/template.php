@@ -146,6 +146,7 @@ foreach ($arResult['QUESTIONS'] as $code=>$arQuestion):
             </div>
         </div>         
     <? else:?>
+
     <div class="row form-group flex-vertical">
         <div class="col col-12 <?=$labelCol;?>">
             <label for="<?=$code;?>"><?=$inputLabel;?><? if($arQuestion['REQUIRED'] == "Y"):?> <span class="color-orange">*</span><? endif;?></label>

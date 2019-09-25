@@ -110,7 +110,8 @@ $APPLICATION->AddChainItem($TitleH1,$arTemplate['ITEM']['DETAIL_PAGE_URL']);
         <? if ($arTemplate['ITEM']['DETAIL_TEXT']):?>
         <div class="popup-form--text"><?=$arTemplate['ITEM']['DETAIL_TEXT'];?></div>
         <? endif;?>
-        <? $APPLICATION->IncludeComponent("bitrix:form.result.new", "contract", Array(
+
+        <? $APPLICATION->IncludeComponent("dorrbitt:form.result.new", "contract", Array(
             "ANALYTICS" => $Analytics,
             "EMAIL_SEND" => $EmailSend,
             "HIDE_TITLE" => "Y",
@@ -129,7 +130,7 @@ $APPLICATION->AddChainItem($TitleH1,$arTemplate['ITEM']['DETAIL_PAGE_URL']);
             "SUCCESS_URL" => "",	// Страница с сообщением об успешной отправке
             "CHAIN_ITEM_TEXT" => "",	// Название дополнительного пункта в навигационной цепочке
             "CHAIN_ITEM_LINK" => "",	// Ссылка на дополнительном пункте в навигационной цепочке
-            "AJAX_MODE" => "Y",
+            "AJAX_MODE" => "N",
             "AJAX_OPTION_JUMP" => "Y",
         ),
         false

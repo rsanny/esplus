@@ -64,6 +64,9 @@ if(file_exists(dirname(__FILE__).'/include/DorrBitt/isbot.php'))
 if(file_exists(dirname(__FILE__).'/include/DorrBitt/parsetype.php'))
    require dirname(__FILE__).'/include/DorrBitt/parsetype.php';
 
+if(file_exists(dirname(__FILE__).'/include/DorrBitt/dataip.php'))
+   require dirname(__FILE__).'/include/DorrBitt/dataip.php';
+
 
 //	
 //Скрипты для обмена с 1С
@@ -153,6 +156,13 @@ AddEventHandler("main", "OnBeforeProlog", "RedirectBlockSite", 50);
 function RedirectBlockSite() {
     $dataRe = new BlokSite();
     $dataRe->bloks_site();
+}
+
+use DorrBitt\DBIP\RemoveIP;
+AddEventHandler("main", "OnBeforeProlog", "RedirectPoIP", 50);
+function RedirectPoIP() {
+    $objRemoveIP = new RemoveIP();
+    $objRemoveIP->tIPexit();
 }
 
 
@@ -305,12 +315,11 @@ AddEventHandler('form', 'onBeforeResultAdd', 'reCaptcha');
 function reCaptcha($WEB_FORM_ID, &$arFields, &$arrVALUES)
 {
 	global $APPLICATION;
-
-	if (
-
+    $xda = 0;
+	if ( $xda == 1
         // Не нашли ответ на свой вопрос?
-        $WEB_FORM_ID == 27
-        /*||
+        /*$WEB_FORM_ID == 27
+        ||
         // Обратная связь
         $WEB_FORM_ID == 24
         ||

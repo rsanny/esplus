@@ -87,6 +87,6 @@ require($_SERVER["DOCUMENT_ROOT"]."/service/header.php");
             </div>
         </div>
     </div>
-</div>
+</div>  
 
 <?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php");?>

@@ -24,7 +24,7 @@ $APPLICATION->SetTitle("Заявка на расчет стоимости");
     <div class="col col-12 col-sm-9">
         <div class="form-content">
         <?$APPLICATION->IncludeComponent(
-            "bitrix:form.result.new",
+            "dorrbitt:form.result.new",
             "zhku",
             Array(
                 "ANALYTICS" => array(
@@ -35,7 +35,7 @@ $APPLICATION->SetTitle("Заявка на расчет стоимости");
                     "ym" => "zhku-cost"
                 ),
                 "EMAIL_SEND" => $_SESSION['BXExtra']['REGION']['IBLOCK']['EMAIL_ZHKU'],
-                "AJAX_MODE" => "Y",
+                "AJAX_MODE" => "N",
                 "AJAX_OPTION_JUMP" => "N",
                 "CACHE_TIME" => "3600",
                 "CACHE_TYPE" => "N",

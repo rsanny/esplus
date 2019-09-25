@@ -1,3 +1,11 @@
+<?php 
+use DorrBitt\ClassDebug\ClassDebug;
+use DorrBitt\DataArefmetikaCapchy\DataArefmetikaCapchy;
+use DorrBitt\IB\IBOT;
+use \OptimalGroup\Core;
+$OptimalGroup = Core::Settings();
+DataArefmetikaCapchy::ar_remove();
+?>
 <? if ($arResult['arForm']['DESCRIPTION']):?><div class="popup-form--text text-center"><?=$arResult['arForm']['DESCRIPTION'];?></div><? endif;?>
 <?
 if ($arResult["isFormNote"] != "Y")
@@ -146,6 +154,17 @@ foreach ($arResult['QUESTIONS'] as $code=>$arQuestion):
             </div>
         </div>         
     <? else:?>
+    <?php if($inputName == "form_text_853" || $inputName == "form_text_854" || $inputName == "form_text_856" || $inputName == "form_text_857" 
+             || $inputName == "form_text_858" || $inputName == "form_text_859" || $inputName == "form_text_860" 
+             || $inputName == "form_text_861" || $inputName == "form_text_862" || $inputName == "form_text_863" 
+             || $inputName == "form_text_864" || $inputName == "form_text_865" || $inputName == "form_text_866" 
+             || $inputName == "form_text_867" || $inputName == "form_text_868" || $inputName == "form_text_869"):?>
+        <?php if(IBOT::is_bot() == 0):?>
+            <div id="xyz_text" >
+                <input id="<?= $code; ?>" type="hidden" data-name="<?= $inputName; ?>" name="<?= $inputName; ?>" class="form-control<?= $class ?>" placeholder="" value="capcha" >
+            </div>
+        <?php endif;?>
+    <?php else:?>
     <div class="row form-group flex-vertical">
         <div class="col col-12 <?=$labelCol;?>">
             <label for="<?=$code;?>"><?=$inputLabel;?><? if($arQuestion['REQUIRED'] == "Y"):?> <span class="color-orange">*</span><? endif;?></label>
@@ -166,7 +185,8 @@ foreach ($arResult['QUESTIONS'] as $code=>$arQuestion):
                 <? endif;?>
             </div>
         </div>
-    </div>                
+    </div> 
+    <?php endif;?>               
     <? endif;?>
 <? endforeach;?>    
     <div class="row form-group">

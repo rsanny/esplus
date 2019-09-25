@@ -1,6 +1,8 @@
 <?if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)die();?>
+<?php use DorrBitt\ClassDebug\ClassDebug; ?>
 <?if (!empty($arResult)):
 $previousLevel = 0;
+
 foreach($arResult as $arItem):
     $link = $arItem["LINK"];
     if (
