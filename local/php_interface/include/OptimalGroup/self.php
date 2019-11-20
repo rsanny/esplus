@@ -183,12 +183,16 @@ class Url {
     Конструктор ссылок для сайта
     */
     public function Make($subDomain, $params, $folder){
-        $currentUrl = explode(".",$_SERVER['HTTP_HOST']);
+        $currentUrl = explode(".",$_SERVER['SERVER_NAME']);
         if (count($currentUrl) > 2){
             $oldSubdomain = array_shift($currentUrl);
         }
         $mainDomain = implode(".", $currentUrl);
-        $protocol = $_SERVER['HTTP_X_FORWARDED_PROTO']?$_SERVER['HTTP_X_FORWARDED_PROTO']:$_SERVER['REQUEST_SCHEME'];
+        //$protocol = $_SERVER['HTTP_X_FORWARDED_PROTO']?$_SERVER['HTTP_X_FORWARDED_PROTO']:$_SERVER['REQUEST_SCHEME'];
+        $protocol = "http";
+        if (isset($_SERVER["HTTPS"]) &&  $_SERVER["HTTPS"] == "on") {
+            $protocol = "https";
+        }
         $url = $protocol.'://'.$subDomain.'.'.$mainDomain.$folder;
         if (is_array($params)){
             $url .= "?".http_build_query($params);

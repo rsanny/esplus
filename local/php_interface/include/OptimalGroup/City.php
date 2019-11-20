@@ -107,10 +107,15 @@ class City {
             $res_region = \CIBlockElement::GetList(array(), array("IBLOCK_ID"=> 6, "PROPERTY_REGION" => $currentRegion['region']), false, false, array("IBLOCK_ID", "ID", "PROPERTY_URL", "PROPERTY_REGION"))->Fetch();
             if($res_region['PROPERTY_REGION_VALUE'] && !$domain) {
                 $domain = $res_region['PROPERTY_URL_VALUE'];
+
             }
         }
-
-        if (!$domain){
+        if (
+            $APPLICATION->sDirPath != "/bitrix/admin/"
+            && !$USER->IsAdmin()
+            && !$domain
+        )
+        {
             $this->RedirectCookie();
         }
 
@@ -125,31 +130,33 @@ class City {
                 }
             }
         }
+
         if ($result['IBLOCK']['GROUP'] != "all" && $is_shop) {
             $result['NO_STORE'] = $result['IBLOCK'];
             $cookie = $this->GetCookieRegion();
+
             if($domain == "shop"){
                 $arrNameShop = self::listNameShop();
-                $cookie = (DBCITY::inarray($arrNameShop,$cookie) == 1) ? $cookie : $arrNameShop[$domain][0];
+                $cookie = (DBCITY::inarray($arrNameShop['shop'],$cookie) == 1) ? $cookie : $arrNameShop[$domain][0];
             }
             if ($cookie){
                 $result['IBLOCK'] = $this->SetRegionByDomain($cookie);
                 $result['AGREED'] = true;
             }
-            else 
+            else
                 $result['IBLOCK'] = $this->SetRegionById($default_id);
         }
-        if (
-            $result['IBLOCK']['URL'] != $domain
-            && $APPLICATION->sDirPath != "/bitrix/admin/"
-            && $result['IBLOCK']['URL']
-            && !$USER->IsAdmin()
-            && !$is_shop)
-        {
-            $NewDomain = Url::Make($result['IBLOCK']['URL']);
-            unset($_SESSION['BXExtra']);
-            LocalRedirect($NewDomain.$APPLICATION->GetCurUri(),true,"301 Moved permanently");
-        }
+//        if (
+//            $result['IBLOCK']['URL'] != $domain
+//            && $APPLICATION->sDirPath != "/bitrix/admin/"
+//            && $result['IBLOCK']['URL']
+//            && !$USER->IsAdmin()
+//            && !$is_shop)
+//        {
+//            $NewDomain = Url::Make($result['IBLOCK']['URL']);
+//            unset($_SESSION['BXExtra']);
+//            LocalRedirect($NewDomain.$APPLICATION->GetCurUri(),true,"301 Moved permanently");
+//        }
         $this->ShopPriceCode($result['IBLOCK']['URL']);
         
         return $result;
@@ -168,6 +175,7 @@ class City {
     }
     public function RedirectCookie(){
         $cookie = $this->GetCookieRegion();
+
         if ($cookie){
             global $APPLICATION;
             $NewDomain = Url::Make($cookie);
@@ -178,14 +186,18 @@ class City {
     public function GetCookieRegion(){
         return \Bitrix\Main\Application::getInstance()->getContext()->getRequest()->getCookie("REGION");        
     }
-    public function SetCookieRegion($code){
+    public function SetCookieRegion($code, $domain = ""){
         $cookie = new \Bitrix\Main\Web\Cookie("REGION", $code, time() + 60*60*24*60);
         $cookie->setDomain("esplus.ru");
         \Bitrix\Main\Application::getInstance()->getContext()->getResponse()->addCookie($cookie);
+        $domain = SiteSection::GetSubDomain();
+        if($domain == "shop") {
+            \Bitrix\Main\Application::getInstance()->getContext()->getResponse()->flush("");
+        }
     }
-    public function SetRegionById($id, $change){
+    public function SetRegionById($id, $change, $domain = ""){
         $result = $this->GetRegionIblock(array('ID' => $id));
-        $this->SetCookieRegion($result['URL']);
+        $this->SetCookieRegion($result['URL'], $domain);
         if ($result && $change){
             $_SESSION['BXExtra']['REGION']['IBLOCK'] = $result;
             $_SESSION['BXExtra']['REGION']['AGREED'] = true;
@@ -218,6 +230,7 @@ class City {
         return $cityObj->GetRegionIblock(array('PROPERTY_URL' => $domain));
     }
     public function Init($type){
+        global $APPLICATION, $USER;
         if (Main::isBot()) return false;
         $domain = SiteSection::GetSubDomain();
 
@@ -225,8 +238,14 @@ class City {
             $UserCity = $this->GetListByRegion($type);
             $_SESSION['BXExtra']['REGION'] = $UserCity;
         } else {
-
-            $UserCity = $_SESSION['BXExtra']['REGION'];
+            if (
+            $APPLICATION->sDirPath != "/bitrix/admin/"
+            && !$USER->IsAdmin()
+            )
+            {
+                $this->RedirectCookie();
+                $UserCity = $_SESSION['BXExtra']['REGION'];
+            }
         }
         /*else {
             if($domain == "shop"){

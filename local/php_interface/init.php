@@ -136,11 +136,11 @@ function RedirectAndSetRegion()
 {
     global $APPLICATION;
     $OptimalGroupCity = new \OptimalGroup\City;
-
+    $_REQUEST['type'] = 'm';
     $CurrentCity = $OptimalGroupCity->Init($_REQUEST['type']);
     $current = \OptimalGroup\SiteSection::Get();
     $domain = \OptimalGroup\SiteSection::GetSubDomain();
-        if ($domain == "shop"){
+    if ($domain == "shop"){
         if ($current['CODE'] != $domain) {//Если не магазин то устанавливаем магазин
             $_REQUEST['site_section'] = $domain;
         }

@@ -1,6 +1,12 @@
 <?
 $aMenuLinks = Array(
-		
+    Array(
+        "Оплатить онлайн",
+        "/service/pay/",
+        Array(),
+        Array("class"=>"wallet"),
+        ""
+    ),
 		Array(
 		"Передать показания", 
 		"/service/post/", 

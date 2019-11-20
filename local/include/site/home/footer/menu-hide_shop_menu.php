@@ -176,6 +176,7 @@
                 <li><a href="/clients/kak-peredat/">Как передать показания</a></li>
 <? elseif ($OptimalGroup['DOMAIN'] == "chuvashia"&& $OptimalGroup['SITE']['CODE'] == "home"): ?>
 <li><a href="/service/post/">Передать показания</a></li>
+                <li><a href="/service/pay/">Оплатить</a></li>
 <li><a href="/service/get/">Проверить баланс</a></li>
 <li><a href="/service/email/">Подписка на электронную квитанцию </a></li>
 <li><a href="/service/contract/">Заключить договор онлайн </a></li>

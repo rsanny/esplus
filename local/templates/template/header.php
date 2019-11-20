@@ -81,6 +81,7 @@ CJSCore::Init(
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta http-equiv="Content-Security-Policy" content="block-all-mixed-content">
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
 		<? if ($OptimalGroup['BRANCH']['YA_WEB_CODE']):?><meta name="yandex-verification" content="<?=$OptimalGroup['BRANCH']['YA_WEB_CODE'];?>">
         <? endif;?><? if ($OptimalGroup['BRANCH']['GG_WEB_CODE']):?><meta name="google-site-verification" content="<?=$OptimalGroup['BRANCH']['GG_WEB_CODE'];?>">

@@ -11,7 +11,6 @@ $ses = DGAPI::ses();
 use DorrBitt\dbapi\BElements;
 $objParseType = new ParseType();
 $getData = $request->get('data');
-print $getData;
 $obj = new BElements();
 $objSOU = new SOU();
 $objClassDBase = new ClassDBase();
