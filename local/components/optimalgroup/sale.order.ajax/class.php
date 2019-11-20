@@ -16,7 +16,7 @@ use Bitrix\Main,
 	Bitrix\Sale\DiscountCouponsManager,
 	Bitrix\Sale\Services\Company,
 	Bitrix\Sale\Location\GeoIp;
-
+use DorrBitt\ClassDebug\ClassDebug;
 if (!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true) die();
 
 /**
@@ -230,6 +230,7 @@ class SaleOrderAjax extends \CBitrixComponent
 		}
 
 		//compatibility to old default columns in basket
+		
 		if (!empty($arParams['PRODUCT_COLUMNS_VISIBLE']))
 		{
 			$arParams['PRODUCT_COLUMNS'] = $arParams['PRODUCT_COLUMNS_VISIBLE'];
@@ -427,11 +428,13 @@ class SaleOrderAjax extends \CBitrixComponent
 					$orderPropId = intval(substr($k, strlen("ORDER_PROP_"), strlen($k) - 2));
 				else
 					$orderPropId = intval(substr($k, strlen("ORDER_PROP_")));
-
+                
 				if ($orderPropId > 0)
 					$orderProperties[$orderPropId] = $v;
 			}
 		}
+
+
 
 		foreach ($this->request->getFileList() as $k => $arFileData)
 		{
@@ -457,6 +460,7 @@ class SaleOrderAjax extends \CBitrixComponent
 				}
 			}
 		}
+
 
 		return $orderProperties;
 	}
@@ -608,7 +612,7 @@ class SaleOrderAjax extends \CBitrixComponent
 				$profileProperties[$propValue['ORDER_PROPS_ID']] = $propValue['VALUE'];
 			}
 		}
-
+		
 		$ipAddress = \Bitrix\Main\Service\GeoIp\Manager::getRealIp();
 		$propertyCollection = $order->getPropertyCollection();
 		/** @var Sale\PropertyValue $property */
@@ -805,7 +809,7 @@ class SaleOrderAjax extends \CBitrixComponent
 				}
 			}
 		}
-
+		
 		return $value;
 	}
 
@@ -1783,6 +1787,7 @@ class SaleOrderAjax extends \CBitrixComponent
 		static $propertyUSER_PROPS = '';
 
 		$arProperty['FIELD_NAME'] = 'ORDER_PROP_'.$arProperty['ID'];
+		//print $arProperty['FIELD_NAME'];
 
 		if ($arProperty['CODE'] != '')
 		{
@@ -1855,7 +1860,6 @@ class SaleOrderAjax extends \CBitrixComponent
 			case 'FILE': self::formatFile($arProperty); break;
 			case 'DATE': self::formatDate($arProperty); break;
 		}
-
 		return $arProperty;
 	}
 
@@ -2015,6 +2019,7 @@ class SaleOrderAjax extends \CBitrixComponent
 				$arProperty["TYPE"] = 'SELECT';
 			}
 		}
+		print_r($arProperty);
 	}
 
 	public static function formatLocation(array &$arProperty, array &$arDeleteFieldLocation, $locationAltPropDisplayManual = null)

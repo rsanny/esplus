@@ -425,7 +425,6 @@ if ($arResult["isFormNote"] != "Y") {
             // Обратная связь
             $arParams["WEB_FORM_ID"] == 24
                 /*
-
             ||
             // Не нашли ответ на свой вопрос?
             $arParams['WEB_FORM_ID'] == 28
@@ -435,21 +434,19 @@ if ($arResult["isFormNote"] != "Y") {
             ||
             // Задать вопрос ЖКУ
             $arParams['WEB_FORM_ID'] == 31
-            ||
+            */||
             // Задать вопрос ЖКУ
             $arParams['WEB_FORM_ID'] == 29
-            */
-
         )
         { ?>
         <div id="recaptchaResponse_<?= $arParams["WEB_FORM_ID"] ?>" class="recaptcha-item recaptcha-item--center"></div>
         <? } ?>
-        <?/*if(
+        <?if(
             // Отправить резюме
-            $arParams['WEB_FORM_ID'] == 8
-            ||
+            $arParams['WEB_FORM_ID'] == 26
+            //||
             // Заказать услугу
-            $arParams['WEB_FORM_ID'] == 17
+            //$arParams['WEB_FORM_ID'] == 17
         )
         { ?>
             <div id="recaptchaResponse_<?= $arParams["WEB_FORM_ID"] ?>" class="recaptcha-item--center"></div>
@@ -458,7 +455,7 @@ if ($arResult["isFormNote"] != "Y") {
                     'sitekey' : G_SITE_KEY
                 });
             </script>
-        <? } */?>
+        <? } ?>
         <div class="row form-group">
             <div class="col col-12 <?= $oneInLineCol; ?>">
                 <button class="btn btn-orange w-170 1" name="web_form_submit"

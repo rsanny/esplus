@@ -11,3 +11,518 @@
         padding: 15px;
     }
 }
+
+
+
+.dataPP { 
+      
+}
+
+.dataPP .b-blok {
+    /*background:#ff7543;*/
+    border-radius:6px;
+}
+
+.dataPP .b-blok .vcont-error {
+    background:#fff3ee;
+    border-radius:6px;
+    padding:10px;
+    border:1px solid #c00000;
+    width:500px;
+    margin:20px auto;
+    font-size:15px;
+    text-align:center;
+    color:#c00000;
+}
+
+.vv-error {
+    background:#fff3ee;
+    border-radius:6px;
+    padding:10px;
+    border:0px solid #c00000;
+    width:500px;
+    margin:20px auto;
+    font-size:15px;
+    text-align:center;
+    color:#c00000;
+}
+
+.dataPP .b-blok .vcontUpdate {
+    font-size:15px;
+    text-align:right;
+    color:#e5e5e5;
+    padding:5px 0;
+}
+
+.dataPP .b-blok .vcont {
+    background:#fff3ee;
+    border-radius:6px;
+    padding:10px;
+}
+
+.dataPP .b-blok .vcont .element-block {
+    display: -webkit-box;
+    display: -moz-box;
+    display: box;
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flexbox;
+    display: flex;
+    flex-direction: row;
+    flex-wrap:nowrap;
+    justify-content:flex-start;
+    align-items:stretch;
+    align-content:stretch;
+    width:500px;
+    border:0px solid red;
+    margin:0 auto 20px auto;
+}
+
+
+
+.dataPP .b-blok .vcont .element-block .elem-left {
+   flex-grow: 0;
+   width:154px;
+   margin:0 10px 0 0;
+   padding:5px 0 0 0;
+   text-align:right;
+   border:0px solid red;
+}
+
+.dataPP .b-blok .vcont .element-block .elem-left .b-loks {
+
+}
+
+.dataPP .b-blok .vcont .element-block .elem-left .b-loks .b-loks-element {
+    padding:0 5px;
+    color:#444;
+    font-size:14px;
+    margin:0 0 1px 0;
+    border:0px solid red;
+}
+
+.dataPP .b-blok .vcont .element-block .elem-right {
+    flex-grow: 1;
+    padding:5px 0 0 0;
+}
+
+.dataPP .b-blok .vcont .element-block .elem-right .b-loks {
+    
+}
+
+.dataPP .b-blok .vcont .element-block .elem-right .b-loks .b-loks-element {
+    padding:0 5px 0 0;
+    color:#444;
+    font-size:14px;
+    margin:0 0 1px 0;
+}
+
+.dataPP .b-blok .vcont .element-block .elem-right .b-loks .b-loks-element input {
+    display: block;
+    width: 100%;
+    height: 50px;
+    padding: 15px 22px 14px;
+    font: 300 14px/1.4 "Roboto";
+    color: #333333;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #d9e2e9;
+    transition: .2s;
+    -webkit-appearance: none;
+    border-radius: 5px;
+    width: 252px;
+}
+
+.dataPP .b-blok .vcont .element-block .elem-right .b-loks .b-loks-element .erorr {
+    font-size:14px;
+    color:#f44336;
+    padding:2px 0 0 0;
+}
+
+.dataPP .b-blok .vcont .element-block .elem-right .b-loks .b-loks-element .yes {
+    font-size:14px;
+    color:#5db65e;
+    padding:2px 0 0 0;
+}
+
+.dataPP .b-blok .vcont .element-block .elem-right .b-loks .b-loks-element input::placeholder {
+    color: #a3acb5;
+    opacity: 1;
+    font-size: 14px;
+}
+
+.dataPP .b-blok .vcont .element-block .elem-right .b-loks .b-loks-element input::selection {
+    background: #ff7543;
+    color: #fff;
+    text-shadow: none;
+}
+
+.dataPP .b-blok .vcont .element-block .elem-right .classSubMit {
+margin:20px 0 0 0;
+}
+
+.dataPP .b-blok .vcont .element-block .elem-right .classSubMit input[type="submit"] {
+    display: inline-block;
+    margin-bottom: 0;
+    font-weight: 300;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    background-image: none;
+    white-space: nowrap;
+    border: 1px solid transparent;
+    border-top-color: transparent;
+    border-right-color: transparent;
+    border-bottom-color: transparent;
+    border-left-color: transparent;
+    padding: 13px 12px;
+    font: 300 16px/1.42857143 "Roboto";
+    border-radius: 5px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    text-decoration: none;
+    transition: all ease .2s;
+    cursor: pointer;
+    background: #f05b25;
+    color: #fff;
+    border-color: #f05b25;
+    width:170px;
+}
+
+.dataPP .b-blok .vcont .element-block .elem-right .classSubMit input[type="submit"]::selection {
+    background: #ff7543;
+    color: #fff;
+    text-shadow: none;
+}
+
+
+@media (min-width: 320px) and (max-width: 480px) {
+
+    .dataPP { 
+      
+    }
+    
+    .dataPP .b-blok {
+        /*background:#ff7543;*/
+        border-radius:6px;
+    }
+    
+    .dataPP .b-blok .vcont-error {
+        background:#fff3ee;
+        border-radius:6px;
+        padding:10px;
+        border:1px solid #c00000;
+        margin:20px auto;
+        font-size:15px;
+        text-align:center;
+        color:#c00000;
+        width:300px;
+    }
+    
+    .dataPP .b-blok .vcontUpdate {
+        font-size:15px;
+        text-align:right;
+        color:#e5e5e5;
+        padding:5px 0;
+    }
+    
+    .dataPP .b-blok .vcont {
+        background:#fff3ee;
+        border-radius:6px;
+        padding:10px;
+    }
+    
+    .dataPP .b-blok .vcont .element-block {
+        display:block;
+    }
+    
+    
+    
+    .dataPP .b-blok .vcont .element-block .elem-left {
+       margin:0 0px 0 0;
+       padding:5px 0 0 0;
+       text-align:left;
+       display:block;
+    }
+    
+    .dataPP .b-blok .vcont .element-block .elem-left .b-loks {
+        display:block !important;
+    }
+    
+    .dataPP .b-blok .vcont .element-block .elem-left .b-loks .b-loks-element {
+        padding:0 5px 0 0;
+        color:#444;
+        font-size:14px;
+        margin:0 0 1px 0;
+        border:0px solid red;
+        display:block !important;
+    }
+    
+    .dataPP .b-blok .vcont .element-block .elem-right {
+        padding:5px 0 0 0;
+        display:block !important;
+        width:300px;
+    }
+    
+    .dataPP .b-blok .vcont .element-block .elem-right .b-loks {
+        
+    }
+    
+    .dataPP .b-blok .vcont .element-block .elem-right .b-loks .b-loks-element {
+        padding:0 5px 0 0;
+        color:#444;
+        font-size:14px;
+        margin:0 0 1px 0;
+    }
+    
+    .dataPP .b-blok .vcont .element-block .elem-right .b-loks .b-loks-element input {
+        display: block;
+        width: 100%;
+        height: 50px;
+        padding: 15px 22px 14px;
+        font: 300 14px/1.4 "Roboto";
+        color: #333333;
+        background-color: #fff;
+        background-image: none;
+        border: 1px solid #d9e2e9;
+        transition: .2s;
+        -webkit-appearance: none;
+        border-radius: 5px;
+        width: 252px;
+    }
+    
+    .dataPP .b-blok .vcont .element-block .elem-right .b-loks .b-loks-element .erorr {
+        font-size:14px;
+        color:#f44336;
+        padding:2px 0 0 0;
+        width:252px;
+    }
+    
+    .dataPP .b-blok .vcont .element-block .elem-right .b-loks .b-loks-element .yes {
+        font-size:14px;
+        color:#5db65e;
+        padding:2px 0 0 0;
+    }
+    
+    .dataPP .b-blok .vcont .element-block .elem-right .b-loks .b-loks-element input::placeholder {
+        color: #a3acb5;
+        opacity: 1;
+        font-size: 14px;
+    }
+    
+    .dataPP .b-blok .vcont .element-block .elem-right .b-loks .b-loks-element input::selection {
+        background: #ff7543;
+        color: #fff;
+        text-shadow: none;
+    }
+    
+    .dataPP .b-blok .vcont .element-block .elem-right .classSubMit {
+        width:170px;
+        margin:20px auto 0 auto !important;
+    }
+    
+    .dataPP .b-blok .vcont .element-block .elem-right .classSubMit input[type="submit"] {
+        display: block;
+        font-weight: 300;
+        text-align: center;
+        vertical-align: middle;
+        cursor: pointer;
+        background-image: none;
+        white-space: nowrap;
+        border: 1px solid transparent;
+        border-top-color: transparent;
+        border-right-color: transparent;
+        border-bottom-color: transparent;
+        border-left-color: transparent;
+        padding: 13px 12px;
+        font: 300 16px/1.42857143 "Roboto";
+        border-radius: 5px;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        text-decoration: none;
+        transition: all ease .2s;
+        cursor: pointer;
+        background: #f05b25;
+        color: #fff;
+        border-color: #f05b25;
+        width:170px  !important;
+        margin:0 auto !important;
+    }
+    
+    .dataPP .b-blok .vcont .element-block .elem-right .classSubMit input[type="submit"]::selection {
+        background: #ff7543;
+        color: #fff;
+        text-shadow: none;
+    }
+
+}
+
+
+@media (min-width: 640px) and (max-width: 900px) {
+
+    .dataPP { 
+      
+    }
+    
+    .dataPP .b-blok {
+        /*background:#ff7543;*/
+        border-radius:6px;
+    }
+    
+    .dataPP .b-blok .vcont-error {
+        background:#fff3ee;
+        border-radius:6px;
+        padding:10px;
+        border:1px solid #c00000;
+        margin:20px auto;
+        font-size:15px;
+        text-align:center;
+        color:#c00000;
+        width:300px;
+    }
+    
+    .dataPP .b-blok .vcontUpdate {
+        font-size:15px;
+        text-align:right;
+        color:#e5e5e5;
+        padding:5px 0;
+    }
+    
+    .dataPP .b-blok .vcont {
+        background:#fff3ee;
+        border-radius:6px;
+        padding:10px;
+    }
+    
+    .dataPP .b-blok .vcont .element-block {
+        display:block;
+        width:300px;
+    }
+    
+    
+    
+    .dataPP .b-blok .vcont .element-block .elem-left {
+       margin:0 0px 0 0;
+       padding:5px 0 0 0;
+       text-align:left;
+       display:block;
+    }
+    
+    .dataPP .b-blok .vcont .element-block .elem-left .b-loks {
+        display:block !important;
+    }
+    
+    .dataPP .b-blok .vcont .element-block .elem-left .b-loks .b-loks-element {
+        padding:0 5px 0 0;
+        color:#444;
+        font-size:14px;
+        margin:0 0 1px 0;
+        border:0px solid red;
+        display:block !important;
+    }
+    
+    .dataPP .b-blok .vcont .element-block .elem-right {
+        padding:5px 0 0 0;
+        display:block !important;
+        width:260px;
+        text-align:center;
+    }
+    
+    .dataPP .b-blok .vcont .element-block .elem-right .b-loks {
+        
+    }
+    
+    .dataPP .b-blok .vcont .element-block .elem-right .b-loks .b-loks-element {
+        padding:0 5px 0 0;
+        color:#444;
+        font-size:14px;
+        margin:0 0 1px 0;
+        text-align:left;
+    }
+    
+    .dataPP .b-blok .vcont .element-block .elem-right .b-loks .b-loks-element input {
+        display: block;
+        height: 50px;
+        padding: 15px 22px 14px;
+        font: 300 14px/1.4 "Roboto";
+        color: #333333;
+        background-color: #fff;
+        background-image: none;
+        border: 1px solid #d9e2e9;
+        transition: .2s;
+        -webkit-appearance: none;
+        border-radius: 5px;
+        width: 252px;
+        margin:0 auto;
+    }
+    
+    .dataPP .b-blok .vcont .element-block .elem-right .b-loks .b-loks-element .erorr {
+        font-size:14px;
+        color:#f44336;
+        padding:2px 0 0 0;
+        width:252px;
+    }
+    
+    .dataPP .b-blok .vcont .element-block .elem-right .b-loks .b-loks-element .yes {
+        font-size:14px;
+        color:#5db65e;
+        padding:2px 0 0 0;
+    }
+    
+    .dataPP .b-blok .vcont .element-block .elem-right .b-loks .b-loks-element input::placeholder {
+        color: #a3acb5;
+        opacity: 1;
+        font-size: 14px;
+    }
+    
+    .dataPP .b-blok .vcont .element-block .elem-right .b-loks .b-loks-element input::selection {
+        background: #ff7543;
+        color: #fff;
+        text-shadow: none;
+    }
+    
+    .dataPP .b-blok .vcont .element-block .elem-right .classSubMit {
+    margin:20px 0 0 0;
+    }
+    
+    .dataPP .b-blok .vcont .element-block .elem-right .classSubMit input[type="submit"] {
+        display: inline-block;
+        margin-bottom: 0;
+        font-weight: 300;
+        text-align: center;
+        vertical-align: middle;
+        cursor: pointer;
+        background-image: none;
+        white-space: nowrap;
+        border: 1px solid transparent;
+        border-top-color: transparent;
+        border-right-color: transparent;
+        border-bottom-color: transparent;
+        border-left-color: transparent;
+        padding: 13px 12px;
+        font: 300 16px/1.42857143 "Roboto";
+        border-radius: 5px;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        text-decoration: none;
+        transition: all ease .2s;
+        cursor: pointer;
+        background: #f05b25;
+        color: #fff;
+        border-color: #f05b25;
+        width:170px;
+    }
+    
+    .dataPP .b-blok .vcont .element-block .elem-right .classSubMit input[type="submit"]::selection {
+        background: #ff7543;
+        color: #fff;
+        text-shadow: none;
+    }
+
+}

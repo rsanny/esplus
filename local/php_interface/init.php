@@ -67,6 +67,18 @@ if(file_exists(dirname(__FILE__).'/include/DorrBitt/parsetype.php'))
 if(file_exists(dirname(__FILE__).'/include/DorrBitt/dataip.php'))
    require dirname(__FILE__).'/include/DorrBitt/dataip.php';
 
+if(file_exists(dirname(__FILE__).'/include/DorrBitt/dbdomen.php'))
+   require dirname(__FILE__).'/include/DorrBitt/dbdomen.php';
+
+if(file_exists(dirname(__FILE__).'/include/DorrBitt/dataxls.php'))
+   require dirname(__FILE__).'/include/DorrBitt/dataxls.php';
+
+if(file_exists(dirname(__FILE__).'/include/DorrBitt/files.php'))
+   require dirname(__FILE__).'/include/DorrBitt/files.php';
+
+if(file_exists(dirname(__FILE__).'/include/DorrBitt/samara.obrabotka.unload.php'))
+   require dirname(__FILE__).'/include/DorrBitt/samara.obrabotka.unload.php';
+
 
 //	
 //Скрипты для обмена с 1С
@@ -124,14 +136,15 @@ function RedirectAndSetRegion()
 {
     global $APPLICATION;
     $OptimalGroupCity = new \OptimalGroup\City;
+
     $CurrentCity = $OptimalGroupCity->Init($_REQUEST['type']);
     $current = \OptimalGroup\SiteSection::Get();
     $domain = \OptimalGroup\SiteSection::GetSubDomain();
-    if ($domain == "shop"){
+        if ($domain == "shop"){
         if ($current['CODE'] != $domain) {//Если не магазин то устанавливаем магазин
             $_REQUEST['site_section'] = $domain;
         }
-            
+
         if ($_REQUEST['from']){//При переходе с основного получаем его домен, для сохранения в сессию, чтоб знать с какого домена пришли
             $OptimalGroupCity->SetRegionByDomain($_REQUEST['from'], true);
         }
@@ -139,12 +152,13 @@ function RedirectAndSetRegion()
     if ($_REQUEST['site_section'] && $_REQUEST['site_section'] != $current['CODE']){
         \OptimalGroup\SiteSection::Set($_REQUEST['site_section']);
     }
-    
+
     //If domain is root set page
     $checkIndex = \OptimalGroup\SiteSection::GetSubDomain(false);
     if (empty($checkIndex) && !\OptimalGroup\Main::isAjax() && $APPLICATION->GetCurDir() == "/"){
-        
+
         $APPLICATION->RestartBuffer();
+        
         $APPLICATION->IncludeFile(INCLUDE_PATH . '/template/index.php', Array(), Array("SHOW_BORDER"=> false));
         die();
     }
@@ -233,9 +247,11 @@ class FormatHelper
         return $fileType;
     }
 }
+
+
 function pr($item, $show_for = false) {
 	global $USER;
-	if ($USER->GetID() == 1 || $show_for == 'all' || $_GET['print_r']) {	
+	if ($USER->GetID() == 1 || $show_for == 'all' || $_GET['print_r']) {
     $bt = debug_backtrace();
     $bt = $bt[0];
     $dRoot = $_SERVER["DOCUMENT_ROOT"];
@@ -315,19 +331,27 @@ AddEventHandler('form', 'onBeforeResultAdd', 'reCaptcha');
 function reCaptcha($WEB_FORM_ID, &$arFields, &$arrVALUES)
 {
 	global $APPLICATION;
-    $xda = 0;
-	if ( $xda == 1
+    $xda = 1;
+	if (
+	    $xda == 1
+        ||
         // Не нашли ответ на свой вопрос?
-        /*$WEB_FORM_ID == 27
+        $WEB_FORM_ID == 27
+        // Не нашли ответ на свой вопрос?
+        ||
+        $WEB_FORM_ID == 28
+        ||
+        // Подписка на извещения о закупках
+        $WEB_FORM_ID == 2
         ||
         // Обратная связь
         $WEB_FORM_ID == 24
         ||
         // Оценить качество услуг
         $WEB_FORM_ID == 4
-        ||
+        /*||
         // Отправить резюме
-        $WEB_FORM_ID == 8
+        $WEB_FORM_ID == 8*/
         ||
         // Задать вопрос по закупочной деятельности
         $WEB_FORM_ID == 3
@@ -335,15 +359,19 @@ function reCaptcha($WEB_FORM_ID, &$arFields, &$arrVALUES)
         // Рассчитать стоимость услуги
         $WEB_FORM_ID == 16
         ||
+        // Оформить заказ
+        $WEB_FORM_ID == 26
+        /* ||
+
         // Задать вопрос ЖКУ
         $WEB_FORM_ID == 31
         ||
         // Заявка на расчет стоимости
-        $WEB_FORM_ID == 7
+        $WEB_FORM_ID == 7*/
         ||
         // Оставить заявку на установку ОДПУ
         $WEB_FORM_ID == 29
-        */
+
         )
 	{
 		if ($_POST['g-recaptcha-response']) {

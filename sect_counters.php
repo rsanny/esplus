@@ -11,7 +11,7 @@ webim = {
 (function () {
     var s = document.createElement("script");
     s.type = "text/javascript";
-    s.src = "https://esplusru.webim.ru/js/button.js";
+    s.src = "https://esplusru.webim.ru/js/button.js?123";
     document.getElementsByTagName("head")[0].appendChild(s);
 })();
 </script>

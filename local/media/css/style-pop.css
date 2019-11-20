@@ -111,65 +111,66 @@
 	font-weight:bolder !important;
 	}
 
-.foot-data-re-blok {
-	width:300px;
-	height:80px;
-	position: fixed;
-    right: 30px;
-	bottom:30px;
-	display:none;
-	z-index:1000
-}
-
-.foot-data-re {
-	width:300px;
-	height:80px;
-	background:#ff7848;
-	border-radius:6px;
-    opacity:0.8;
-	position: fixed;
-    right: 30px;
-	bottom:30px;
-}
-
-
-.foot-data-re-2 {
-	width:300px;
-	height:77px;
-	border-radius:3px;
-	position: fixed;
-    right: 30px;
-	bottom:20px;
-	padding:3px 10px 5px 10px;
-
-	font-size: 18px;
-	font-family: 'Source Sans Pro';
-	font-weight:normal;
-	/*color: #D0CFD2;*/
-	color: #fff;
-	margin:-10px 0 0 0;
-	text-align:center;
-	cursor:pointer;
-	z-index:1000;
-}
-
-.foot-data-re-2 span {
-	display:block;
-	/*text-decoration:underline;*/
-	font-size:20px;
-	/*color: #D0CFD2;*/
-	color: #fff;
-	font-weight:bolder;
-}
-
-.foot-data-re-2 mark {
-	background:url("https://esplus.ru/upload/close/nexp-pre-right-white.png") 0px 0 no-repeat;
-	width:48px;
-	height:48px;
-	position:absolute;
-	z-index:1;
-	margin:2px 0 0 -50px;
-}
+	.foot-data-re-blok {
+		width:200px;
+		height:60px;
+		position: fixed;
+		right: 10px;
+		bottom:10px;
+		display:none;
+		z-index:1000
+	}
+	
+	.foot-data-re {
+		width:200px;
+		height:60px;
+		background: #f05b25 !important;
+		border-radius:6px;
+		opacity:1;
+		position: fixed;
+		right: 10px;
+		bottom:10px;
+	}
+	
+	
+	.foot-data-re-2 {
+		width:200px;
+		height:57px;
+		border-radius:3px;
+		position: fixed;
+		right: 10px;
+		bottom:10px;
+		padding:10px 10px 5px 30px;
+		/*background: #f05b25 !important;*/
+		font-size: 13px;
+		font-family: inherit;
+		/*color: #D0CFD2;*/
+		color: #fff;
+		margin:-10px 0 0 0;
+		text-align:center;
+		cursor:pointer;
+		z-index:1000;
+	}
+	
+	.foot-data-re-2 span {
+		display:block;
+		/*text-decoration:underline;*/
+		font-size:13px;
+		font-family: inherit;
+		/*color: #D0CFD2;*/
+		color: #fff;
+		/*font-weight:bolder;*/
+	}
+	
+	.foot-data-re-2 mark {
+		background:url("https://esplus.ru/upload/close/nexp-pre-right-white.png") 0px 0 no-repeat;
+		width:48px;
+		height:48px;
+		position:absolute;
+		z-index:1;
+		margin:-5px 0 0 -42px;
+	}
+	
 
 /*
 @media (max-width: 760px) {

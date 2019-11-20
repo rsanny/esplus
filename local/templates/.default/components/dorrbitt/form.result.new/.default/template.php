@@ -29,6 +29,7 @@ if ($arParams['HIDE_TITLE'] != "Y" || $arParams['FORM_TITLE']):
     <div class="section-title text-center"><span><?= $FormTitle; ?></span></div>
 <? endif; ?>
 <!--<pre>--><? //print_r($arResult)?><!--</pre>-->
+<?if ($arResult["isFormErrors"] == "Y"):?><?=$arResult["FORM_ERRORS_TEXT"];?><?endif;?>
 <? if ($arResult['arForm']['DESCRIPTION']): ?>
     <div class="popup-form--text text-center"><?= $arResult['arForm']['DESCRIPTION']; ?></div><? endif; ?>
 <?
@@ -440,7 +441,33 @@ if ($arResult["isFormNote"] != "Y") {
                 });
             </script>
         <? endif; ?>
-    
+        <?
+
+        if (
+        // Не нашли ответ на свой вопрос?
+        $arParams["WEB_FORM_ID"] == 27
+        ||
+        // Обратная связь
+        $arParams["WEB_FORM_ID"] == 24
+        ||
+        // Не нашли ответ на свой вопрос?
+        $arParams['WEB_FORM_ID'] == 28
+        // Подписка на извещения о закупках
+        ||
+        $arParams['WEB_FORM_ID'] == 2
+        ||
+        // Задать вопрос по закупочной деятельности
+        $arParams['WEB_FORM_ID'] == 3
+        /*||
+        // Задать вопрос ЖКУ
+        $arParams['WEB_FORM_ID'] == 31*/
+        ||
+        // Задать вопрос ЖКУ
+        $arParams['WEB_FORM_ID'] == 29
+        )
+        { ?>
+            <div id="recaptchaResponse_<?= $arParams["WEB_FORM_ID"] ?>" class="recaptcha-item recaptcha-item--center"></div>
+        <? } ?>
         <div class="row form-group">
             <div class="col col-12 <?= $oneInLineCol; ?>">
                 <button class="btn btn-orange w-170 1" 

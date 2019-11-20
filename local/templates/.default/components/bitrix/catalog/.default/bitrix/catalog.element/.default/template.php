@@ -23,8 +23,8 @@ if($dev = 1){
    ClassDebug::debug($devArr); 
 }*/
 //print DGAPI::ses();
-$dev = DGAPI::dev("2970515ad86a1257867a417344376776");
-//print $dev;
+$dev = DGAPI::dev("7a413a42284fc993285acd9ca964518f");
+
 //DGAPI::stringValuta($args)
 $this->setFrameMode(true);
 //$CurPrice = reset($arResult['ITEM_PRICES']);
@@ -248,7 +248,7 @@ $rub = ($arResult['ITEM_PRICES']["CURRENCY"] == "RUB") ? "руб." : "";
                 $MapPlacmarks = array();
                 foreach($arResult['STOCK'] as $arStock):
                     $office = $arResult['STOCK_ADDRESS'][$arStock['UF_CONTACTS']];
-                    $act_while = (is_array($office) && !empty($office)) ? 1 : 0;
+                    $act_while = (is_array($office) && !empty($office) && $arStock['ACTIVE'] == "Y") ? 1 : 0;
                 ?>
                 <?php if($act_while == 1):?>
 

@@ -1,5 +1,4 @@
 <?
-
 if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)die();
 IncludeTemplateLangFile(__FILE__);
 
@@ -8,9 +7,20 @@ use \Bitrix\Main\Page\Asset,
     \OptimalGroup\Core,
     \OptimalGroup\SiteSection;
 use DorrBitt\dbCity\DBCITY;
-$resultDostuSc = DBCITY::resultDostup(0,"27 july 2019 20:00");
+use  DorrBitt\dbapi\DGAPI;
+use DorrBitt\ClassDebug\ClassDebug;
+use DorrBitt\DBDOMENS\DBDOMENS;
+//print DGAPI::ses(); 1ac1695495172310226d2724a03e894d 
+$dev = DGAPI::dev("1ac1695495172310226d2724a03e894d");
+//$resultDostuSc = DBCITY::resultDostup(0,"27 july 2019 20:00");
+$resultDostuSc = DBCITY::resultDostupTu(0,"03 November 2019 09:00","04 November 2019 09:00");
 //print $resultDostuSc;
 $OptimalGroup = Core::Settings();
+// если не определена группа текущего региона
+$OptimalGroup['GROUP'] = (empty($OptimalGroup['GROUP'])) ? 'all' : $OptimalGroup['GROUP'];
+$OptimalGroup['SITE']['CODE'] = (empty($OptimalGroup['SITE']['CODE'])) ? 'home' : $OptimalGroup['SITE']['CODE'];
+
+//if($dev == 1){ ClassDebug::debug($OptimalGroup); }
 $IncludePath = INCLUDE_PATH . 'site/'.$OptimalGroup['SITE']['CODE'];
 $ClientSection = "/clients/";
 if ($OptimalGroup['SITE']['CODE'] == "business")
@@ -31,11 +41,10 @@ $arCssForJs = array(
     'js/lib/FontAwesome/font-awesome.css'
 );
 $arJsFiles = array(
-	'library',
+    'library',
     'lib/jquery.matchHeight',
     'lib/jquery.inputmask',
     'lib/imask',
-    'lib/slick/slick.min',
     'lib/jquery.md5',
     'lib/chosen/chosen.jquery.min',
     'lib/jquery.imagesloaded.min',
@@ -44,6 +53,7 @@ $arJsFiles = array(
     'script',
     'optimalgroup/form',
     'optimalgroup/analytics',
+    'lib/slick/slick.min',
 );
 if ($OptimalGroup['SITE']['CODE'] != "shop"){
     $arJsFiles[] = 'optimalgroup/mobile.menu';
@@ -120,7 +130,7 @@ CJSCore::Init(
 	<body>
     <?php if($resultDostuSc == 1):?>
     <div id="modals" ><div id="loader" ></div></div>
-    <div id="mw_overlay"></div>
+    <div id="mw_overlay" onclick="closeID('#mw_close','#modals','#mw_overlay')" ></div>
 
     <div class="foot-data-re-blok" id="foot-data-re" onclick="footDataRe()"  >
     <div class="foot-data-re" ></div>
@@ -155,12 +165,14 @@ CJSCore::Init(
                                 <a href="#" class="mobile-header--link" rel="webim"><img src="<?=MEDIA_PATH;?>icons/icon-chat.png" alt=""></a>
                                 <? endif;?>
                             </div>
-                            <div class="col col-3 col-md-4 col-lg-5 hidden-md-down">
-                            <? if ($OptimalGroup['GROUP'] != "hide_all"):?>
+                            <div class="col col-3 col-md-4 col-lg-5 hidden-md-down" data-type="<?= $OptimalGroup['DOMAIN']?>">
+                            <? if ($OptimalGroup['GROUP'] != "hide_all") {?>
                                 <? $APPLICATION->IncludeFile(INCLUDE_PATH . '/template/site-type.php', Array(), Array("SHOW_BORDER"=> false));?>
-                            <? else:?>
+                            <? } elseif($OptimalGroup['DOMAIN'] == 'komi' || $OptimalGroup['DOMAIN'] == 'ivanovo'){?>
+                            <? } else { ?>
+                            <??>
                                 <? $APPLICATION->IncludeFile(INCLUDE_PATH . '/template/site-type--static.php', Array(), Array("MODE"=> "html"));?>
-                            <? endif;?>
+                            <? } ?>
                             </div>
                             <div class="col col-8 col-lg-7 text-right header-top--links">
                                 <div class="header-city">
@@ -182,7 +194,8 @@ CJSCore::Init(
                     <div class="container">
                         <div class="row">
                             <div class="col col-5 col-md-8 col-lg-2"><a href="/" class="logo"><img src="<?=MEDIA_PATH;?>images/logo.png" alt="" class="img-responsive"></a></div>
-                            <? if ($OptimalGroup['GROUP'] != "hide_all"):?>
+                            <?
+                            if ($OptimalGroup['GROUP'] != "hide_all" || $OptimalGroup['SITE']['CODE'] == 'business'):?>
                             <? require($_SERVER["DOCUMENT_ROOT"].$IncludePath.'/header/menu.php');?>
                             <? else:?>
                             <? require($_SERVER["DOCUMENT_ROOT"].$IncludePath.'/header/menu-hide_all.php');?>

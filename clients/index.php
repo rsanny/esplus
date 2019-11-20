@@ -23,7 +23,7 @@ if (!$_REQUEST['site_section']){
 		"DELAY" => "N",
 		"MAX_LEVEL" => "4",
 		"MENU_CACHE_TIME" => "3600",
-		"MENU_CACHE_TYPE" => "A",
+		"MENU_CACHE_TYPE" => "N",
 		"MENU_CACHE_USE_GROUPS" => "Y",
 		"ROOT_MENU_TYPE" => "section",
 		"CACHE_SELECTED_ITEMS" => "N",

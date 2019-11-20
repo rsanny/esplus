@@ -39,6 +39,7 @@ $APPLICATION->AddChainItem($TitleH1,$arTemplate['ITEM']['DETAIL_PAGE_URL']);
             "PROPERTY_BRANCH" => $_SESSION['BXExtra']['REGION']['IBLOCK']['ID']
         );
         ?>
+
         <? $APPLICATION->IncludeComponent(
             "bitrix:news.list",
             "contract-sections--tabs",
@@ -108,7 +109,17 @@ $APPLICATION->AddChainItem($TitleH1,$arTemplate['ITEM']['DETAIL_PAGE_URL']);
     </div>
     <div class="col col-12 col-md-10 col-lg-9">
         <? if ($arTemplate['ITEM']['DETAIL_TEXT']):?>
-        <div class="popup-form--text"><?=$arTemplate['ITEM']['DETAIL_TEXT'];?></div>
+        <?php 
+        if($arParams['UF_BRANCH'] == 25){
+            $spText = explode("Как заключить договор",$arTemplate['ITEM']['DETAIL_TEXT']);
+            $spTextReturn = "{$spText[0]}Как заключить договор</a></p>";
+        }
+        else{
+            $spText = [];
+            $spTextReturn = $arTemplate['ITEM']['DETAIL_TEXT'];
+        }
+        ?>
+        <div class="popup-form--text"><?=$spTextReturn;?></div>
         <? endif;?>
 
         <? $APPLICATION->IncludeComponent("dorrbitt:form.result.new", "contract", Array(

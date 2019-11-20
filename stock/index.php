@@ -101,7 +101,7 @@ else{
             <label for="SIMPLE_QUESTION_646">Пароль <span class="color-orange">*</span></label>
         </div>
         <div class="col col-12 col-md-8 col-lg-7">
-        <input id="pass_1" type="password" name="pass_1" class="form-control js-InputMask" placeholder="" value="" >
+        <input id="pass_1" type="password" name="pass_1" class="form-control" placeholder="" value="" >
         </div>
     </div>
 

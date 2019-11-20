@@ -7,6 +7,10 @@ class ParseType {
 	public static function pt_int($pti){
 		return (intval($pti) > 0) ? intval($pti) : 0;
 		}
+	
+		public static function pt_numeric($pti){
+		return (is_numeric($pti) > 0) ? is_numeric($pti) : 0;
+		}
 		
 	public static function pt_md5($ptmd){
 		return md5($ptmd);

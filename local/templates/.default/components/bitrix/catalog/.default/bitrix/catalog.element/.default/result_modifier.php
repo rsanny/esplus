@@ -3,6 +3,9 @@
  * @var CBitrixComponentTemplate $this
  * @var CatalogElementComponent $component
 */
+use DorrBitt\ClassDebug\ClassDebug;
+use DorrBitt\dbapi\DGAPI;
+$dev = DGAPI::dev("7a413a42284fc993285acd9ca964518f");
 $component = $this->getComponent();
 $arParams = $component->applyTemplateModifications();
 $arResult['STOCK_ADDRESS'] = array();
@@ -36,6 +39,10 @@ if ($arContacts){
     }
 }
 $arResult['STOCK_AVAILABILITY'] = \OptimalGroup\Catalog::GetStockView($maxQuantity);
+
+if($dev == 1):
+    //ClassDebug::debug($arResult);
+endif;
 
 //Get Banner for product .product-detail--banner
 $arResult['SERVICE_BANNER'] = array();

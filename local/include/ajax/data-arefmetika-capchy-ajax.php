@@ -13,6 +13,9 @@ $arisave = DataArefmetikaCapchy::ar_save();
 $ariResult = "{$arisave[0]}-{$arisave[1]}-{$arisave[2]}";
 $provBota = DataArefmetikaCapchy::arf_proverka();
 if($provBota == 1 && ParseType::len($_GET["id"]) > 6 && ParseType::len($_GET["name"]) > 3 && ParseType::len($ariResult) > 14){
-    print DataArefmetikaCapchy::arf_input($_GET["id"],$_GET["name"],$ariResult);
+    echo DataArefmetikaCapchy::arf_input($_GET["id"],$_GET["name"],$ariResult);
 }
+#WTF ????
+#sleep(2); 
+
 ?>

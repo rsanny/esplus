@@ -845,16 +845,17 @@ header.top {}
             text-align:center;
         }
         .service-tabs--selector a + a {margin-left:100px;}
-            .service-tabs--selector a i {
-                display:block;
-                border: 1px solid #d9e1e9;
-                height:98px;
-                width:98px;
-                margin:0 auto 17px;
-                border-radius:50%;
-                background:#fff;
-                line-height:96px;
-            }
+.service-tabs--selector a i {
+    display: block;
+
+    border: 1px solid #d9e1e9;
+    height:98px;
+    width:98px;
+    margin:0 auto 17px;
+    border-radius:50%;
+    background:#fff;
+    line-height:96px;
+}
                 .service-tabs--selector a i span {
                     display: inline-block;
                     width: 100%;
@@ -2347,4 +2348,3 @@ footer.bottom {
 .contacts-item--text {
     margin-bottom: 17px;
 }
-

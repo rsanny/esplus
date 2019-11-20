@@ -29,6 +29,7 @@ else
 {	
     $this->addExternalJs($templateFolder.'/order_view.js');
     $this->addExternalJs(MEDIA_PATH ."js/optimalgroup/basket.action.js");
+    $this->addExternalJs(MEDIA_PATH ."js/jquery.maskedinput.min.js");
     $this->addExternalJs("//api-maps.yandex.ru/2.1/?lang=ru_RU");
     //GetBranchList
     $OptimalGroupCity = new \OptimalGroup\City;
@@ -94,6 +95,9 @@ else
                         <div class="form-legend clearfix text-uppercase">Оформление заказа</div>
                         <div class="form-group--label">Получатель</div>
                         <?
+                        /*print("<pre>");
+                        print_r($arResult);
+                        print("</pre>");*/
                         $arFields = array();
                         foreach($arResult['ORDER_PROP']['USER_PROPS_Y'] as $arField){
                             if ($arField['FIELD_ID'] == "ORDER_PROP_NAME") $arFields['NAME'] = $arField;
@@ -121,7 +125,7 @@ else
                             <div class="col col-12 col-sm-6">
                                 <div class="form-group">
                                     <label class="form-label mb-10" for="ORDER_FIELD_<?=$arFields['PHONE']['ID'];?>">Телефон <span class="color-orange">*</span></label>
-                                    <input type="text" name="<?=$arFields['PHONE']['FIELD_NAME'];?>" value="<?=$arFields['PHONE']['VALUE'];?>" class="form-control js-InputMask" data-inputmask="'mask': '+7 999 999 99 99','placeholder':'Х'" id="ORDER_FIELD_<?=$arFields['PHONE']['ID'];?>">
+                                    <input type="text" name="<?=$arFields['PHONE']['FIELD_NAME'];?>" value="<?=$arFields['PHONE']['VALUE'];?>" class="form-control phone" id="ORDER_FIELD_<?=$arFields['PHONE']['ID'];?>">
                                 </div>
                             </div>
                         </div>
@@ -178,9 +182,7 @@ else
                             <label class="form-group--label mb-10">Комментарии к заказу</label>
                             <input type="text" name="ORDER_DESCRIPTION" value="" class="form-control">
                         </div>
-                        <div class="form-group">
-                            <div id="saveOrderAjax" class="recaptcha-item"></div>
-                        </div>
+
                         <div class="cart-order--total clearfix cart-group--total cart-group none">
                             <div class="cart-order--total__table pull-left">
                                 <table width="100%">
@@ -212,6 +214,12 @@ else
             </div>
         </div>
     </form>
+
+    <script>
+$(function(){
+  $(".phone").mask("+7(999) 999-99-99");
+});
+</script>
 	<?
 }
 ?>

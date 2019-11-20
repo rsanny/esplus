@@ -67,6 +67,12 @@
             overflow: hidden;
             height: 50px;
         }
+        .product-item--text-data {
+            font-size:13px;
+            color:#62707d;
+            margin:0 0 22px;
+            overflow: hidden;
+        }
         .product-item .product-item--number {
             font-size: 12px;
             color: #a3acb5;

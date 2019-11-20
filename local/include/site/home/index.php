@@ -73,6 +73,9 @@ if ($OptimalGroup['BRANCH']['URL'] == "chuvashia")
 if ($OptimalGroup['BRANCH']['URL'] == "kirov")
     $IndexPath = INCLUDE_PATH . 'site/'.$OptimalGroup['SITE']['CODE'].'/index_kirov.php';
 
+if ($OptimalGroup['BRANCH']['URL'] == "samara")
+    $IndexPath = INCLUDE_PATH . 'site/'.$OptimalGroup['SITE']['CODE'].'/index_samara.php';
+
 //if ():?>
 
 <? $APPLICATION->IncludeFile($IndexPath, array(), Array("SHOW_BORDER"=> false));?>

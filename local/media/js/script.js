@@ -1,7 +1,9 @@
-$(function(){//DOM READEY
+$(document).ready(function () {
     OptimalGroup.init();
+
     Material.init();
-    
+
+
     if (OptimalGroup.isMobile()){
         $('.js-MobilePopUp').fancybox({
             wrapCSS: 'page mobile-popup',
@@ -571,13 +573,13 @@ var onloadCallback = function() {
 
 };
 
-/*$(function() {
+$(function() {
 
-    $("body").on("submit", "form[name='SIMPLE_FORM_27']", function (e) {
+    $("body").on("submit", "form[name='SIMPLE_FORM_24'],form[name='SIMPLE_FORM_26']", function (e) {
         if (!$("textarea#g-recaptcha-response").val() && !$(this).find('.is-error').length) {
             e.preventDefault();
             alert("Проверка на робота не пройдена");
         }
     })
 
-});*/
+});

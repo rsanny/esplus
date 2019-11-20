@@ -1,4 +1,8 @@
-        <? if (!\OptimalGroup\Template::ShowFullWidth() && !$FullWidthDir):?>
+<?
+$OptimalGroup['SITE']['CODE'] = (empty($OptimalGroup['SITE']['CODE'])) ? 'home' : $OptimalGroup['SITE']['CODE'];
+$IncludePath = (empty($IncludePath)) ? INCLUDE_PATH . 'site/'.$OptimalGroup['SITE']['CODE'] : $IncludePath ;
+?>
+<? if (!\OptimalGroup\Template::ShowFullWidth() && !$FullWidthDir):?>
             </div>
         </main>
         <? endif;?>
@@ -85,5 +89,9 @@ if($dev == 1){
     ClassDebug::debug($_SERVER['HTTP_REFERER']);
 }
 ?>
+
+<? if($OptimalGroup['DOMAIN']=='oren'){?>
+
+<?}?>
 </body>
 </html>

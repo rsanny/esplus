@@ -1,5 +1,6 @@
 <?
 namespace OptimalGroup;
+use DorrBitt\dbCity\DBCITY;
 
 class City {
     private $RegionIblock = BRANCH_IBLOCK;
@@ -52,7 +53,7 @@ class City {
                 $result = $arFields;
             }
             if ($isInvalid) { 
-                $cache->abortDataCache(); 
+                $cache->abortDataCache();
             }
             
             $CACHE_MANAGER->EndTagCache();
@@ -62,9 +63,22 @@ class City {
 
         return $result;
     }
+
+    private function listIDShop(){
+        return [
+                "shop"=>[23,24,18,13,11],
+               ];
+    }
+
+    private function listNameShop(){
+        return [
+                "shop"=>["ekb","udm","oren","kirov","vladimir"],
+               ];
+    }
+    
     private function GetListByRegion($type){
         global $APPLICATION, $USER;
-        $domain = SiteSection::GetSubDomain();
+        $domain = SiteSection::GetSubDomain(false);
         $is_shop = false;
         $ip = $_SERVER["REMOTE_ADDR"];
         
@@ -77,17 +91,29 @@ class City {
 			$ip = $_SERVER["HTTP_X_REAL_IP"];
         if ($_REQUEST['ip'])
             $ip = $_REQUEST['ip'];
-            
+
+        // ������ - 178.219.186.12
+
+
+
         $currentRegion = self::GetGeoData($ip);
-        
-        if (!$domain){
-            $this->RedirectCookie();
-        }
-        
+
         
         $result = array(
             'IP' => $currentRegion
         );
+
+        if(\CModule::includeModule('iblock')) {
+            $res_region = \CIBlockElement::GetList(array(), array("IBLOCK_ID"=> 6, "PROPERTY_REGION" => $currentRegion['region']), false, false, array("IBLOCK_ID", "ID", "PROPERTY_URL", "PROPERTY_REGION"))->Fetch();
+            if($res_region['PROPERTY_REGION_VALUE'] && !$domain) {
+                $domain = $res_region['PROPERTY_URL_VALUE'];
+            }
+        }
+
+        if (!$domain){
+            $this->RedirectCookie();
+        }
+
         if (!$result['IBLOCK']){
             if (empty($domain)) {
                 $result['IBLOCK'] = $this->SetRegionById($default_id);
@@ -102,7 +128,10 @@ class City {
         if ($result['IBLOCK']['GROUP'] != "all" && $is_shop) {
             $result['NO_STORE'] = $result['IBLOCK'];
             $cookie = $this->GetCookieRegion();
-            
+            if($domain == "shop"){
+                $arrNameShop = self::listNameShop();
+                $cookie = (DBCITY::inarray($arrNameShop,$cookie) == 1) ? $cookie : $arrNameShop[$domain][0];
+            }
             if ($cookie){
                 $result['IBLOCK'] = $this->SetRegionByDomain($cookie);
                 $result['AGREED'] = true;
@@ -110,18 +139,17 @@ class City {
             else 
                 $result['IBLOCK'] = $this->SetRegionById($default_id);
         }
-        
-        //if (
-//            $result['IBLOCK']['URL'] != $domain 
-//            && $APPLICATION->sDirPath != "/bitrix/admin/" 
-//            && $result['IBLOCK']['URL'] 
-//            && !$USER->IsAdmin()
-//            && !$is_shop)
-//        {
-//            $NewDomain = Url::Make($result['IBLOCK']['URL']);
-//            unset($_SESSION['BXExtra']);
-//            LocalRedirect($NewDomain.$APPLICATION->GetCurUri(),true,"301 Moved permanently");
-//        }
+        if (
+            $result['IBLOCK']['URL'] != $domain
+            && $APPLICATION->sDirPath != "/bitrix/admin/"
+            && $result['IBLOCK']['URL']
+            && !$USER->IsAdmin()
+            && !$is_shop)
+        {
+            $NewDomain = Url::Make($result['IBLOCK']['URL']);
+            unset($_SESSION['BXExtra']);
+            LocalRedirect($NewDomain.$APPLICATION->GetCurUri(),true,"301 Moved permanently");
+        }
         $this->ShopPriceCode($result['IBLOCK']['URL']);
         
         return $result;
@@ -191,13 +219,24 @@ class City {
     }
     public function Init($type){
         if (Main::isBot()) return false;
+        $domain = SiteSection::GetSubDomain();
+
         if (!$_SESSION['BXExtra']['REGION'] || $type == "m"){ 
-            $UserCity = $this->GetListByRegion($type);            
+            $UserCity = $this->GetListByRegion($type);
             $_SESSION['BXExtra']['REGION'] = $UserCity;
-        }
-        else {
+        } else {
+
             $UserCity = $_SESSION['BXExtra']['REGION'];
         }
+        /*else {
+            if($domain == "shop"){
+                $nameRegion = $_SESSION['BXExtra']['REGION']["IBLOCK"]["URL"];
+                $arrNameShop = self::listNameShop();
+                $nameRegion = (DBCITY::inarray($arrNameShop,$nameRegion) == 1) ? $nameRegion : $arrNameShop[$domain][0];
+                $_SESSION['BXExtra']['REGION']["IBLOCK"] = $this->SetRegionByDomain($nameRegion);
+            }
+            $UserCity = $_SESSION['BXExtra']['REGION'];
+        }*/
         return $UserCity;
     }
     public function GetBranchList($cityFilter){

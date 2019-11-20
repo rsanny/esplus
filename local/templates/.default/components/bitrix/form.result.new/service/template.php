@@ -150,7 +150,7 @@ endforeach;?>
 
     if (
         // Не нашли ответ на свой вопрос?
-        $arParams["WEB_FORM_ID"] == 27
+        $arParams["WEB_FORM_ID"] == 16
 
     )
     { ?>

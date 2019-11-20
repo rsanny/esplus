@@ -10,29 +10,38 @@ global $OptimalGroup;
                     <div class="col col-12 col-md-3">
                         <div class="menu-container--title">Электротехнические товары</div>
                         <? $APPLICATION->IncludeComponent(
-                            "bitrix:catalog.section.list",
-                            "header-catalog-menu",
-                            Array(
-                                "IS_OREN" => $OptimalGroup['DOMAIN'] == 'oren',
-                                "FILTER_TYPE" => CATALOG_TYPE_PRODUCTS,
-                                "CHILD_DEPTH_LEVEL" => 1,
-                                "ADD_SECTIONS_CHAIN" => "N",
-                                "CACHE_GROUPS" => "Y",
-                                "CACHE_TIME" => "36000000",
-                                "CACHE_TYPE" => "A",
-                                "COUNT_ELEMENTS" => "Y",
-                                "IBLOCK_ID" => CATALOG_IBLOCK_ID,
-                                "IBLOCK_TYPE" => "1c_catalog",
-                                "SECTION_CODE" => "",
-                                "SECTION_FIELDS" => array("", ""),
-                                "SECTION_ID" => "",
-                                "SECTION_URL" => "/catalog/#SECTION_CODE#/",
-                                "SECTION_USER_FIELDS" => array("UF_*"),
-                                "SHOW_PARENT_NAME" => "Y",
-                                "TOP_DEPTH" => "5",
-                                "VIEW_MODE" => "LINE"
-                            )
-                        );?>
+	"bitrix:catalog.section.list", 
+	"header-catalog-menu", 
+	array(
+		"IS_OREN" => $OptimalGroup["DOMAIN"]=="oren",
+		"FILTER_TYPE" => CATALOG_TYPE_PRODUCTS,
+		"CHILD_DEPTH_LEVEL" => "1",
+		"ADD_SECTIONS_CHAIN" => "N",
+		"CACHE_GROUPS" => "Y",
+		"CACHE_TIME" => "36000000",
+		"CACHE_TYPE" => "N",
+		"COUNT_ELEMENTS" => "Y",
+		"IBLOCK_ID" => CATALOG_IBLOCK_ID,
+		"IBLOCK_TYPE" => "1c_catalog",
+		"SECTION_CODE" => "",
+		"SECTION_FIELDS" => array(
+			0 => "",
+			1 => "",
+		),
+		"SECTION_ID" => "",
+		"SECTION_URL" => "/catalog/#SECTION_CODE#/",
+		"SECTION_USER_FIELDS" => array(
+			0 => "",
+			1 => "UF_*",
+			2 => "",
+		),
+		"SHOW_PARENT_NAME" => "Y",
+		"TOP_DEPTH" => "5",
+		"VIEW_MODE" => "LINE",
+		"COMPONENT_TEMPLATE" => "header-catalog-menu"
+	),
+	false
+);?>
                     <!--/Menu contaner left-->                                                    
                     </div>
                     <div class="col col-12 col-md-9">

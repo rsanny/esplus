@@ -1,5 +1,6 @@
 <?
 $HeaderMenuPath = INCLUDE_PATH.'site/'.$OptimalGroup['SITE']['CODE'].'/header/menu-'.$OptimalGroup['GROUP'].'.php';
+
 $tariffLink = "/tariffs/".$OptimalGroup['DOMAIN']."/fiz/";
 if ($OptimalGroup['DOMAIN'] == "vladimir")
     $HeaderMenuPath = INCLUDE_PATH . 'site/'.$OptimalGroup['SITE']['CODE'].'/header/menu-vladimir.php';

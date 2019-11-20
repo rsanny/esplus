@@ -1,4 +1,4 @@
-$(function(){    
+$(document).ready(function () {
     $('.product-slider').slick({
         nav:true,
         infinite: true,

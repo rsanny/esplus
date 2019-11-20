@@ -1,5 +1,5 @@
 <?
-$aMenuLinks = Array(
+/*$aMenuLinks = Array(
 	Array(
 		"Как оплатить", 
 		"/service/pay/", 
@@ -23,3 +23,24 @@ $aMenuLinks = Array(
 		"" 
 	),
 );
+*/
+$aMenuLinks = Array(
+
+	Array(
+		"Заключить договор", 
+		"/service/contract/", 
+		Array(), 
+		Array("class"=>"contract"), 
+		"" 
+	),
+	Array(
+		"Передать показания", 
+		"/service/post/", 
+		Array(), 
+		Array("class"=>"transfer"), 
+		"" 
+	),
+ 
+);
+
+?>

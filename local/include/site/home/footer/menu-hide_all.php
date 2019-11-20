@@ -36,7 +36,7 @@
     </div>
 
     <div class="col col-12 hidden-md-down col-lg-3 hidden-sm-down">
-        <a href="/feedback-2/" class="btn btn-label block"><span><i class="fa fa-envelope"></i></span>Обратная связь</a>
+        <a href="/feedback/" class="btn btn-label block"><span><i class="fa fa-envelope"></i></span>Обратная связь</a>
         <a href="/about/quality-of-services/" class="btn btn-label block"><span><i
                         class="icon-rating btn-icon"></i></span>Оценить качество услуг</a>
     </div>

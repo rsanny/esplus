@@ -37,15 +37,18 @@ $dev = DGAPI::dev("6bb94a866ca9c9cddf2f73f704e7c176");
     if ($arParams['IS_OREN'])
         if (
             $arSection['ID'] == '623' ||
-            $arSection['ID'] == '612'
+            $arSection['ID'] == '612' ||
+            $arSection['ID'] == '1934'
         )
             continue;
 
 ?>
     <?php if($devArrLen > 0):?>
+    <?php if($arSection['ID'] != 1934):?>
     <li>
         <a href="<?=$arSection['SECTION_PAGE_URL']; ?>"><?=$arSection['NAME']; ?></a>
     </li>
+    <?php endif;?>
     <?php endif;?>
 <? endforeach;?>
 </ul>

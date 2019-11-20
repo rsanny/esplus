@@ -843,7 +843,12 @@ header.top {}
         }
         .service-tabs--selector a + a {margin-left:100px;}
             .service-tabs--selector a i {
-                display:block;
+                display: -webkit-box;
+                display: -ms-flexbox;
+                display: flex;
+                -webkit-box-align: center;
+                -ms-flex-align: center;
+                align-items: center;
                 border: 1px solid #d9e1e9;
                 height:98px;
                 width:98px;
@@ -912,8 +917,10 @@ header.top {}
             height: 80px;
             width: 80px;
             position: absolute;
-            left: 107px;
-            bottom: 95px;
+            /*left: 107px;
+            bottom: 95px;*/
+            left: 250px;
+            bottom: 140px;
         }
         .small-banner--link .btn {
             position:absolute;
@@ -2444,3 +2451,105 @@ footer.bottom {
     margin: 15px 0px;
     width: 100%;
 }
+
+
+
+/* xlsdata */
+.xlsdata {
+
+}
+
+
+.xlsdata .xlsdata-bl-hg {
+    display: -webkit-box;
+    display: -moz-box;
+    display: box;
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flexbox;
+    display: flex;
+    flex-direction: row;
+    flex-wrap:wrap;
+    justify-content:flex-start;
+    align-items:center;
+    align-content:stretch; 
+    background:#d8dde2;
+}
+
+.xlsdata .xlsdata-bl-hg .xlsdata-bl-name {
+    color:#444;
+    font-size:14px;
+    padding:5px 10px;
+    width:350px;
+}
+
+.xlsdata .xlsdata-bl-hg .xlsdata-bl-type {
+    color:#444;
+    font-size:14px;
+    padding:10px;
+    width:300px;
+}
+
+.xlsdata .xlsdata-bl-hg .xlsdata-bl-action {
+    color:#444;
+    font-size:14px;
+    padding:10px;
+    width:200px;
+    text-align:center;
+}
+
+.xlsdata .xlsdata-bl {
+    display: -webkit-box;
+    display: -moz-box;
+    display: box;
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flexbox;
+    display: flex;
+    flex-direction: row;
+    flex-wrap:wrap;
+    justify-content:flex-start;
+    align-items:center;
+    align-content:stretch; 
+    background:#f8f8f8;
+    border:1px solid #d8dde2;
+
+}
+
+.xlsdata .xlsdata-bl .xlsdata-bl-name {
+    color:#444;
+    font-size:14px;
+    padding:10px 10px;
+    width:350px;
+}
+
+.xlsdata .xlsdata-bl .xlsdata-bl-type {
+    color:#444;
+    font-size:14px;
+    padding:10px;
+    width:300px;
+}
+
+.xlsdata .xlsdata-bl .xlsdata-bl-action {
+    color:#444;
+    font-size:14px;
+    padding:10px 0;
+    width:200px;
+}
+
+.xlsdata .xlsdata-bl .xlsdata-bl-action a {
+    color:#fff;
+    font-size:14px;
+    padding:10px;
+    background:#f05b25;
+    text-align:center;
+    width:160px;
+    text-decoration:none;
+    border-radius:3px;
+    display:block;
+    margin:0 auto;
+}
+
+
+
+/* end xlsdata */

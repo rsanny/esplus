@@ -13,8 +13,8 @@ var OptimalGroup = {
 
         $('.js-InputMask:not([data-type="email"])').each(function () {
             var options = $(this).attr('data-inputmask');
-            options = options.replace(/'/g, '"');
-            options = JSON.parse("{" + options + "}");
+            //options = options.replace(/'/g, '"');
+            //options = JSON.parse("{" + options + "}");
 
             var mask = new IMask($(this)[0], {
                 mask: "+{7} 000 000 00 00",

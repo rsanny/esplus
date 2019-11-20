@@ -55,7 +55,8 @@ if(is_array($arItem['ITEM_PRICES']) && empty($arItem['ITEM_PRICES'])){
         <span class="product-item--img loading-bg product-to-basket--img"><img src="<?=$product_picture['src'];?>" alt="<?=$arItem['NAME'];?>" class="fadeImg" data-id="<?=$product_picture_id;?>"></span>
         <span class="product-item--middle">
             <span class="product-item--name"><span><?=$arItem['NAME'];?></span></span>
-            <span class="product-item--text"><?=$arItem['PREVIEW_TEXT'];?></span>
+            <!--<span class="product-item--text"><?=$arItem['PREVIEW_TEXT'];?></span>-->
+            <span class="product-item--text-data"></span>
             <? if ($arItem['PROPERTIES']['CML2_ARTICLE']['VALUE']):?>
             <span class="product-item--number">Артикул: <?=$arItem['PROPERTIES']['CML2_ARTICLE']['VALUE'];?></span>
             <? endif;?>

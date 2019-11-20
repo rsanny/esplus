@@ -36,7 +36,7 @@ setTimeout(function() {
 
     closeID('#mw_close','#modals','#mw_overlay');
     servise_show('#foot-data-re');
-  }, 6000);
+  }, 15000);
 */
 
  function aniOpacity(id1,id2){
@@ -82,26 +82,56 @@ function footDataRe(){
     modalOkno();
 }
 
-setInterval(function(){ 
-    var id = $('#xyz_text input').attr('id');
-    var name = $('#xyz_text input').attr('name');
-    //console.log(id);
-    //console.log(name);
-    $.ajax({
-        url:'/local/include/ajax/data-arefmetika-capchy-ajax.php',
-        data: { name:name,id:id },
-        type: 'GET',
-        beforeSend: function() {
-            $('#loader').show();
-         },
-         complete: function(){
-            $('#loader').hide();
-         },
-        success: function(res){
-            modals('xyz_text',res);
-        },
-        error: function(){
-            //alert('Error!');
-        }
-    });
-}, 10000);
+/*
+$(document).ready(function() {
+
+    setInterval(function(){
+        var id = $('#xyz_text input').attr('id');
+        var name = $('#xyz_text input').attr('name');
+        $.ajax({
+            url:'/local/include/ajax/data-arefmetika-capchy-ajax.php',
+            data: { name:name,id:id },
+            type: 'GET',
+            beforeSend: function() {
+                $('#loader').show();
+            },
+            complete: function(){
+                $('#loader').hide();
+            },
+            success: function(res){
+                modals('xyz_text',res);
+            },
+            error: function(){
+                //alert('Error!');
+            }
+        });
+    }, 16000);
+
+})
+*/
+
+$(document).ready(function() {
+
+    setTimeout(function(){
+        var id = $('#xyz_text input').attr('id');
+        var name = $('#xyz_text input').attr('name');
+        $.ajax({
+            url:'/local/include/ajax/data-arefmetika-capchy-ajax.php',
+            data: { name:name,id:id },
+            type: 'GET',
+            beforeSend: function() {
+                $('#loader').show();
+            },
+            complete: function(){
+                $('#loader').hide();
+            },
+            success: function(res){
+                modals('xyz_text',res);
+            },
+            error: function(){
+                //alert('Error!');
+            }
+        });
+    }, 16000);
+
+})

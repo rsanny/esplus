@@ -1,6 +1,6 @@
 <?
 require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
-$APPLICATION->SetTitle("Руководство ОАО \"ЭнергосбыТ Плюс\"");
+$APPLICATION->SetTitle("Руководство АО \"ЭнергосбыТ Плюс\"");
 ?>
 <div class="row">
     <div class="col col-12 col-md-4 col-lg-3">
