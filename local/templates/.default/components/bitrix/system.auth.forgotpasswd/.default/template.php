@@ -31,6 +31,15 @@ if (strlen($arResult["BACKURL"]) > 0)
             <div class="form-group text-left">
                 <input type="text" name="USER_EMAIL" class="form-control" placeholder="E-mail" />
             </div>
+            <?if($arResult["CAPTCHA_CODE"]):?>
+                <input type="hidden" name="captcha_sid" value="<?echo $arResult["CAPTCHA_CODE"]?>" />
+                <div class="capchaBitrix" >
+                  <img src="/bitrix/tools/captcha.php?captcha_sid=<?echo $arResult["CAPTCHA_CODE"]?>" width="180" height="40" alt="CAPTCHA" />
+                  <div class="classIn" >
+                    <input class="form-control" type="text" name="captcha_word" maxlength="50" value="" size="15" />
+                  </div>
+                </div>
+            <?endif;?>
             <div class="btn-action text-center">
                 <p><button class="btn btn-grey w-170" type="submit" name="send_account_info" value="<?=GetMessage("AUTH_SEND")?>"><span class="fa-angle-btn"><?=GetMessage("AUTH_SEND")?></span></button></p>
                 <a href="<?=$arResult['AUTH_AUTH_URL'];?>" class="dashed"><?=GetMessage("AUTH_AUTH");?></a>

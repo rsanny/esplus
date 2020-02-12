@@ -3,6 +3,7 @@ require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/header.php");
 $APPLICATION->SetTitle("Оплатить онлайн");
 require($_SERVER["DOCUMENT_ROOT"] . "/service/header.php");
 $arResult = [];
+global $OptimalGroup;
 
 if (!empty($_REQUEST['PER_ACC'])) {
     $api = new esplusApi(array(
@@ -15,7 +16,7 @@ if (!empty($_REQUEST['PER_ACC'])) {
     #debmes($arResult);
 }
 ?>
-
+    <div class="service-form service-tabs">
     <form id="formPayUnregistered">
         <?= bitrix_sessid_post() ?>
         <div class="form-group--title text-left text-md-center">
@@ -69,13 +70,30 @@ if (!empty($_REQUEST['PER_ACC'])) {
                     </div>
                 </div>
                 <div id="splitted_container">
-                    <? $summ = 0; ?>
+                    <? $summ = $summOverPayment = 0; ?>
                     <? if (!empty($arResult['details'])): ?>
                         <? foreach ($arResult['details'] as $typePay) { ?>
                             <? //if (intval($typePay['OracleId']) != intval(trim($_REQUEST['PER_ACC']))) continue; ?>
-                            <? if ($typePay['ServiceBalance'] > 0) $summ += $typePay['ServiceBalance']; ?>
-                            <? $text = 'Рекомендуемый платеж: '; ?>
-                            <? if (intval($typePay['ServiceBalance']) == 0 || $typePay['ServiceBalance'] < 0) $text = 'Переплата: '; ?>
+                            <? if ($OptimalGroup['DOMAIN'] == 'kirov') {
+
+                                if($typePay['ServiceBalance'] >= 0){
+                                    $summ += $typePay['ServiceBalance'];
+                                } else {
+                                    $summOverPayment += $typePay['ServiceBalance'];
+                                }  ?>
+                                <? $text = 'Рекомендуемый платеж: ';
+                                $emptyValue = false;
+                                ?>
+                                <? if (intval($typePay['ServiceBalance']) == 0 || $typePay['ServiceBalance'] < 0) {
+                                    $emptyValue = true;
+                                    $text = 'Переплата: ';
+                                }
+
+                            } else { ?>
+                                <? if ($typePay['ServiceBalance'] > 0) $summ += $typePay['ServiceBalance']; ?>
+                                <? $text = 'Рекомендуемый платеж: '; ?>
+                                <? if (intval($typePay['ServiceBalance']) == 0 || $typePay['ServiceBalance'] < 0) $text = 'Переплата: '; ?>
+                            <? } ?>
                             <? if (intval($typePay['ServiceBalance']) == 0) $typePay['ServiceBalance'] = '0.00'; ?>
                             <? if ($typePay['ServiceBalance'] < 0) $typePay['ServiceBalance'] *= -1; ?>
                             <div class="row form-group flex-vertical">
@@ -84,9 +102,24 @@ if (!empty($_REQUEST['PER_ACC'])) {
                                 </div>
                                 <div class="col col-12 col-md-6">
                                     <div class="form-control--container">
+                                        <?
+                                        if($OptimalGroup['DOMAIN'] == 'kirov') {
+
+                                            if($typePay['ServiceBalance'] <= 0) {
+                                                $text = 'Переплата: ';
+                                                $typePay['ServiceBalance'] = abs($typePay['ServiceBalance']);
+                                                $emptyValue = true;
+                                            }
+
+                                            $typePay['ServiceBalance'] = number_format($typePay['ServiceBalance'], 2, '.', '');
+
+                                        }
+                                        ?>
                                         <input class="form-control comma"
                                                placeholder="<?= $text . $typePay['ServiceBalance'] ?> руб."
-                                               value="<?= ($typePay['ServiceBalance'] > 0) ? $typePay['ServiceBalance'] : '' ?>"
+                                               value="<?= ($emptyValue) ? '' : $typePay['ServiceBalance'] ?>"
+                                               <?= ($emptyValue) ? 'data-num="'.$typePay['ServiceBalance'].'"' : ''?>
+                                               data-oracle-id="<?= $typePay['OracleId']?>"
                                                name="no_more">
                                         <i class="form-control--question js-toolTip"
                                            data-text="Укажите сумму платежа в формате хх.хх Например: <?= $typePay['ServiceBalance'] ?> По умолчанию указана сумма к оплате по данной услуге из Вашего последнего счета."></i>
@@ -103,9 +136,26 @@ if (!empty($_REQUEST['PER_ACC'])) {
                         Сумма платежа руб.<span class="color-orange">*</span><br>
                         (например: 1050.31)
                     </div>
+                    <? if($OptimalGroup['DOMAIN'] == 'kirov') {
+
+                        if ($summ <= 0) {
+
+                            $placeholder = 'Переплата: ';
+
+                            if ($summ == 0 && $summOverPayment < 0) {
+                                $placeholder .= number_format(abs($summOverPayment), 2, '.', '') . ' руб.';
+                            } else {
+                                $placeholder .= number_format(abs($summ), 2, '.', '') . ' руб.';
+                            }
+
+                            $summ = 0;
+
+                        }
+
+                    } ?>
                     <div class="col col-12 col-md-6">
                         <div class="form-control--container">
-                            <input class="form-control part_sum" value="<?= ($summ != 0) ? $summ : '' ?>" placeholder=""
+                            <input class="form-control part_sum" value="<?= ($summ != 0) ? $summ : '' ?>" placeholder="<?= $placeholder?>"
                                    name="summa" readonly> <!--<i
                                     class="form-control--question js-toolTip"
                                     data-text="Укажите сумму платежа в формате хх.хх Например: 1050.31 По умолчанию указана сумма к оплате из Вашего последнего счета."></i>-->
@@ -143,17 +193,14 @@ if (!empty($_REQUEST['PER_ACC'])) {
                     </p>
                     <ul class="mb-0 pb-0">
                         <li>оплачивать услуги онлайн круглосуточно и без комиссии</li>
-                        <li>для оплаты используйте карты VISA, MasterCard, Maestro, МИР</li>
+                        <li>для оплаты используйте карты VISA, MasterCard, МИР</li>
                         <li>убедитесь, что для Вашей карты разрешены расчеты в Интернете</li>
-                        <!--<li>
-                            <a id="splitted_pay" href="/service/payments/<? /*= (isset($_REQUEST['PER_ACC'])) ? '?PER_ACC' . $_REQUEST['PER_ACC'] : '' */ ?>">распределяйте
-                                платежи по услугам</a></li>-->
                     </ul>
                 </div>
                 <div class="pay-logos text-center">
-                    <img src="/local/media/images/logo-pay-mir_big.png" alt="" class="img-responsive"> <img
-                            src="/local/media/images/logo-pay-master_big.png" alt="" class="img-responsive"> <img
-                            src="/local/media/images/logo-pay-visa_big.png" alt="" class="img-responsive">
+                    <img src="/local/media/images/logo-pay-mir_big.png" alt="" class="img-responsive">
+                    <img src="/local/media/images/logo-master-card.jpg" alt="" class="img-responsive">
+                    <img src="/local/media/images/logo-pay-visa_big.png" alt="" class="img-responsive">
                 </div>
             </div>
         </div>
@@ -172,9 +219,9 @@ if (!empty($_REQUEST['PER_ACC'])) {
                             <li>введите сумму платежа и нажмите на кнопку «Отправить»</li>
                             <li>после ввода суммы платежа и нажатия на кнопку «Оплатить», Вы будете перенаправлены на
                                 защищенную страницу платежной системы Газпромбанка, где безопасно осуществите Ваш
-                                платеж.
+                                платеж
                             </li>
-                            <li>после осуществления платежа Вы будете возвращены на прежнюю страницу.</li>
+                            <li>после осуществления платежа Вы будете возвращены на прежнюю страницу</li>
                         </ul>
                     </div>
                 </div>
@@ -188,10 +235,10 @@ if (!empty($_REQUEST['PER_ACC'])) {
                         </div>
                         <ul class="mt-0 pt-0 mb-0 pb-0">
                             <li>срок зачисления средств в рабочие дни за исключением пятницы составляет один рабочий
-                                день с момента оплаты.
+                                день с момента оплаты
                             </li>
                             <li>при оплате в пятницу, а также в выходные и праздничные дни, средства зачисляются в тот
-                                же срок, начиная с ближайшего рабочего дня.
+                                же срок, начиная с ближайшего рабочего дня
                             </li>
                         </ul>
                     </div>
@@ -207,7 +254,7 @@ if (!empty($_REQUEST['PER_ACC'])) {
                         <ul class="mt-0 pt-0 mb-0 pb-0">
                             <li>возврат денежных средств возможен на ту же карту, с которой был выполнен платеж и
                                 осуществляется по обращению клиента в обслуживающий его офис продаж.Сроки возврата
-                                зависят от банка клиента.
+                                зависят от банка клиента
                             </li>
                         </ul>
                     </div>
@@ -253,7 +300,10 @@ if (!empty($_REQUEST['PER_ACC'])) {
                             val = val.replace(/,/g, ".");
                         }
                         var float = parseFloat(val);
-                        if (float != parseInt(float) && !isNaN(float)) {
+//                        if (float != parseInt(float) && !isNaN(float)) {
+//                            $(this).val(float.toFixed(2));
+//                        }
+                        if(float >= 0) {
                             $(this).val(float.toFixed(2));
                         }
                     }
@@ -278,21 +328,51 @@ if (!empty($_REQUEST['PER_ACC'])) {
                     dataType: 'json',
                     method: 'POST',
                     success: function (data) {
-                        console.log(data);
                         if (!data.error) {
                             for (var prop in data.list_payment.details) {
                                 variable = data.list_payment.details[prop];
                                 if (variable.OracleId == $('input[name="nlsid"]').val()) {
-                                    $('#splitted_container').append('<div class="row form-group flex-vertical"><div class="col col-12 col-md-6 col-lg-5 col-xl-4 offset-lg-1 offset-xl-2 text-md-right text-left form-label">' + variable.ServiceName + '<span class="color-orange">*</span></div><div class="col col-12 col-md-6"><div class="form-control--container"><input class="form-control comma" placeholder="Рекомендуемый платеж:' + variable.ServiceBalance + 'руб." value="' + variable.ServiceBalance + '" name="no_more"><i class="form-control--question js-toolTip" data-text="Укажите сумму платежа в формате хх.хх Например: ' + variable.ServiceBalance + ' По умолчанию указана сумма к оплате по данной услуге из Вашего последнего счета."></i><span class="error_mini">Укажите сумму платежа</span></div></div></div>');
+                                    <? if($OptimalGroup['DOMAIN'] == 'kirov') { ?>
+                                        if(variable.ServiceBalance <= 0) {
+                                            var placeholder = 'Переплата: ' + Math.abs(variable.ServiceBalance).toFixed(2) + ' руб.';
+                                            var valueServiceBalance = '';
+                                        } else {
+                                            var placeholder = 'Рекомендуемый платеж: ' + variable.ServiceBalance.toFixed(2) + ' руб.';
+                                            var valueServiceBalance = variable.ServiceBalance.toFixed(2);
+                                        }
+                                    <?} else {?>
+                                        var placeholder = 'Рекомендуемый платеж: ' + variable.ServiceBalance.toFixed(2) + ' руб.';
+                                        var valueServiceBalance = variable.ServiceBalance.toFixed(2);
+                                    <?}?>
+                                    $('#splitted_container').append('<div class="row form-group flex-vertical"><div class="col col-12 col-md-6 col-lg-5 col-xl-4 offset-lg-1 offset-xl-2 text-md-right text-left form-label">' + variable.ServiceName + '<span class="color-orange">*</span></div><div class="col col-12 col-md-6"><div class="form-control--container"><input class="form-control comma" placeholder="'+ placeholder + '" data-num="'+variable.ServiceBalance.toFixed(2)+'" value="' + valueServiceBalance + '" name="no_more"><i class="form-control--question js-toolTip" data-text="Укажите сумму платежа в формате хх.хх Например: ' + valueServiceBalance + ' По умолчанию указана сумма к оплате по данной услуге из Вашего последнего счета."></i><span class="error_mini">Укажите сумму платежа</span></div></div></div>');
                                     var sum = 0;
 
-                                    $('input[name="no_more"]').each(function () {
-                                        sum += parseFloat($(this).val());
-                                    });
+                                    <? if($OptimalGroup['DOMAIN'] == 'kirov') { ?>
+                                        $('input[name="no_more"]').each(function () {
 
-                                    if (sum != 0) {
-                                        $('input[name="summa"]').val(sum.toFixed(2));
-                                    }
+                                            if($(this).attr("data-num") != "") {
+                                                sum += parseFloat($(this).attr("data-num"));
+                                            } else {
+                                                sum += 0;
+                                            }
+
+                                        });
+
+                                        if (sum >= 0) {
+                                            $('input[name="summa"]').val(sum.toFixed(2));
+                                        } else {
+                                            $('input[name="summa"]').val("");
+                                            $('input[name="summa"]').attr("placeholder", "Переплата: " + Math.abs(sum).toFixed(2) + " руб.");
+                                        }
+                                    <? } else { ?>
+                                        $('input[name="no_more"]').each(function () {
+                                            sum += parseFloat($(this).val());
+                                        });
+
+                                        if (sum != 0) {
+                                            $('input[name="summa"]').val(sum.toFixed(2));
+                                        }
+                                    <? } ?>
                                 }
                             }
 
@@ -320,7 +400,6 @@ if (!empty($_REQUEST['PER_ACC'])) {
 
                 $('input[name="no_more"]').each(function () {
                     val = parseFloat($(this).val());
-                    console.log(val);
                     if (isNaN(val)) val = 0;
                     sum += val;
                 });
@@ -344,7 +423,11 @@ if (!empty($_REQUEST['PER_ACC'])) {
 
                 inputs.each(function () {
                     $(this).removeClass('is-error');
+                    <? if($OptimalGroup['DOMAIN'] == 'kirov') { ?>
+                    if (!$(this).val() && !$(this).attr('data-num')) {
+                    <? } else {?>
                     if (!$(this).val()) {
+                    <? } ?>
                         hasErrors++;
                         $(this).addClass('is-error');
                         $(this).parent('div.form-control--container').find('.error_mini').css('display', 'block');
@@ -360,9 +443,40 @@ if (!empty($_REQUEST['PER_ACC'])) {
                     return false;
                 }*/
 
+                <? if ($OptimalGroup['DOMAIN'] == 'kirov') { ?>
+                    var inputPhone =  $form.find('[name="phone"]');
+                    var phone = inputPhone.val().replace(/[^-0-9]/gim,'');
+
+                    if (phone.length < 10) {
+                        inputPhone.val("");
+                    } else {
+                        inputPhone.val(phone);
+                    }
+                <? } ?>
+
                 $dataForm = $form.serialize();
                 $dataForm += '&DISTRIBUTE=Y'
+                <? if ($OptimalGroup['DOMAIN'] == 'kirov') { ?>
+                    $dataForm += '&MakePaymentSplitter=true';
+                    <?
+                    // оплата с расщеплением услуг
+                    if (!empty($_REQUEST['PER_ACC'])) { ?>
+                        var objMakePaymentSplitter = [];
 
+                        $(this).find('input[name="no_more"]').each(function () {
+
+                            objMakePaymentSplitter.push({
+                                    "oracleId": $(this).attr('data-oracle-id'),
+                                    "amount": ($(this).val() * 100).toFixed(0)
+                                }
+                            )
+
+                        });
+
+                        var jsonMakePaymentSplitter = JSON.stringify(objMakePaymentSplitter);
+                        $dataForm += '&jsonMakePaymentSplitter=' + jsonMakePaymentSplitter;
+                    <? } ?>
+                <? } ?>
                 if (!hasErrors) {
                     $.ajax({
                         url: '/local/include/ajax/payment.php',
@@ -417,5 +531,5 @@ if (!empty($_REQUEST['PER_ACC'])) {
             display: none;
         }
     </style>
-
+    </div>
 <? require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/footer.php"); ?>

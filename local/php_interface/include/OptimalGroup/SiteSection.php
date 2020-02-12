@@ -58,7 +58,7 @@ class SiteSection {
             if (!$oldSubdomain) 
                 $oldSubdomain = $_SESSION['BXExtra']['REGION']['IBLOCK']['URL'];
         }
-        
+
         return $oldSubdomain;
     }
     public function Filter(){

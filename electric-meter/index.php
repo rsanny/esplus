@@ -1,8 +1,24 @@
 <?
 require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
 $APPLICATION->SetTitle("Электросчетчик");
+use DorrBitt\dbCity\DBCITY;
 OptimalGroup\SiteSection::Check("shop");
-if ($_REQUEST['show_config'] == "Y"):
+//$_REQUEST['show_config'] = "Y";
+$dostupListDomen = [
+    "kirov",
+    "udm",
+    "ekb",
+    "vladimir"
+];
+
+$dostupListDomenText = [
+    "ekb"
+];
+$act_region_text = (DBCITY::inarray($dostupListDomenText,$OptimalGroup['DOMAIN']) == 1) ? 1 : 0;
+$act_region = (DBCITY::inarray($dostupListDomen,$OptimalGroup['DOMAIN']) == 1) ? 1 : 0;
+
+//if ($_REQUEST['show_config'] == "Y"):
+    if ($act_region == 1 || $_REQUEST['show_config'] == "Y"):
 ?>
 <section class="counters-offer index-section" id="calc">
     <div class="container">
@@ -168,16 +184,19 @@ if ($_REQUEST['show_config'] == "Y"):
                         "STRICT_SECTION_CHECK" => "N"
                     )
                 );?>
-                
+
             </div>
-            <div class="col col-12 col-md-5 col-lg-4">                 
+            <div class="col col-12 col-md-5 col-lg-4">
                 <? $APPLICATION->IncludeFile(INCLUDE_PATH . '/page/more-question.php', Array(), Array("MODE"=> "html"));?>
-                
+
             </div>
         </div>
     </div>
 </section>
-
+<?php
+//if ($_REQUEST['show_config'] == "Y"):
+    if ($act_region == 1 || $_REQUEST['show_config'] == "Y"):
+    ?>
 <section class="electric-meter--calc bg-grey index-section border-top-bottom" id="configurator">
     <div class="container">
         <div class="section-title text-center"><span>Калькулятор расчета выгоды при многотарифном учете</span></div>
@@ -189,7 +208,7 @@ if ($_REQUEST['show_config'] == "Y"):
         ));
         \Bitrix\Main\Page\Asset::getInstance()->addCss(MEDIA_PATH .'js/lib/ion.range/ion.rangeSlider.css');
         global $arrTariffFilter;
-        $arrTariffFilter = array('PROPERTY_BRANCH' => $_SESSION['BXExtra']['REGION']['IBLOCK']['ID'], 'PROPERTY_PLATE_TYPE'=>415);  
+        $arrTariffFilter = array('PROPERTY_BRANCH' => $_SESSION['BXExtra']['REGION']['IBLOCK']['ID'], 'PROPERTY_PLATE_TYPE'=>415);
         ?>
         <? $APPLICATION->IncludeComponent(
             "bitrix:news.list",
@@ -245,10 +264,15 @@ if ($_REQUEST['show_config'] == "Y"):
                 "STRICT_SECTION_CHECK" => "N"
             )
         );?>
-        <div class="mt-30">Обращаем Ваше внимание на то, что расчет, сформированный при помощи Калькулятора, носит исключительно информационный характер и ни при каких условиях не является публичной офертой. Для получения подробных расчетов, пожалуйста, обращайтесь в ближайший офис обслуживания ЭнергосбыТ Плюс.</div>
+        <div class="mt-30">Обращаем Ваше внимание на то, что расчет, сформированный при помощи Калькулятора, носит исключительно информационный характер и ни при 
+        каких условиях не является публичной офертой. Для получения подробных расчетов, пожалуйста, обращайтесь в ближайший офис обслуживания ЭнергосбыТ Плюс.
+        <?php if($act_region_text == 1):?>
+            Расчет производится без учета исключительных (выходных и праздничных) дней.
+        <?php endif;?>
+        </div>
     </div>
 </section>
-
+<?php endif;?>
 <section class="index-section">
     <div class="container">
         <div class="section-title text-center"><span>Почему выбирают нас?</span></div>
@@ -257,14 +281,16 @@ if ($_REQUEST['show_config'] == "Y"):
                 <div class="why-we">
                     <i><img src="<?=MEDIA_PATH;?>icons/icon-why-we-1.png" alt=""></i>
                     <div>Экономия времени</div>
-                    <span>Услуга оказывается в согласованное с Вами время. Вам не придется идти в энергоснабжающую компанию, чтобы передать документы для ввода в эксплуатацию нового счетчика – за Вас это сделает наш мастер, после оказания услуги.</span>
+                    <span>Услуга оказывается в согласованное с Вами время. Вам не придется идти в энергоснабжающую компанию, чтобы передать документы для ввода
+                    в эксплуатацию нового счетчика – за Вас это сделает наш мастер, после оказания услуги</span>
                 </div>
             </div>
             <div class="col col-12 col-md-6 col-lg-3 mt-30 mt-lg-0">
                 <div class="why-we">
                     <i><img src="<?=MEDIA_PATH;?>icons/icon-why-we-2.png" alt=""></i>
                     <div>Безопасность</div>
-                    <span>Работы выполняются квалифицированными специалистами компании в соответствии с нормами законодательства при соблюдении техники безопасности и правил установки приборов учета.</span>
+                    <span>Работы выполняются квалифицированными специалистами компании в соответствии с нормами законодательства при соблюдении техники безопасности
+                    и правил установки приборов учета</span>
                 </div>
             </div>
             <div class="col col-12 col-md-6 col-lg-3 mt-30 mt-lg-0">
@@ -272,21 +298,21 @@ if ($_REQUEST['show_config'] == "Y"):
                     <i><img src="<?=MEDIA_PATH;?>icons/icon-why-we-3.png" alt=""></i>
                     <div>Экономия денег</div>
                     <span>Возможность перейти на многотарифный учет.<br>
-Приобретая пакетное предложение (счетчик с услугой по установке) Вы экономите еще больше.</span>
+Приобретая пакетное предложение (счетчик с услугой по установке) Вы экономите еще больше</span>
                 </div>
             </div>
             <div class="col col-12 col-md-6 col-lg-3 mt-30 mt-lg-0">
                 <div class="why-we">
                     <i><img src="<?=MEDIA_PATH;?>icons/icon-why-we-4.png" alt=""></i>
                     <div>Опломбировка сразу</div>
-                    <span>После установки новый прибор учета в обязательном порядке опломбируется и вводится в эксплуатацию.</span>
+                    <span>После установки новый прибор учета в обязательном порядке опломбируется и вводится в эксплуатацию</span>
                 </div>
             </div>
-        </div>       
+        </div>
         <? \Optimalgroup\Template::OfferBanners(
             array(
                 "arSettings" => array(
-                    "NEWS_COUNT" => 2, 
+                    "NEWS_COUNT" => 2,
                     "BY_PAGE"=> "Y"
                 )
             )

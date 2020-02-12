@@ -13,9 +13,13 @@ use DorrBitt\DBDOMENS\DBDOMENS;
 //print DGAPI::ses(); 1ac1695495172310226d2724a03e894d 
 $dev = DGAPI::dev("1ac1695495172310226d2724a03e894d");
 //$resultDostuSc = DBCITY::resultDostup(0,"27 july 2019 20:00");
-$resultDostuSc = DBCITY::resultDostupTu(0,"03 November 2019 09:00","04 November 2019 09:00");
+//print $OptimalGroup['SITE']['CODE'];
+
 //print $resultDostuSc;
 $OptimalGroup = Core::Settings();
+if($OptimalGroup['SITE']['CODE'] == "home" || $OptimalGroup['SITE']['CODE'] == "business" ){
+    $resultDostuSc = DBCITY::resultDostupTu(0,"16 January 2020 08:00","16 January 2020 15:00");
+}
 // если не определена группа текущего региона
 $OptimalGroup['GROUP'] = (empty($OptimalGroup['GROUP'])) ? 'all' : $OptimalGroup['GROUP'];
 $OptimalGroup['SITE']['CODE'] = (empty($OptimalGroup['SITE']['CODE'])) ? 'home' : $OptimalGroup['SITE']['CODE'];
@@ -197,9 +201,17 @@ CJSCore::Init(
                             <div class="col col-5 col-md-8 col-lg-2"><a href="/" class="logo"><img src="<?=MEDIA_PATH;?>images/logo.png" alt="" class="img-responsive"></a></div>
                             <?
                             if ($OptimalGroup['GROUP'] != "hide_all" || $OptimalGroup['SITE']['CODE'] == 'business'):?>
-                            <? require($_SERVER["DOCUMENT_ROOT"].$IncludePath.'/header/menu.php');?>
+                            <?php 
+                            if(file_exists($_SERVER["DOCUMENT_ROOT"].$IncludePath.'/header/menu.php')){
+                                require($_SERVER["DOCUMENT_ROOT"].$IncludePath.'/header/menu.php');
+                                }
+                            ?>
                             <? else:?>
-                            <? require($_SERVER["DOCUMENT_ROOT"].$IncludePath.'/header/menu-hide_all.php');?>
+                            <?php 
+                            if(file_exists($_SERVER["DOCUMENT_ROOT"].$IncludePath.'/header/menu-hide_all.php')){
+                                require($_SERVER["DOCUMENT_ROOT"].$IncludePath.'/header/menu-hide_all.php');
+                                }
+                            ?>
                             <? endif;?>
                         </div>
                     </div>

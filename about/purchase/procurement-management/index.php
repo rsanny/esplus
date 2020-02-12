@@ -70,7 +70,7 @@ $APPLICATION->SetTitle("Управление закупочной деятель
             <b>Политика в области закупок</b>
         </a>
 
-        <a href="/upload/doc/Положение о закупках ЭСБ_01.10.2018.zip" class="file-item--small">
+        <a href="/upload/doc/Положение о закупках АО ЭнергосбыТ Плюс.pdf" class="file-item--small">
 
             <span><i class="icon-file--zip"></i></span>
             <b>Положение о закупках</b>

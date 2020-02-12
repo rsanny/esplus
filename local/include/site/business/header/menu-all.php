@@ -1,3 +1,7 @@
+<?php 
+use DorrBitt\DBDOMENS\DBDOMENS;
+$domenNA = DBDOMENS::proverkaDomenNoAct();
+?>
 <li>
     <a href="#" class="main-menu--link js-MainMenu">Электроэнергия</a>
     <div class="menu-container">
@@ -18,7 +22,9 @@
                         <ul class="no-list main-menu--second-level">
                             <li><a href="/business/service/pay/">Как оплатить</a></li>
                             <li><a href="/business/service/post/">Как передать показания</a></li>
+                            <?php if($domenNA == 1):?>
                             <li><a href="/business/service/contract/">Заключить договор онлайн</a></li>
+                            <?php endif; ?>
                             <li><a href="/business/service/doc/">Электронный документооборот</a></li>
                             <? if ($OptimalGroup['DOMAIN'] == "udm"):?>
                             <li><a href="http://csoi.esplus.ru/">Показания АИИС КУЭ</a></li>

@@ -1,73 +1,73 @@
 function modalOkno(){
-        var ayax = "";
-        $('#modals').css('display', 'block').animate({ opacity: 1 });
-        MyModal('#modals','#mw_overlay');
-        console.log(ayax);
-        $.ajax({
-            url:'/local/include/ajax/popText.php?id=2',
-            data: { id:ayax },
-            type: 'GET',
-            beforeSend: function() {
-                $('#loader').show();
-             },
-             complete: function(){
-                $('#loader').hide();
-             },
-            success: function(res){
-                modals('modals',res);
-                //aniOpacity(".modal-img","#mw_close");
-            },
-            error: function(){
-                //alert('Error!');
-            }
-        });
+    var ayax = "";
+    $('#modals').css('display', 'block').animate({ opacity: 1 });
+    MyModal('#modals','#mw_overlay');
+    console.log(ayax);
+    $.ajax({
+        url:'/local/include/ajax/popText.php?id=2',
+        data: { id:ayax },
+        type: 'GET',
+        beforeSend: function() {
+            $('#loader').show();
+        },
+        complete: function(){
+            $('#loader').hide();
+        },
+        success: function(res){
+            modals('modals',res);
+            //aniOpacity(".modal-img","#mw_close");
+        },
+        error: function(){
+            //alert('Error!');
+        }
+    });
 }
 
 function modals(id,results){
     $("#"+id).html(results);
- }
- 
+}
+
 /*
-var timerId = setTimeout(function() {
-    modalOkno();
-  }, 2000);
+ var timerId = setTimeout(function() {
+ modalOkno();
+ }, 1000);
 
-setTimeout(function() {
+ setTimeout(function() {
 
-    closeID('#mw_close','#modals','#mw_overlay');
-    servise_show('#foot-data-re');
-  }, 15000);
+ closeID('#mw_close','#modals','#mw_overlay');
+ servise_show('#foot-data-re');
+ }, 12000);
 */
 
- function aniOpacity(id1,id2){
-     $(id1).fadeIn(900,
-      function () {
-          $(this).animate({ height: "show" }, 1000);
-      });
-      $(id2).fadeIn(900,
-          function () {
-              $(this).animate({ height: "show" }, 1000);
-          });
-  }
+function aniOpacity(id1,id2){
+    $(id1).fadeIn(900,
+        function () {
+            $(this).animate({ height: "show" }, 1000);
+        });
+    $(id2).fadeIn(900,
+        function () {
+            $(this).animate({ height: "show" }, 1000);
+        });
+}
 
- function servise_show(id1){
-     $(id1).fadeIn(900,
-      function () {
-          $(this).animate({ height: "show" }, 1000);
-      });
-  }
+function servise_show(id1){
+    $(id1).fadeIn(900,
+        function () {
+            $(this).animate({ height: "show" }, 1000);
+        });
+}
 
- function MyModal(DataIdMOd,overlay) {
-     $(DataIdMOd).fadeIn(400,
-         function () {
-             $(DataIdMOd).css('display', 'block').animate({ opacity: 1 });
-         });
-     $(overlay).fadeIn(400,
-         function () {
-             $(DataIdMOd).css('display', 'block').animate({ opacity: 1 });
-         });
+function MyModal(DataIdMOd,overlay) {
+    $(DataIdMOd).fadeIn(400,
+        function () {
+            $(DataIdMOd).css('display', 'block').animate({ opacity: 1 });
+        });
+    $(overlay).fadeIn(400,
+        function () {
+            $(DataIdMOd).css('display', 'block').animate({ opacity: 1 });
+        });
 
-     }
+}
 
 function closeID(DataId,DataIdMOd,overlay){
     $(DataId).css('display', 'none');
@@ -82,56 +82,34 @@ function footDataRe(){
     modalOkno();
 }
 
-/*
 $(document).ready(function() {
 
-    setInterval(function(){
-        var id = $('#xyz_text input').attr('id');
-        var name = $('#xyz_text input').attr('name');
-        $.ajax({
-            url:'/local/include/ajax/data-arefmetika-capchy-ajax.php',
-            data: { name:name,id:id },
-            type: 'GET',
-            beforeSend: function() {
-                $('#loader').show();
-            },
-            complete: function(){
-                $('#loader').hide();
-            },
-            success: function(res){
-                modals('xyz_text',res);
-            },
-            error: function(){
-                //alert('Error!');
-            }
-        });
-    }, 16000);
+    if($('#xyz_text').length) {
 
-})
-*/
+        setInterval(function(){
+            var id = $('#xyz_text input').attr('id');
+            var name = $('#xyz_text input').attr('name');
+            //console.log(id);
+            //console.log(name);
+            $.ajax({
+                url:'/local/include/ajax/data-arefmetika-capchy-ajax.php',
+                data: { name:name,id:id },
+                type: 'GET',
+                beforeSend: function() {
+                    $('#loader').show();
+                },
+                complete: function(){
+                    $('#loader').hide();
+                },
+                success: function(res){
+                    modals('xyz_text',res);
+                },
+                error: function(){
+                    //alert('Error!');
+                }
+            });
+        }, 16000);
 
-$(document).ready(function() {
-
-    setTimeout(function(){
-        var id = $('#xyz_text input').attr('id');
-        var name = $('#xyz_text input').attr('name');
-        $.ajax({
-            url:'/local/include/ajax/data-arefmetika-capchy-ajax.php',
-            data: { name:name,id:id },
-            type: 'GET',
-            beforeSend: function() {
-                $('#loader').show();
-            },
-            complete: function(){
-                $('#loader').hide();
-            },
-            success: function(res){
-                modals('xyz_text',res);
-            },
-            error: function(){
-                //alert('Error!');
-            }
-        });
-    }, 16000);
+    }
 
 })

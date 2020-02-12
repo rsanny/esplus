@@ -3273,7 +3273,19 @@ class SaleOrderAjax extends \CBitrixComponent
 			$extPayment->setField('SUM', $remainingSum);
 			$arPaySystemServices = PaySystem\Manager::getListWithRestrictions($extPayment);
             global $USER;
-            if ($USER->GetId() != 1){////HERE TEST PAYMENT
+            $OptimalGroup = \OptimalGroup\Core::Settings();
+            //if ($USER->GetId() != 1){////HERE TEST PAYMENT
+            $arPayBranch = [
+                'kirov',
+                'vladimir',
+                'udm',
+                'ekb',
+                'oren'
+            ];
+            if (
+                !in_array($OptimalGroup['BRANCH']['URL'], $arPayBranch) &&
+                $USER->GetId() != 1
+            ){
                 unset($arPaySystemServices[4]);
             }
 			// we already checked restrictions for inner pay system (could be different prices by price restrictions)

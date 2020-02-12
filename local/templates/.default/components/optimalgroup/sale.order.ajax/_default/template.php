@@ -35,6 +35,7 @@ else
     $OptimalGroupCity = new \OptimalGroup\City;
     $arBranchList = $OptimalGroupCity->GetBranchList();
     //pr($arResult,true);
+    //pr($arBranchList,true);
     $lastOrderData = $arResult['USER_VALS']['LAST_ORDER_DATA'];
     $PersonType = $lastOrderData['PERSON_TYPE_ID'];
     $DeliveryId = $lastOrderData['DELIVERY_ID'];
@@ -205,7 +206,7 @@ else
                             <label>
                                 <input type="checkbox" checked name="RULE_FOR_DATA" value="Y">
                                 <i class=""></i>
-                                Нажимая кнопку «Подтвердить заказ», я предоставляю персональные данные и соглашаюсь с обработкой моих персональных данных ОАО «ЭнергосбыТ Плюс» в соответствии с <a href="/privacy/" target="_blank">Политикой обработки персональных данных</a>.
+                                Нажимая кнопку «Подтвердить заказ», я предоставляю персональные данные и соглашаюсь с обработкой моих персональных данных АО «ЭнергосбыТ Плюс» в соответствии с <a href="/privacy/" target="_blank">Политикой обработки персональных данных</a>.
                             </label>
                         </div>
                     </div>

@@ -12,7 +12,7 @@ Class DBCITY {
     * @ array list regions
     */
     public static function dbidcity(){
-        return [23,13,18,24,15];
+        return [23,13,18,24,15,22];
     }
     /** 
     * @ array list regions online servises pay

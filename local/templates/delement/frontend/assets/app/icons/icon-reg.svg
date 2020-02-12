@@ -1,0 +1,8 @@
+export default {
+      id: "icon-reg-usage",
+      viewBox: "0 0 496 496",
+      url: __webpack_public_path__ + "C:\\Users\\web3r\\Documents\\projects\\de-bx24\\local\\templates\\delement\\frontend\\app\\icons\\icon-reg.svg",
+      toString: function () {
+        return this.url;
+      }
+    }

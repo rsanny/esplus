@@ -3,6 +3,9 @@
 ?>
 <div class="service-tabs--selector text-center clearfix">
     <div class="row">
+        <pre style="display: none;">
+            <?print_r($arResult)?>
+        </pre>
 <?
 $c = count($arResult);
 foreach($arResult as $k=>$arItem):

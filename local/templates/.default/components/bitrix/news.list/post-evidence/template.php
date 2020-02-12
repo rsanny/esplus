@@ -15,7 +15,7 @@ $this->setFrameMode(true);
 <? if (count($arResult["ITEMS"])):?>
 <div class="index-section">
     <? if ($arParams['HIDE_TITLE'] != "Y"):?>
-    <div class="section-title text-center"><span>Другие способы передачи показаний</span></div>
+    <div class="section-title text-center"><span>Способы передачи показаний</span></div>
     <? endif;?>
     <? foreach($arResult["ITEMS"] as $arItem):?>
 	<?

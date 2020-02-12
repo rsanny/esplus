@@ -5,7 +5,9 @@
     <div class="row">
         <div class="col col-12 col-md-10 col-lg-8">
             <div class="row form-group flex-vertical">
-                <div class="col col-12 col-md-6 col-lg-5 col-xl-4 offset-lg-1 offset-xl-2 text-md-right text-left form-label">№ лицевого счета</div>
+                <div class="col col-12 col-md-6 col-lg-5 col-xl-4 offset-lg-1 offset-xl-2 text-md-right text-left form-label">
+                Номер лицевого счета <span class="text-danger">*</span>
+                </div>
                 <div class="col col-12 col-md-6">
                     <div class="form-control--container">
                         <input class="form-control" value="" name="nlsid" placeholder="" required>

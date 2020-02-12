@@ -45,16 +45,9 @@ Class ClassDBase {
             $data_where = ""; $i = "";
             foreach($where as $k_where=>$v_where){
                 $i++;
-                if($i == 1){
-                    if($i == count($where)){
-                        $and = "";
-                         $and_end = "";
-                    }
-                    else{
-                        $and = "";
-                        $and_end = " and ";
-                    }
-                    
+                if($i == 1 && count($where) > 1){
+                    $and = "";
+                    $and_end = " and "; 
                 }
                 elseif($i == count($where)){
                     $and = "";
@@ -139,26 +132,33 @@ Class ClassDBase {
         if(is_array($where) && !empty($where) && !empty($where[0])){
             $data_where = ""; $i = "";
             for($i=0;$i<count($where);$i++){
-                if($i == 0){
-                    if($i == count($where)-1){
+                if($i == 0 && count($where) > 1){
                         $and = "";
-                         $and_end = "";
-                    }
-                    else{
-                        $and = "";
-                        $and_end = " and ";
-                    }
-                    
+                        $and_end = " and "; 
                 }
                 elseif($i == count($where)-1){
                     $and = "";
                     $and_end = "";
                 }
                 else{
-                    $and = " and ";
+                    $and = " ";
                     $and_end = " and ";
                 }
-                $data_where .= "{$and}{$where[$i][0]} {$where[$i][1]} '{$where[$i][2]}'{$and_end}";
+                if($where[$i][1] == "IN"){
+                    $data_where .= "{$and}{$where[$i][0]} {$where[$i][1]} {$where[$i][2]}{$and_end}";
+                }
+                else{
+                    $exp_where_t = [];
+                    $exp_where_t = explode(".",$where[$i][2]);
+                    if(count($exp_where_t) > 1){
+                        $data_where .= "{$and}{$where[$i][0]} {$where[$i][1]} {$where[$i][2]} {$and_end}";
+                    }
+                    else{
+                        $data_where .= "{$and}{$where[$i][0]} {$where[$i][1]} '{$where[$i][2]}'{$and_end}";
+                    }
+                    
+                }
+                
             }
             //print $data_where; 
             $w = (count($where) > 0) ? " WHERE " : "";
@@ -273,6 +273,20 @@ Class ClassDBase {
         $select = "INSERT INTO {$table} {$sql}";
         $this->localselect = $select;
         
+        $results = $this->tquery($select);
+        $arrResults = $this->fetch($results);
+        return $arrResults;
+    }
+
+    public function initDelete($tableName = "",$sql,$where){
+        
+        $table = $this->tableName($tableName);
+        $sql   = $this->sqlInsert($sql);
+        $where = $this->where3($where);
+    $select = "DELETE FROM {$table} {$sql} {$where}";
+        $this->localselect = $select;
+        print $select;
+
         $results = $this->tquery($select);
         $arrResults = $this->fetch($results);
         return $arrResults;
@@ -455,6 +469,18 @@ Class BSections {
             $arrSections[] = $obs;
         }
         return $arrSections;
+    }
+}
+
+Class BSectionsResultCode {
+
+    public static function section_code($order, $arFilter,$fields){
+        $DBCResultCode = \CIBlockSection::GetList($order, $arFilter, true,$fields);
+        // $arFilter = ["IBLOCK_ID" => $arParams["IBLOCK_ID"], "CODE" => $section["CODE"], "SITE_ID" => "s2"];
+        // $fields   = ["NAME","ID"];
+        $arrSectionCode = [];
+        $arrSectionCode = $DBCResultCode->Fetch();
+        return $arrSectionCode;
     }
 }
 

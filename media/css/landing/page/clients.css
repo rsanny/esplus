@@ -1,0 +1,60 @@
+.client-section {
+    display: block;
+    background: #fff;
+    border: 1px solid #d9e2e9;
+    border-radius: 5px;
+    text-decoration: none;
+    text-align: center;
+    font-size: 18px;
+    color: #64727f;
+    padding: 17px 20px 18px;
+}
+    .client-section i {
+        display: block;
+        margin: 0 auto 18px;
+        height: 64px;
+        line-height: 64px;
+        vertical-align: middle;
+    }
+        .client-section i img {
+            max-height: 100%;
+            width: auto;
+            display: inline-block;
+        }
+    
+.client-question,
+.clients-office {
+    display: block;
+    background: #fff;
+    border: 1px solid #d9e2e9;
+    padding: 25px 26px;
+}        
+    .client-question {        
+        background: url(../../images/support-img.jpg) no-repeat bottom right #fff;
+        min-height: 740px;
+    }
+    .clients-office {
+        background: url(../../icons/icon-support--branch.png) no-repeat 95% center #fff;
+    }
+@media (max-width: 1200px){
+    .client-question {background: #fff; min-height: 0;}
+}
+
+.blok-content {
+    padding:20px 0 20px 0;
+}
+
+.blok-content p {
+    margin: 0 0 10px;
+    text-rendering: optimizeLegibility;
+    hyphens: auto;
+    line-height: inherit;
+    font-size: inherit;
+}
+
+.pad-bot-5 {
+    padding-bottom:5px !important;
+}
+
+.hei-20 { height:20px; }
+

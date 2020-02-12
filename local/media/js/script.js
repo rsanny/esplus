@@ -1,3 +1,15 @@
+
+// closest poly
+(function(ELEMENT) {
+  ELEMENT.matches = ELEMENT.matches || ELEMENT.mozMatchesSelector || ELEMENT.msMatchesSelector || ELEMENT.oMatchesSelector || ELEMENT.webkitMatchesSelector;
+  ELEMENT.closest = ELEMENT.closest || function closest(selector) {
+    if (!this) return null;
+    if (this.matches(selector)) return this;
+    if (!this.parentElement) {return null}
+    else return this.parentElement.closest(selector)
+  };
+}(Element.prototype));
+
 $(document).ready(function () {
     OptimalGroup.init();
 
@@ -83,7 +95,7 @@ $(document).ready(function () {
     $('body').on('submit','#authForm', function(e){
         var $form = $(this),
             user_type = $form.find('input[name="USER_TYPE"]').val();
-        
+
         if(!window.successAuth)
         {
             $('#authForm').find('input.form-control').removeClass('is-error');
@@ -119,12 +131,141 @@ $(document).ready(function () {
             }
         }
     })
+
+    function deleteErrors () {
+        $('#authFormLk .form-group-error').empty();
+        $('#authFormLk').find('[name="login"]').removeClass('is-error');
+    }
+
+    // отменим отправку для формы
+    $('body').on('submit','#authFormLk', function(e){
+
+        e.preventDefault();
+
+        var loginInput = $(this).find('[name="login"]');
+        var login = loginInput.val();
+        var result = validatePaymentCode(login);
+
+        switch (result.type) {
+
+            // данные заполнены не корректно
+            case undefined:
+
+                deleteErrors();
+                loginInput.addClass('is-error');
+                loginInput.after('<div class="form-group-error">Неверный номер лицевого счета или email</div>');
+
+                break;
+
+            // эсплюс
+            case 'esplus':
+
+                window.location.href = "https://lkk-samara.esplus.ru/Login.aspx?nls_id=" + login;
+
+                break;
+            // квартплата
+            case 'kvartplata':
+
+                window.location.href = "https://esplus.kvp24.ru/login";
+
+                break;
+
+        }
+
+    })
+
+    // проверка на вводимый логин для Самары
+    $('body').on('keyup','#authFormLk [name="login"]', function(e){
+
+        var login = $(this).val();
+        var RE = new RegExp(/[а-яА-ЯЁё]/);
+
+        // проверка ввода латинских символов
+        if(login.search(RE) !== -1) {
+
+            $(this).val(login.substring(0, login.length - 1));
+
+        } else {
+
+            validatePaymentCode(login);
+
+        }
+
+
+
+    })
+
+    // проверяем введеные данные в поле
+    function validatePaymentCode(login)
+    {
+
+        var result = {};
+
+        // это лк эсплюс
+        if (validateEmail(login)) {
+            deleteErrors();
+            result.type = 'esplus';
+
+        }
+        // возможно это квартплата
+        else {
+
+            if (login.length == 10) {
+
+                if (valudateNum(login)) {
+                    deleteErrors();
+                    result.type = 'esplus';
+
+                }
+
+            }
+
+            if (login.length == 11) {
+
+                if (valudateNum(login)) {
+
+                    if(Kvp24.isKvp24ValidNumber(login)) {
+                        // точно квартплата
+                        result.type = 'kvartplata';
+                        deleteErrors();
+
+                    }
+
+                }
+            }
+
+        }
+
+        return result;
+    }
+
+    // проверка на эмейл
+    function validateEmail(email)
+    {
+
+        var pattern = /^[a-z0-9_-]+@[a-z0-9-]+\.[a-z]{2,6}$/i;
+
+        if(email.search(pattern) == 0){
+            return true;
+        } else {
+            return false;
+        }
+
+    }
+
+    // проверка на число
+    function valudateNum(string) {
+
+        return !(/[a-z]/g.test(string));
+
+    }
+
     $(document).on('click', function(e) {
-        if (!e.target.closest('.header-auth')) {
-            $('.header-auth').removeClass('is-opened'); 
+        if (!e.target.closest('.header-auth') && (document.activeElement && !document.activeElement.classList.contains('form-control'))) {
+            $('.header-auth').removeClass('is-opened');
         }
         if (!e.target.closest('.menu-container') && !e.target.closest('.main-menu li')) {
-            $('.menu-container').closest('li').removeClass('is-selected'); 
+            $('.menu-container').closest('li').removeClass('is-selected');
         }
         if (!e.target.closest('.dropdown.by-click')) {
             $('.dropdown.by-click').closest('.dropdown').removeClass('is-opened');
@@ -189,8 +330,8 @@ $(document).ready(function () {
         $($(this).attr('href')).show();
         $.fancybox.update()
     });
-    
-    
+
+
     $('body').on('click','.js-OneRadio label',function(){
         var value = $(this).data('value'),
             container = $(this).closest('.js-OneRadio'),
@@ -234,7 +375,7 @@ $(document).ready(function () {
         input.attr('type', newType);
         $(this).addClass(newClass);
     });
-    
+
     $('body').on({
         'mouseenter':function(){
             var text = $(this).data('text'),
@@ -246,7 +387,7 @@ $(document).ready(function () {
                 offsetTop = ($(this).offset().top-$('.tooltip').outerHeight())-13,
                 toolWidth = $('.tooltip').outerWidth(),
                 position = $(this).data('position');
-            
+
             if (position == "middle"){
                 offsetLeft = $(this).offset().left + ($(this).outerWidth()/2);
             }
@@ -254,10 +395,10 @@ $(document).ready(function () {
                 'left': offsetLeft,
                 'top': offsetTop
             });
-            
+
             if (toolWidth + offsetLeft > $(window).width()){
                 var offsetRight = $(window).width() - ($(this).offset().left + 10);
-                
+
                 if (toolWidth + offsetRight > $(window).width()) {
                     offsetRight = 0;
                 }
@@ -275,11 +416,11 @@ $(document).ready(function () {
         $('.page-overlay').fadeToggle();
         $('.header-bottom').toggleClass('is-visible')
     });
-    $('.js-matchHeight').matchHeight({ 
+    $('.js-matchHeight').matchHeight({
         byRow: true,
     });
-    
-    $('body').on('click','.js-switchSite a, .js-switchSiteLink',function(e){        
+
+    $('body').on('click','.js-switchSite a, .js-switchSiteLink',function(e){
         var code = $(this).data('code'),
             btn = $(this),
             url = $(this).attr('href');
@@ -293,13 +434,13 @@ $(document).ready(function () {
                     btn.addClass('is-selected');
                     if (url == "#")
                         window.location = "/";
-                    else    
+                    else
                         window.location = url;
                 }
             });
         }
     });
-    
+
     $('.js-CityIsMy').on('click',function(e){
         e.preventDefault();
         $.ajax({
@@ -316,7 +457,7 @@ $(document).ready(function () {
             }
         })
     });
-    $('body').on('click change','.js-ChangeBranch',function(e){        
+    $('body').on('click change','.js-ChangeBranch',function(e){
         var id = $(this).data('id'),
             method = "index";
         if ($(this).is("select")){
@@ -380,14 +521,14 @@ $(document).ready(function () {
             $(window).trigger('slideToggleEnd');
         });
         $(this).toggleClass('is-selected');
-        
+
     });
     $('body').on('click','.js-MainMenu',function(e){
         e.preventDefault();
         var li = $(this).closest('li');
         if (!li.hasClass('is-selected'))
             $('.main-menu > li.is-selected').removeClass('is-selected');
-            
+
         li.toggleClass('is-selected');
     });
     $(window).on('scroll',function(){
@@ -411,13 +552,13 @@ $(document).ready(function () {
             offsetTop = $(target).offset().top;
         if (!tab)
             tab = target;
-        $('.js-Tabs a[href="'+tab+'"]').trigger('click');        
+        $('.js-Tabs a[href="'+tab+'"]').trigger('click');
         $('body, html').animate({"scrollTop":offsetTop});
     });
-    
+
     if (window.location.hash){
         var Hash = window.location.hash;
-        
+
         if ($(Hash).length){
             $('a[href="'+Hash+'"]').trigger('click');
         }
@@ -450,11 +591,11 @@ $(document).ready(function () {
                 },
                 success: function(data){ // сoбытиe пoслe удaчнoгo oбрaщeния к сeрвeру и пoлучeния oтвeтa
                     // eсли всe прoшлo oк
-                        //alert(data); // пишeм чтo всe oк
-                        $("#question").hide();
-                        $(".succ_voice>b").text(data);
-                        $(".color-orange").hide();
-                        $(".color-orange+p").hide();
+                    //alert(data); // пишeм чтo всe oк
+                    $("#question").hide();
+                    $(".succ_voice>b").text(data);
+                    $(".color-orange").hide();
+                    $(".color-orange+p").hide();
                 },
                 error: function (xhr, ajaxOptions, thrownError) { // в случae нeудaчнoгo зaвeршeния зaпрoсa к сeрвeру
                     alert(xhr.status); // пoкaжeм oтвeт сeрвeрa
@@ -466,12 +607,12 @@ $(document).ready(function () {
     });
 
     $(".header-search").hover(function(){
-        $(".header-search--form").show()
-    },
-    function()
-    {
-        $(".header-search--form").hide()
-    });
+            $(".header-search--form").show()
+        },
+        function()
+        {
+            $(".header-search--form").hide()
+        });
 
 
 });
@@ -518,7 +659,7 @@ var authCallback = function(data){
                 errMsg = 'Сервис временно недоступен! Попробуйте зайти позже';
                 break;
         }
-        
+
         $form.find('input.form-control').addClass('is-error');
         $form.find('input[name="pass"]').after('<div class="form-group-error">'+errMsg+'</div>');
     }
@@ -575,7 +716,7 @@ var onloadCallback = function() {
 
 $(function() {
 
-    $("body").on("submit", "form[name='SIMPLE_FORM_24'],form[name='SIMPLE_FORM_26']", function (e) {
+    $("body").on("submit", "form[name='SIMPLE_FORM_24']", function (e) {
         if (!$("textarea#g-recaptcha-response").val() && !$(this).find('.is-error').length) {
             e.preventDefault();
             alert("Проверка на робота не пройдена");

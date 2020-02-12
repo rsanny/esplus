@@ -1,4 +1,4 @@
-<?php 
+<?php
 if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)die();
 $APPLICATION->SetAdditionalCSS("/local/templates/.default/components/bitrix/news/clients/bitrix/news.list/.default/style.css");
 $request = \Bitrix\Main\Application::getInstance()->getContext()->getRequest();
@@ -7,6 +7,7 @@ use DorrBitt\dbapi\ClassDBase;
 use DorrBitt\ClassDebug\ClassDebug;
 use DorrBitt\SamaraObrabotkaUnload\SOU;
 use DorrBitt\ParseType\ParseType;
+use DorrBitt\dbCity\DBCITY;
 $ses = DGAPI::ses();
 use DorrBitt\dbapi\BElements;
 $objParseType = new ParseType();
@@ -40,7 +41,7 @@ if(!empty($getData)){
     $daraResult = $obj->elemList2($arParams);
     $resultData = $objSOU->listElemProps($daraResult);*/
     if($objParseType->pt_numeric($getData) == 1){
-        $resultData = $objClassDBase->initQuery4(
+        $dataXmlID = $objClassDBase->initQuery4(
             $table,
             [
               "{$table}.IBLOCK_ELEMENT_ID as ID",
@@ -58,7 +59,46 @@ if(!empty($getData)){
           );
     }
 
-    if(is_array($resultData) && !empty($resultData) && count($resultData) > 0){ $ats = 1; }else{ $ats = 0; } 
+    $IDFILE = round($dataXmlID[0]["IDFILE"],0);
+
+    $dostypTime = 0;
+    if($IDFILE > 0){
+      $arParams = [
+        "IBLOCK_ID"=>56,
+        "arSelect"=>["ID","NAME","IBLOCK_ID","XML_ID"],
+        "arOrder"=>"",
+        "arProperty"=>["CODE"=>"PERIOD_VY"],
+        "PROPERTYID"=>$_POST["nlsid"],
+    ];
+    $timeArr = $obj->elementID($IDFILE);
+
+    $timeArrData[0] = [
+      "ID"=>$timeArr["ID"],
+      "NAME"=>$timeArr["NAME"],
+      "IBLOCK_ID"=>$timeArr["IBLOCK_ID"],
+      "XML_ID"=>$timeArr["XML_ID"],
+    ];
+    //ClassDebug::debug($timeArrData[0]);
+    $resultTimeID = $objSOU->listElemPropsTime($timeArrData);
+    $data_time = "06.01.2020 00:00:00";
+    $dostypTime = DBCITY::dostup_time_period($data_time,$resultTimeID[$IDFILE]["PERIOD_VY"]["VALUE"]);
+    //print("<div>{$data_time} == {$resultTimeID[$IDFILE]["PERIOD_VY"]["VALUE"]} ==== {$dostypTime}</div>");
+    }
+    else{
+          $IDFF = 535876;
+          $timeArr = $obj->elementID($IDFF);
+          $timeArrData[0] = [
+          "ID"=>$timeArr["ID"],
+          "NAME"=>$timeArr["NAME"],
+          "IBLOCK_ID"=>$timeArr["IBLOCK_ID"],
+          "XML_ID"=>$timeArr["XML_ID"],
+        ];
+        $resultTimeID = $objSOU->listElemPropsTime($timeArrData);
+        $data_time = "05.12.2019 00:00:00";
+        $dostypTime = DBCITY::dostup_time_period($data_time,$resultTimeID[$IDFF]["PERIOD_VY"]["VALUE"]);
+      }
+
+    if(is_array($dataXmlID) && !empty($dataXmlID) && count($dataXmlID) > 0){ $ats = 1; }else{ $ats = 0; }
 }
 ?>
 
@@ -66,6 +106,7 @@ if(!empty($getData)){
 <?php if(!empty($getData)):?>
 <div id="dataLC" ></div>
 <?php endif;?>
+
 <div style="height:40px;" ></div>
 <div id="IDPP" >
 <div class="form-group--title text-left text-md-center">Передача показаний онлайн</div>
@@ -74,13 +115,14 @@ if(!empty($getData)){
     <div class="row">
         <div class="col col-12 col-md-10 col-lg-8">
             <div class="row form-group flex-vertical">
-                <div class="col col-12 col-md-6 col-lg-5 col-xl-4 offset-lg-1 offset-xl-2 text-md-right text-left form-label">№ лицевого счета</div>
+                <div class="col col-12 col-md-6 col-lg-5 col-xl-4 offset-lg-1 offset-xl-2 text-md-right text-left form-label">
+                Номер лицевого счета <span class="text-danger">*</span>
+                </div>
                 <div class="col col-12 col-md-6">
                     <div class="form-control--container">
                         <input class="form-control" value="<?=$getData?>" name="nlsid"  placeholder="" maxlength="20" required>
-                        <i class="form-control--question js-toolTip" 
-                           data-text="Номер лицевого счета указан в Вашей квитанции от ООО &laquo;Центр-СБК-Самара&raquo; или 
-                           ООО &laquo;ЕРЦ г.Тольятти&raquo;">
+                        <i class="form-control--question js-toolTip"
+                           data-text="Номер лицевого счета указан в Вашей квитанции">
                         </i>
                     </div>
                 </div>
@@ -94,9 +136,10 @@ if(!empty($getData)){
 
         </div>
     </div>
-    
+
     <div class="" id="dataIdSUL" >
     <?php if(!empty($getData)):?>
+        <?php if($dostypTime == 1): ?>
     <div class="dataPP" >
 
 <div class="b-blok" >
@@ -105,19 +148,19 @@ if(!empty($getData)){
         <!--<div class="vcontUpdate" >Данные успешно обновлены!</div>-->
     <?php endif;?>
     <div class="vcont" >
-      <?php if(is_array($resultData) && !empty($resultData)):?>
-        <?php foreach($resultData as $resData):?>
-        <?php 
+      <?php if(is_array($dataXmlID) && !empty($dataXmlID)):?>
+        <?php foreach($dataXmlID as $resData):?>
+        <?php
           $resData["SHOV_LAST"] = $objParseType->pt_trim($resData["SHOV_LAST"]);
           $resData["SHOV_LAST"] = $objParseType->pt_add_slash($resData["SHOV_LAST"]);
           $resData["SHOV_LAST"] = $objParseType->pt_add_hschar($resData["SHOV_LAST"]);
           $resData["SHOV_LAST"] = $objParseType->pt_replace($resData["SHOV_LAST"],[",","."]);
-          
+
           $resData["SHOV_LAST_ADD"] = $objParseType->pt_replace($resData["SHOV_LAST_ADD"],[",","."]);
           $resData["SHOV_LAST_ADD"] = $objParseType->pt_trim($resData["SHOV_LAST_ADD"]);
           $resData["SHOV_LAST_ADD"] = $objParseType->pt_add_slash($resData["SHOV_LAST_ADD"]);
           $resData["SHOV_LAST_ADD"] = $objParseType->pt_add_hschar($resData["SHOV_LAST_ADD"]);
-          $pokazaniaProverka = $objParseType->pt_numeric($resData["SHOV_LAST_ADD"]); 
+          $pokazaniaProverka = $objParseType->pt_numeric($resData["SHOV_LAST_ADD"]);
           if($pokazaniaProverka == 1){
             $pokazania = ($pokazaniaProverka == 1) ? $resData["SHOV_LAST_ADD"] : "";
             $pokazaniaResult = (!empty($pokazania)) ? $pokazania : "";
@@ -139,7 +182,7 @@ if(!empty($getData)){
                 <div class="b-loks-element" >Показания</div>
                 <div class="b-loks-element" >
                     <?php $value = ($pozDataIS == 1) ? $resData["SHOV_LAST_ADD"] : ""; ?>
-                    <input type="text" value="<?=$value?>" name="numberPY-<?=$resData["ID"]?>" 
+                    <input type="text" value="<?=$value?>" name="numberPY-<?=$resData["ID"]?>"
                            placeholder="Последнее показание <?=$resData["SHOV_LAST"]?>" maxlength="20" />
                 </div>
               </div>
@@ -147,7 +190,7 @@ if(!empty($getData)){
               <div class="classSubMit" >
                 <input type="submit" class="dataxls" value="Отправить" id="s-submit-<?=$resData["ID"]?>" name="s-submit-<?=$resData["ID"]?>" />
               </div>
-        
+
             </div>
 
         </div>
@@ -161,13 +204,19 @@ if(!empty($getData)){
     <?php endif;?>
 </div>
 </div>
+<?php else:?>
+  <div class="vv-error" >
+  <div>Период передачи показаний для клиентов ООО «Центр-СБК-Самара» еще не наступил.</div>
+    <div>Рекомендуем передавать показания приборов учета<br /> ежемесячно с 6 по 25 число.</div>
+  </div>
+<?php endif;?>
 <?php endif;?>
 </div>
-         
+
  <div class="bg-info bg-message mt-20">
     <div class="mb-10 color-orange"><b>Информация</b><i class="icon-info--orange"></i></div>
-      <p>
-      Данная форма позволяет клиентам расчетно-кассовых центров ООО &laquo;Центр-СБК-Самара&raquo; и ООО &laquo;ЕРЦ г.Тольятти&raquo; 
+      <!--<p>
+      Данная форма позволяет клиентам расчетно-кассовых центров ООО &laquo;Центр-СБК-Самара&raquo; и ООО &laquo;ЕРЦ г.Тольятти&raquo;
       передавать показания онлайн по номеру лицевого счета, указанному в платежных документах(квитанциях).
       </p>
       <p>
@@ -175,13 +224,35 @@ if(!empty($getData)){
       </p>
       <p>
       Рекомендуем передавать показания приборов учета до 25 числа.
+      </p>-->
+
+      <!--<p>
+      Данная форма позволяет клиентам расчетно-кассового центра <b>ООО «Центр-СБК-Самара»</b> передавать показания онлайн по номеру лицевого счета,
+      указанному в платежных документах (квитанциях).
+      </p>
+      <p>
+      Рекомендуем передавать показания приборов учета ежемесячно с 6 по 25 число.
+      </p>
+
+      <p>
+      Передача показаний онлайн для клиентов <b>АО &laquo;ЭнергосбыТ Плюс&raquo;</b> доступна в <a target="_blank" href="https://lk.kvp24.ru/login" >личном кабинете</a>.
+      </p>-->
+      <p>
+      Данная форма позволяет новым клиентам АО &laquo;ЭнергосбыТ Плюс&raquo; передавать показания онлайн по номеру лицевого счета (10 цифр), указанному в квитанциях. 
+      </p>
+      <p>
+      Передача показаний для клиентов, номер лицевого счета которых состоит из 11 цифр,  временно доступна только в <a target="_blank" href="https://esplus.kvp24.ru/login" >личном кабинете</a>.
+      </p>
+      <br>
+      <p>
+      Рекомендуем передавать показания приборов учета ежемесячно с 6 по 25 число.
       </p>
 </div>
 
 
         </form>
 </div>
-<?php 
+<?php
 $uri_sa = explode("?",$_SERVER["REQUEST_URI"])[0];
 $snum = md5(rand(5, 15));
 ?>
@@ -193,7 +264,7 @@ $('#formIDPP').on('click', 'button', function(e){
     var url = "<?=$uri_sa?>?data="+lc;
     var par = 2;
     var dataPost = $form.serialize();
-    
+
     //console.log(lc);
     dataPost += '&'+$(this).attr('name')+'='+$(this).val()+"&par="+par;
     ///modals('dataIdSUL','<div id="loader" >Подождите пожалуйста. Идёт загрузка данных.</div>');
@@ -256,10 +327,35 @@ $(document).on('click','.dataxls',function(e){
     });
 });
 </script>
-
 <?php else:?>
-    <div class="vv-error" >
+  <div class="form-group--title text-left text-md-center">Передача показаний онлайн</div>
+    <!--<div class="vv-error" >
     <div>Период передачи показаний еще не наступил.</div>
     <div>Рекомендуем передавать показания приборов учета<br /> ежемесячно с 5 по 21 число.</div>
-    </div>
+    </div>-->
+
+    <div class="bg-info bg-message mt-20">
+    <div class="mb-10 color-orange"><b>Информация</b><i class="icon-info--orange"></i></div>
+      <!--<p>
+      Данная форма позволяет клиентам расчетно-кассовых центров ООО &laquo;Центр-СБК-Самара&raquo; и ООО &laquo;ЕРЦ г.Тольятти&raquo;
+      передавать показания онлайн по номеру лицевого счета, указанному в платежных документах(квитанциях).
+      </p>
+      <p>
+      Передача показаний онлайн для клиентов АО &laquo;ЭнергосбыТ Плюс&raquo; доступна в <a target="_blank" href="https://lk.kvp24.ru/login" >личном кабинете</a>.
+      </p>
+      <p>
+      Рекомендуем передавать показания приборов учета до 25 числа.
+      </p>-->
+
+      <p>
+      Данная форма позволяет новым клиентам АО &laquo;ЭнергосбыТ Плюс&raquo; передавать показания онлайн по номеру лицевого счета (10 цифр), указанному в квитанциях. 
+      </p>
+      <p>
+      Передача показаний для клиентов, номер лицевого счета которых состоит из 11 цифр,  временно доступна только в <a target="_blank" href="https://esplus.kvp24.ru/login" >личном кабинете</a>.
+      </p>
+      <br>
+      <p>
+      Рекомендуем передавать показания приборов учета ежемесячно с 6 по 25 число.
+      </p>
+</div>
 <?php endif;?>

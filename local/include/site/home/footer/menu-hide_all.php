@@ -1,21 +1,24 @@
 <div class="row footer-top">
     <? $APPLICATION->IncludeComponent(
-        "bitrix:menu",
-        "footer-hide--all",
-        Array(
-            "IN_SHOP" => false,
-            "ALLOW_MULTI_SELECT" => "N",
-            "CHILD_MENU_TYPE" => "left",
-            "DELAY" => "N",
-            "MAX_LEVEL" => "1",
-            "MENU_CACHE_GET_VARS" => array(""),
-            "MENU_CACHE_TIME" => "3600",
-            "MENU_CACHE_TYPE" => "A",
-            "MENU_CACHE_USE_GROUPS" => "Y",
-            "ROOT_MENU_TYPE" => "left",
-            "USE_EXT" => "N"
-        )
-    ); ?>
+	"bitrix:menu", 
+	"footer-hide--all", 
+	array(
+		"IN_SHOP" => false,
+		"ALLOW_MULTI_SELECT" => "N",
+		"CHILD_MENU_TYPE" => "left",
+		"DELAY" => "N",
+		"MAX_LEVEL" => "1",
+		"MENU_CACHE_GET_VARS" => array(
+		),
+		"MENU_CACHE_TIME" => "3600",
+		"MENU_CACHE_TYPE" => "A",
+		"MENU_CACHE_USE_GROUPS" => "Y",
+		"ROOT_MENU_TYPE" => "left",
+		"USE_EXT" => "N",
+		"COMPONENT_TEMPLATE" => "footer-hide--all"
+	),
+	false
+); ?>
     <div class="col col-12 col-md-3 hidden-sm-down">
         <? if ($OptimalGroup['BRANCH']['PHONE']): ?>
             <div class="footer-address">

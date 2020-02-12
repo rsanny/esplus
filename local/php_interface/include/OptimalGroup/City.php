@@ -1,6 +1,5 @@
 <?
 namespace OptimalGroup;
-use DorrBitt\dbCity\DBCITY;
 
 class City {
     private $RegionIblock = BRANCH_IBLOCK;
@@ -9,28 +8,28 @@ class City {
         $CIDRFile = $_SERVER['DOCUMENT_ROOT'] . '/local/php_interface/include/IpGeo/cidr_optim.txt';
         $CitiesFile = $_SERVER['DOCUMENT_ROOT'] . '/local/php_interface/include/IpGeo/cities.txt';
         $gb = new \IPGeoBase($CIDRFile, $CitiesFile);
-        $data = $gb->getRecord($ip);        
+        $data = $gb->getRecord($ip);
         return $data;
     }
     private function GetRegionIblock($filter){
         $SiteType = SiteSection::Get();
         $result = false;
         $cache_dir = "/branch";
-        $cache = \Bitrix\Main\Data\Cache::createInstance(); 
-        if ($cache->initCache("360000", serialize($filter).serialize($SiteType), $cache_dir)) 
+        $cache = \Bitrix\Main\Data\Cache::createInstance();
+        if ($cache->initCache("360000", serialize($filter).serialize($SiteType), $cache_dir))
         {
-            $result = $cache->getVars(); 
-        } 
-        elseif ($cache->startDataCache()) 
+            $result = $cache->getVars();
+        }
+        elseif ($cache->startDataCache())
         {
             \CModule::IncludeModule("iblock");
             $arSelect = Array("ID", "NAME", "IBLOCK_ID","PROPERTY_*");
             $arFilter = Array("IBLOCK_ID"=>$this->RegionIblock, "ACTIVE"=>"Y");
             $res = \CIBlockElement::GetList(Array(), array_merge($arFilter,$filter), false, Array("nPageSize"=>1), $arSelect);
-            
+
             global $CACHE_MANAGER;
             $CACHE_MANAGER->StartTagCache($cache_dir);
-            
+
             while($ob = $res->GetNextElement()){
                 $arFields = $ob->GetFields();
                 $arProps = $ob->GetProperties();
@@ -52,43 +51,30 @@ class City {
                     if (substr($code, 0, 1) == "~") unset($arFields[$code]);
                 $result = $arFields;
             }
-            if ($isInvalid) { 
+            if ($isInvalid) {
                 $cache->abortDataCache();
             }
-            
+
             $CACHE_MANAGER->EndTagCache();
-            
-            $cache->endDataCache($result); 
+
+            $cache->endDataCache($result);
         }
 
         return $result;
     }
-
-    private function listIDShop(){
-        return [
-                "shop"=>[23,24,18,13,11],
-               ];
-    }
-
-    private function listNameShop(){
-        return [
-                "shop"=>["ekb","udm","oren","kirov","vladimir"],
-               ];
-    }
-    
     private function GetListByRegion($type){
         global $APPLICATION, $USER;
-        $domain = SiteSection::GetSubDomain(false);
+        $domain = SiteSection::GetSubDomain();
         $is_shop = false;
         $ip = $_SERVER["REMOTE_ADDR"];
-        
+
         $default_id = DEFAULT_REGION_ID;
-        
+
         if ($domain == "shop") {
             $is_shop = true;
         }
         if (!empty($_SERVER["HTTP_X_REAL_IP"]))
-			$ip = $_SERVER["HTTP_X_REAL_IP"];
+            $ip = $_SERVER["HTTP_X_REAL_IP"];
         if ($_REQUEST['ip'])
             $ip = $_REQUEST['ip'];
 
@@ -98,18 +84,28 @@ class City {
 
         $currentRegion = self::GetGeoData($ip);
 
-        
+        if (!$domain){
+            $this->RedirectCookie();
+        }
+
         $result = array(
             'IP' => $currentRegion
         );
 
         if(\CModule::includeModule('iblock')) {
             $res_region = \CIBlockElement::GetList(array(), array("IBLOCK_ID"=> 6, "PROPERTY_REGION" => $currentRegion['region']), false, false, array("IBLOCK_ID", "ID", "PROPERTY_URL", "PROPERTY_REGION"))->Fetch();
+            if(!empty($res_region['PROPERTY_REGION_VALUE'])) {
+                $_SESSION['domain'] = $res_region['PROPERTY_URL_VALUE'];
+            }
+            else {
+                $_SESSION['domain'] = 'ekb';
+            }
             if($res_region['PROPERTY_REGION_VALUE'] && !$domain) {
                 $domain = $res_region['PROPERTY_URL_VALUE'];
 
             }
         }
+
         if (
             $APPLICATION->sDirPath != "/bitrix/admin/"
             && !$USER->IsAdmin()
@@ -130,15 +126,10 @@ class City {
                 }
             }
         }
-
         if ($result['IBLOCK']['GROUP'] != "all" && $is_shop) {
             $result['NO_STORE'] = $result['IBLOCK'];
             $cookie = $this->GetCookieRegion();
 
-            if($domain == "shop"){
-                $arrNameShop = self::listNameShop();
-                $cookie = (DBCITY::inarray($arrNameShop['shop'],$cookie) == 1) ? $cookie : $arrNameShop[$domain][0];
-            }
             if ($cookie){
                 $result['IBLOCK'] = $this->SetRegionByDomain($cookie);
                 $result['AGREED'] = true;
@@ -146,7 +137,7 @@ class City {
             else
                 $result['IBLOCK'] = $this->SetRegionById($default_id);
         }
-//        if (
+        //if (
 //            $result['IBLOCK']['URL'] != $domain
 //            && $APPLICATION->sDirPath != "/bitrix/admin/"
 //            && $result['IBLOCK']['URL']
@@ -158,7 +149,7 @@ class City {
 //            LocalRedirect($NewDomain.$APPLICATION->GetCurUri(),true,"301 Moved permanently");
 //        }
         $this->ShopPriceCode($result['IBLOCK']['URL']);
-        
+
         return $result;
     }
     private function ShopPriceCode($domain_url){
@@ -175,7 +166,6 @@ class City {
     }
     public function RedirectCookie(){
         $cookie = $this->GetCookieRegion();
-
         if ($cookie){
             global $APPLICATION;
             $NewDomain = Url::Make($cookie);
@@ -184,20 +174,16 @@ class City {
         }
     }
     public function GetCookieRegion(){
-        return \Bitrix\Main\Application::getInstance()->getContext()->getRequest()->getCookie("REGION");        
+        return \Bitrix\Main\Application::getInstance()->getContext()->getRequest()->getCookie("REGION");
     }
-    public function SetCookieRegion($code, $domain = ""){
+    public function SetCookieRegion($code){
         $cookie = new \Bitrix\Main\Web\Cookie("REGION", $code, time() + 60*60*24*60);
         $cookie->setDomain("esplus.ru");
         \Bitrix\Main\Application::getInstance()->getContext()->getResponse()->addCookie($cookie);
-        $domain = SiteSection::GetSubDomain();
-        if($domain == "shop") {
-            \Bitrix\Main\Application::getInstance()->getContext()->getResponse()->flush("");
-        }
     }
-    public function SetRegionById($id, $change, $domain = ""){
+    public function SetRegionById($id, $change){
         $result = $this->GetRegionIblock(array('ID' => $id));
-        $this->SetCookieRegion($result['URL'], $domain);
+        $this->SetCookieRegion($result['URL']);
         if ($result && $change){
             $_SESSION['BXExtra']['REGION']['IBLOCK'] = $result;
             $_SESSION['BXExtra']['REGION']['AGREED'] = true;
@@ -207,7 +193,7 @@ class City {
     }
     public function SetRegionByDomain($domain, $change){
         $result = $this->GetRegionIblock(array('PROPERTY_URL' => $domain));
-        
+
         $this->SetCookieRegion($result['URL']);
         if ($result && $change){
             $_SESSION['BXExtra']['REGION']['IBLOCK'] = $result;
@@ -216,7 +202,7 @@ class City {
         }
         return $result;
     }
-    
+
     public function GetRegionById($id){
         $cityObj = $this;
         if (!$this)
@@ -230,32 +216,14 @@ class City {
         return $cityObj->GetRegionIblock(array('PROPERTY_URL' => $domain));
     }
     public function Init($type){
-        global $APPLICATION, $USER;
         if (Main::isBot()) return false;
-        $domain = SiteSection::GetSubDomain();
-
-        if (!$_SESSION['BXExtra']['REGION'] || $type == "m"){ 
+        if (!$_SESSION['BXExtra']['REGION'] || $type == "m"){
             $UserCity = $this->GetListByRegion($type);
             $_SESSION['BXExtra']['REGION'] = $UserCity;
-        } else {
-            if (
-            $APPLICATION->sDirPath != "/bitrix/admin/"
-            && !$USER->IsAdmin()
-            )
-            {
-                $this->RedirectCookie();
-                $UserCity = $_SESSION['BXExtra']['REGION'];
-            }
         }
-        /*else {
-            if($domain == "shop"){
-                $nameRegion = $_SESSION['BXExtra']['REGION']["IBLOCK"]["URL"];
-                $arrNameShop = self::listNameShop();
-                $nameRegion = (DBCITY::inarray($arrNameShop,$nameRegion) == 1) ? $nameRegion : $arrNameShop[$domain][0];
-                $_SESSION['BXExtra']['REGION']["IBLOCK"] = $this->SetRegionByDomain($nameRegion);
-            }
+        else {
             $UserCity = $_SESSION['BXExtra']['REGION'];
-        }*/
+        }
         return $UserCity;
     }
     public function GetBranchList($cityFilter){
@@ -265,23 +233,23 @@ class City {
         if ($cityFilter){
             $branchFilter = array_merge($branchFilter,$cityFilter);
         }
-        
+
         if ($domain == "shop"){
             $branchFilter['PROPERTY_GROUP'] = PROPERTY_BRANCH_ALL;
         }
-        
+
         $cache_id = "city_list";
         $cache_id .= implode('.',$branchFilter);
         $cache_dir = "/city-list";
-        $cache = \Bitrix\Main\Data\Cache::createInstance(); 
-        if ($cache->initCache("360000", $cache_id, $cache_dir)) 
+        $cache = \Bitrix\Main\Data\Cache::createInstance();
+        if ($cache->initCache("360000", $cache_id, $cache_dir))
         {
-            $arBranchList = $cache->getVars(); 
-        } 
-        elseif ($cache->startDataCache()) 
+            $arBranchList = $cache->getVars();
+        }
+        elseif ($cache->startDataCache())
         {
             \CModule::IncludeModule("iblock");
-            $arBranchList = array(); 
+            $arBranchList = array();
 
             $arSelect = Array("ID", "NAME", "IBLOCK_ID", "SORT", "PROPERTY_*");
             $res = \CIBlockElement::GetList(array("SORT"=>"ASC"), $branchFilter, false, false, $arSelect);
@@ -293,7 +261,7 @@ class City {
             {
                 $arFields = $ob->GetFields();
                 $arProps = $ob->GetProperties();
-                
+
                 foreach ($arProps as $code=>$arProperty){
                     if ($code == "GROUP")
                         $arFields[$code] = $arProperty['VALUE_XML_ID'];
@@ -309,17 +277,17 @@ class City {
                 //Clean ~fields
                 foreach ($arFields as $code=>$field)
                     if (substr($code, 0, 1) == "~") unset($arFields[$code]);
-                    
+
                 $arBranchList[] = $arFields;
 
                 $CACHE_MANAGER->RegisterTag("iblock_id_".$arFields["IBLOCK_ID"]);
             }
-            if ($isInvalid) { 
-                $cache->abortDataCache(); 
-            } 
+            if ($isInvalid) {
+                $cache->abortDataCache();
+            }
             $CACHE_MANAGER->EndTagCache();
 
-            $cache->endDataCache($arBranchList); 
+            $cache->endDataCache($arBranchList);
         }
         return $arBranchList;
     }

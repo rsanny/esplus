@@ -23,5 +23,22 @@ Class DBDOMENS {
         return (DBCITY::inarray($listM,$idregion) == 1) ? 1 : 0;
     }
 
-}
+    public static function listDomenNoAct(){
+        return [
+            "kirov",
+            "udm",
+            "oren",
+            "ekb",
+            "vladimir",
+        ];
+    }
+
+    public static function proverkaDomenNoAct(){
+        $tDomen = self::typeDomen();
+        //print_r($tDomen);
+        $listDomenNA = self::listDomenNoAct();
+        return (DBCITY::inarray($listDomenNA,$tDomen[0]) == 1) ? 0 : 1;
+        }
+
+    }
 ?>

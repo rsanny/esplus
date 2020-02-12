@@ -1,7 +1,7 @@
 <?
     global $arBanner, $APPLICATION;
     $arBanner['PROPERTY_PAGE'] = \OptimalGroup\Core::GetCurPage();
-?> 
+?>
 <?$APPLICATION->IncludeComponent(
 	"bitrix:news.list",
 	"page-banner",
@@ -36,7 +36,7 @@
 		"INCLUDE_IBLOCK_INTO_CHAIN" => "N",
 		"INCLUDE_SUBSECTIONS" => "Y",
 		"MESSAGE_404" => "",
-		"NEWS_COUNT" => "1",
+		"NEWS_COUNT" => "13",
 		"PAGER_BASE_LINK_ENABLE" => "N",
 		"PAGER_DESC_NUMBERING" => "N",
 		"PAGER_DESC_NUMBERING_CACHE_TIME" => "36000",
@@ -60,4 +60,4 @@
 		"SORT_ORDER1" => "ASC",
 		"SORT_ORDER2" => "ASC"
 	)
-);?> 
+);?>

@@ -7,7 +7,7 @@ class CAtollApi
     private static $api_version = 'v4';
     private static $inn = '5612042824';
     private static $token = '';
-    private static $payment_address = 'esplus.ru';
+    private static $payment_address = 'shop.esplus.ru';
     
     /*TEST WORK*/
     /*
@@ -67,14 +67,34 @@ class CAtollApi
     function registerOrderPayment($orderID)
     {
         \Bitrix\Main\Loader::includeModule("sale");
-
         $order = \Bitrix\Sale\Order::load($orderID);
-
+        
         if($order->isPaid())
         {
+            $basket = $order->getBasket();            
+            $branchUrl = self::$payment_address;
             $propertyCollection = $order->getPropertyCollection();
-            $basket = $order->getBasket();
+            $orderRegion = $propertyCollection->getItemByOrderPropertyId(4)->getValue();//REGION
+            
+            if ($orderRegion){
+                $branchCode = "";
+                \CModule::IncludeModule("iblock");
+                $res = \CIBlockElement::GetList([], ["IBLOCK_ID" => BRANCH_IBLOCK, "ACTIVE"=>"Y", "PROPERTY_REGION" => $orderRegion], false, Array("nPageSize"=>1), ["ID", "NAME", "IBLOCK_ID","PROPERTY_URL"]);
+                while ($rsResult = $res->GetNext())   
+                    $branchCode = $rsResult['PROPERTY_URL_VALUE'];
 
+                if ($branchCode)
+                    switch ($branchCode){
+                        case 'ekb':
+                        case 'oren':
+                        case 'kirov':
+                        case 'udm':
+                        case 'vladimir':
+                            $branchUrl .= '/' . $branchCode . '/';
+                        break;
+                    }
+            }
+            
             $arItems = array();
 
             foreach ($basket as $basketItem) {
@@ -91,6 +111,12 @@ class CAtollApi
             $arOperation = array(
                 'external_id' => 'order_'.$orderID,
                 'receipt' => array(
+                    "company" => [
+                         "email" => "no-reply@site.esplus.ru",
+                         "sno" => "osn",
+                         "inn" => self::$inn,
+                         "payment_address" => $branchUrl
+                     ],
                     'attributes' => array(
                         'email' => $propertyCollection->getUserEmail()->getValue(),
                         //'phone' => '',
@@ -108,11 +134,11 @@ class CAtollApi
                 'service' => array(
                     'callback_url' => 'https://shop.esplus.ru/test/atol_callback.php',
                     'inn' => self::$inn,
-                    'payment_address' => self::$payment_address
+                    'payment_address' => $branchUrl
                 ),
                 'timestamp' => $order->getField('DATE_PAYED')->format('d.m.Y H:i:s')
             );
-
+            
             $res = self::register('sell', $arOperation);
 
             file_put_contents($_SERVER['DOCUMENT_ROOT'].'/upload/log_atol.txt', date('d.m.Y H:i:s')."\n".print_r($res, true)."\n", FILE_APPEND);

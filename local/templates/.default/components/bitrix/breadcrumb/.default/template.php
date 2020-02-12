@@ -23,7 +23,15 @@ for($index = 0; $index < $itemSize; $index++)
     
 	if($arResult[$index]["LINK"] <> "")
 	{
-		$strReturn .= '<a href="'.$arResult[$index]["LINK"].'" title="'.$title.'" itemprop="url">'.$title.'</a>';
+        if(CSite::InDir('/business/service/')) {
+            $urlBusiness = '/business';
+        }
+
+        if($arResult[$index]["LINK"] == '/') {
+            $urlBusiness = '';
+        }
+
+		$strReturn .= '<a href="'.$urlBusiness.$arResult[$index]["LINK"].'" title="'.$title.'" itemprop="url">'.$title.'</a>';
 	}
 	else
 	{

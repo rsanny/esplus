@@ -442,18 +442,8 @@ if ($arResult["isFormNote"] != "Y") {
             </script>
         <? endif; ?>
         <?
-
         if (
-        // Не нашли ответ на свой вопрос?
-        $arParams["WEB_FORM_ID"] == 27
-        ||
-        // Обратная связь
-        $arParams["WEB_FORM_ID"] == 24
-        ||
-        // Не нашли ответ на свой вопрос?
-        $arParams['WEB_FORM_ID'] == 28
         // Подписка на извещения о закупках
-        ||
         $arParams['WEB_FORM_ID'] == 2
         ||
         // Задать вопрос по закупочной деятельности
@@ -466,6 +456,27 @@ if ($arResult["isFormNote"] != "Y") {
         $arParams['WEB_FORM_ID'] == 29
         )
         { ?>
+            <!--<div id="recaptchaResponse_<?= $arParams["WEB_FORM_ID"] ?>" class="recaptcha-item recaptcha-item--center"></div>-->
+            <div class="row form-group">
+                <div class="col col-12 col-md-8 offset-md-4 col-lg-7 offset-lg-5 text-md-left text-center">
+                    <div id="recaptchaResponse_<?= $arParams["WEB_FORM_ID"] ?>" class="recaptcha-item recaptcha-item--center-mobile"></div>
+                </div>
+            </div>
+        <? } ?>
+        <? if (
+            // Обратная связь
+            $arParams["WEB_FORM_ID"] == 24
+        ) { ?>
+            <div class="row form-group">
+                <div class="col col-12 col-md-8 offset-md-4 col-lg-7 offset-lg-5 text-md-left text-center">
+                    <div id="recaptchaResponse_<?= $arParams["WEB_FORM_ID"] ?>" class="recaptcha-item recaptcha-item--center-mobile"></div>
+                </div>
+            </div>
+        <? } ?>
+        <? if (
+            // Не нашли ответ на свой вопрос?
+            $arParams["WEB_FORM_ID"] == 27 || $arParams['WEB_FORM_ID'] == 28
+        ) { ?>
             <div id="recaptchaResponse_<?= $arParams["WEB_FORM_ID"] ?>" class="recaptcha-item recaptcha-item--center"></div>
         <? } ?>
         <div class="row form-group">

@@ -867,6 +867,14 @@ html {-ms-overflow-style: scrollbar;}
         max-width: 25%
     }
 
+    .col-lg-3-33 {
+        -webkit-box-flex: 0;
+        -webkit-flex: 0 0 33%;
+        -ms-flex: 0 0 33%;
+        flex: 0 0 33%;
+        max-width: 33%;
+    }
+
     .col-lg-4 {
         -webkit-box-flex: 0;
         -webkit-flex: 0 0 33.333333%;

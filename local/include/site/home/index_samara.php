@@ -1,11 +1,10 @@
 <? 
 global $OptimalGroup;
 ?>
-<? $APPLICATION->IncludeFile(INCLUDE_PATH . '/template/inline-auth.php', array(), Array("MODE"=> "html"));?>
+<? //$APPLICATION->IncludeFile(INCLUDE_PATH . '/template/inline-auth.php', array(), Array("MODE"=> "html"));?>
 
 <section class="index-section index-service__list bg-grey border-top-bottom index-section">
     <div class="container">
-        <? \Optimalgroup\Template::OfferBanners();?>
 
         <div class="section-title text-center"><span>Онлайн сервисы</span></div>
         <div class="service-tabs--selector text-center js-Tabs clearfix service-mobile--row" data-container=".service-tab">

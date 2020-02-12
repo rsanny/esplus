@@ -54,6 +54,71 @@ while($ob = $res->GetNextElement()){
 }
 ?>
 <? $k = 1;?>
+<?php 
+
+$requertUri = $_SERVER["DOCUMENT_ROOT"];
+$branch = "by-branch/";
+$url_all = $_SERVER["REQUEST_URI"];
+$urlB = explode($branch,$url_all)[0];
+$url = explode("?",$urlB)[0];
+$dataPath = "{$requertUri}{$url}";
+require("{$dataPath}classLoginPass.php");
+//ClassDebug::debug($allNoStoreByShop);
+$tSes = LoginPassBasa::ses();
+$urlBranch = $url.$branch;
+
+if(is_array($_POST) && !empty($_POST)){
+    $dLogin = LoginPassBasa::trim($_POST["user_1"]);
+    $dPass = LoginPassBasa::md5(LoginPassBasa::trim($_POST["pass_1"]));
+    
+    if( ($dLogin == LoginPassBasa::login()) && ($dPass == LoginPassBasa::pass())){
+        LocalRedirect("{$urlBranch}?result={$tSes}");
+    }
+    else{
+        LocalRedirect("{$urlBranch}?error={$tSes}"); 
+    }
+}
+
+if(is_array($_GET) && !empty($_GET)){
+    $res = LoginPassBasa::login_result();
+    $rDostup = ((!empty(LoginPassBasa::userIzSee()) && !empty($res)) && (LoginPassBasa::userIzSee() == $res)) ? 1 : 0;
+}
+else{
+    $rDostup = ((!empty(LoginPassBasa::userIzSee()) && !empty(LoginPassBasa::login())) && (LoginPassBasa::userIzSee() == LoginPassBasa::login())) ? 1 : 0;
+}
+
+?>
+<?php if($rDostup == 0):?>
+<form action="<?=$urlBranch?>?s=<?=$tSes?>" method="POST" >
+
+<div class="form">
+    <div class="row form-group flex-vertical">
+        <div class="col col-12 col-md-4 col-lg-5 text-left form-label">
+            <label for="SIMPLE_QUESTION_891">Логин <span class="color-orange">*</span></label>
+        </div>
+        <div class="col col-12 col-md-8 col-lg-7">
+            <input id="user_1" type="text" name="user_1" class="form-control" placeholder="" value="">
+        </div>
+    </div>
+    <div class="row form-group flex-vertical">
+        <div class="col col-12 col-md-4 col-lg-5 text-left form-label">
+            <label for="SIMPLE_QUESTION_646">Пароль <span class="color-orange">*</span></label>
+        </div>
+        <div class="col col-12 col-md-8 col-lg-7">
+        <input id="pass_1" type="password" name="pass_1" class="form-control" placeholder="" value="" >
+        </div>
+    </div>
+
+<div class="row form-group">
+    <div class="col col-12 col-md-8 offset-md-4 col-lg-7 offset-lg-5 text-md-left text-center">
+        <button class="btn btn-orange w-170 1" name="web_form_submit" value="Войти" >Войти</button>
+    </div>
+</div>
+</div>
+
+</form>
+<?php elseif($rDostup == 1):?>
+    <a href="<?=$urlBranch?>?error=<?=$tSes?>" class="seans-link" >завершить сеанс - <?=LoginPassBasa::userIzSee()?></a>
 <div class="z2">1. Нет привязки к складам</div>
 <table width="100%" class="table table-striped table-hover">
     <tbody>
@@ -117,5 +182,5 @@ while($ob = $res->GetNextElement()){
     endforeach;?>
     </tbody>
 </table>
-
+<?php endif;?>
 <?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php");?>

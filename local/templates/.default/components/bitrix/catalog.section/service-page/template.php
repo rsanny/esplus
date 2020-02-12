@@ -11,7 +11,14 @@ use \Bitrix\Main\Localization\Loc;
  * @var string $templateName
  * @var string $componentPath
  */
+
+Global $OptimalGroup;
+use DorrBitt\dbCity\DBCITY;
 $this->setFrameMode(true);
+$actDom = [
+    "ekb",
+];
+$actDomen = (DBCITY::inarray($actDom,$OptimalGroup['DOMAIN']) == 1) ? 1 : 0;
 ?>
 <div class="services-page">
     <div class="service-total text-right js-fixInContainer none">
@@ -34,7 +41,12 @@ $this->setFrameMode(true);
                 <img src="<?=$img;?>" alt="<?=$arSection['OPENED']['NAME'];?>">
                 
             </div>
-            <div class="service-item__name fs-18"><?=$arSection['NAME'];?></div>
+            <div class="service-item__name fs-18">
+            <?=$arSection['NAME'];?>
+            <?php if(!empty($arSection["DESCRIPTION"]) && $actDomen == 1):?>
+                <i class="podskazka_rub js-toolTip" data-text="<?=$arSection["DESCRIPTION"]?>"></i>
+            <?php endif;?>
+            </div>
             <div class="service-item__head--price text-right fs-18 color-black ml-20 js-SectionPrice">&nbsp;</div>
         </div>
         <div class="service-item__content<? if (!$arSection['OPENED']):?> none<? endif;?>" id="service-<?=$arSection['CODE'];?>">

@@ -18,7 +18,7 @@ $(function(){
 			success: function(data){
                 console.log(data);
 				$('.js-BasketHeader').html(data.basket);
-                //window.location = "/cart/";
+                window.location = "/cart/";
 			}
 		});	
     });

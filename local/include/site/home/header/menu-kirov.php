@@ -7,7 +7,7 @@
                     <div class="col col-12 col-xl-6">
                         <div class="menu-container--title">Онлайн сервисы</div>
                         <ul class="no-list main-menu--second-level">
-                            <li><a href="/service/pay/">Как оплатить</a></li>
+                            <li><a href="/service/pay/">Оплатить онлайн</a></li>
                             <li><a href="/service/post/">Передать показания</a></li>
                             <li><a href="/service/get/">Узнать задолженность</a></li>
                             <li><a href="/service/email/">Получать квитанцию на e-mail</a></li>

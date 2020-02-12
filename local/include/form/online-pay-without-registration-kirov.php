@@ -1,3 +1,4 @@
+<?global $OptimalGroup;?>
 <form id="formPayUnregistered" data-step="1">
     <?=bitrix_sessid_post()?>
     <div class="form-group--title text-left text-md-center">
@@ -83,13 +84,14 @@
                 </p>
                 <ul class="mb-0 pb-0">
                     <li>оплачивать услуги онлайн круглосуточно и без комиссии</li>
-                    <li>для оплаты используйте карты VISA, MasterCard, Maestro, МИР</li>
+                    <li>для оплаты используйте карты VISA, MasterCard, МИР</li>
                     <li>убедитесь, что для Вашей карты разрешены расчеты в Интернете</li>
-                    <!--<li><a id="splitted_pay" href="/service/payments/">распределяйте платежи по услугам</a></li>-->
                 </ul>
             </div>
             <div class="pay-logos text-center">
-                <img src="/local/media/images/logo-pay-mir_big.png" alt="" class="img-responsive"> <img src="/local/media/images/logo-pay-master_big.png" alt="" class="img-responsive"> <img src="/local/media/images/logo-pay-visa_big.png" alt="" class="img-responsive">
+                <img src="/local/media/images/logo-pay-mir_big.png" alt="" class="img-responsive">
+                <img src="/local/media/images/logo-master-card.jpg" alt="" class="img-responsive">
+                <img src="/local/media/images/logo-pay-visa_big.png" alt="" class="img-responsive">
             </div>
         </div>
     </div>
@@ -106,8 +108,8 @@
                     </div>
                     <ul class="mt-0 pt-0 mb-0 pb-0">
                         <li>введите сумму платежа и нажмите на кнопку «Отправить»</li>
-                        <li>после ввода суммы платежа и нажатия на кнопку «Оплатить», Вы будете перенаправлены на защищенную страницу платежной системы Газпромбанка, где безопасно осуществите Ваш платеж.</li>
-                        <li>после осуществления платежа Вы будете возвращены на прежнюю страницу.</li>
+                        <li>после ввода суммы платежа и нажатия на кнопку «Оплатить», Вы будете перенаправлены на защищенную страницу платежной системы Газпромбанка, где безопасно осуществите Ваш платеж</li>
+                        <li>после осуществления платежа Вы будете возвращены на прежнюю страницу</li>
                     </ul>
                 </div>
             </div>
@@ -120,8 +122,8 @@
                         Срок зачисления средств
                     </div>
                     <ul class="mt-0 pt-0 mb-0 pb-0">
-                        <li>срок зачисления средств в рабочие дни за исключением пятницы составляет один рабочий день с момента оплаты.</li>
-                        <li>при оплате в пятницу, а также в выходные и праздничные дни, средства зачисляются в тот же срок, начиная с ближайшего рабочего дня.</li>
+                        <li>срок зачисления средств в рабочие дни за исключением пятницы составляет один рабочий день с момента оплаты</li>
+                        <li>при оплате в пятницу, а также в выходные и праздничные дни, средства зачисляются в тот же срок, начиная с ближайшего рабочего дня</li>
                     </ul>
                 </div>
             </div>
@@ -134,7 +136,7 @@
                         Возврат платежей
                     </div>
                     <ul class="mt-0 pt-0 mb-0 pb-0">
-                        <li>возврат денежных средств возможен на ту же карту, с которой был выполнен платеж и осуществляется по обращению клиента в обслуживающий его офис продаж.Сроки возврата зависят от банка клиента.</li>
+                        <li>возврат денежных средств возможен на ту же карту, с которой был выполнен платеж и осуществляется по обращению клиента в обслуживающий его офис продаж.Сроки возврата зависят от банка клиента</li>
                     </ul>
                 </div>
             </div>
@@ -146,9 +148,11 @@
                     <div class="section-title text-center">
                         Политика безопасности
                     </div>
-                    Безопасность платежей обеспечивается с помощью Банка-эквайера, функционирующего на основе современных протоколов и технологий, разработанных международными платежными системами НСПК, Visa International и MasterCard Worldwide. Обработка полученных конфиденциальных данных Держателя карты производится в процессинговом центре Банка-эквайера, сертифицированного по стандарту PCI DSS. Безопасность передаваемой информации обеспечивается с помощью современных протоколов обеспечения безопасности в сети Интернет.
+                    Безопасность платежей обеспечивается с помощью Банка-эквайера, функционирующего на основе современных протоколов и технологий, разработанных международными платежными системами МИР, Visa International и MasterCard Worldwide. Обработка полученных конфиденциальных данных Держателя карты производится в процессинговом центре Банка-эквайера, сертифицированного по стандарту PCI DSS. Безопасность передаваемой информации обеспечивается с помощью современных протоколов обеспечения безопасности в сети Интернет.
                     <div class="pay-logos">
-                        <img src="/local/media/images/logo-pay-mir.png" alt="" class="img-responsive"> <img src="/local/media/images/logo-pay-master.png" alt="" class="img-responsive"> <img src="/local/media/images/logo-pay-visa.png" alt="" class="img-responsive">
+                        <img src="/local/media/images/logo-pay-mir.png" alt="" class="img-responsive">
+                        <img src="/local/media/images/logo-pay-master.png" alt="" class="img-responsive">
+                        <img src="/local/media/images/logo-pay-visa.png" alt="" class="img-responsive">
                     </div>
                 </div>
             </div>
@@ -172,9 +176,17 @@
                         val = val.replace(/,/g , ".");
                     }
                     var float = parseFloat(val);
-                    if (float != parseInt(float) && !isNaN(float)){
-                        $(this).val(float.toFixed(2));
-                    }
+
+                    <? if ($OptimalGroup['DOMAIN'] == 'kirov') {?>
+                        if(float >= 0) {
+                            $(this).val(float.toFixed(2));
+                        }
+                    <?} else {?>
+                        if (float != parseInt(float) && !isNaN(float)){
+                            $(this).val(float.toFixed(2));
+                        }
+                    <?}?>
+
                 }
             },
             'input[name="summa"],input[name="no_more"]'
@@ -203,7 +215,7 @@
                     success: function(data){
                         if (!data.error){
                             $('splitted_pay').attr('href',$(this).attr('href') + '?PER_ACC=' + $('input[name="nlsid"]').val());
-                            window.location.href = '/service/payments/?PER_ACC=' + $('input[name="nlsid"]').val();
+                            window.location.href = '/service/pay/?PER_ACC=' + $('input[name="nlsid"]').val();
                         }
                         if(!!data.error)
                         {
@@ -275,11 +287,38 @@
                             //list_payment.details
                             if(data.list_payment.Message == 'OK'){
                                 var sumDebt = 0;
+                                var sumOverPayment = 0;
                                 for (var prop in data.list_payment.details) {
-                                    sumDebt += data.list_payment.details[prop].ServiceBalance;
+                                    <? if ($OptimalGroup['DOMAIN'] == 'kirov') {?>
+                                        if(data.list_payment.details[prop].ServiceBalance >= 0) {
+                                            sumDebt += data.list_payment.details[prop].ServiceBalance;
+                                        } else {
+                                            sumOverPayment += data.list_payment.details[prop].ServiceBalance;
+                                        }
+                                    <?} else {?>
+                                        sumDebt += data.list_payment.details[prop].ServiceBalance;
+                                    <?}?>
                                 }
-                                $('input[name="summa"]').val(sumDebt.toFixed(2));
-                                $('input[name="summa"]').attr('placeholder','Рекомендуемый платеж: '+sumDebt.toFixed(2)+' руб.');
+
+                                var sumNum = sumDebt.toFixed(2);
+
+                                <? if($OptimalGroup['DOMAIN'] == 'kirov') { ?>
+                                    if(sumNum <= 0) {
+                                        if (sumNum == 0 && sumOverPayment < 0) {
+                                            var placeholder = 'Переплата: ' + Math.abs(sumOverPayment) + ' руб.';
+                                        } else {
+                                            var placeholder = 'Переплата: ' + Math.abs(sumNum) + ' руб.';
+                                        }
+                                        sumNum = "";
+                                    } else {
+                                        var placeholder = 'Рекомендуемый платеж: ' + sumNum + ' руб.';
+                                    }
+                                <? } else { ?>
+                                    var placeholder = 'Рекомендуемый платеж: ' + sumNum + ' руб.';
+                                <? } ?>
+
+                                $('input[name="summa"]').val(sumNum);
+                                $('input[name="summa"]').attr('placeholder', placeholder);
                             }
                         }
                         if(!!data.error)
@@ -367,7 +406,7 @@
         });
 
         $('#splitted_but').click(function () {
-            window.location.href = '/service/payments/?PER_ACC=' + $('input[name="nlsid"]').val();
+            window.location.href = '/service/pay/?PER_ACC=' + $('input[name="nlsid"]').val();
             return false;
         });
 

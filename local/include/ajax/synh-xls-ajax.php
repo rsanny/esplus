@@ -1,4 +1,4 @@
-<?php 
+<?php
 require_once($_SERVER['DOCUMENT_ROOT'] . '/bitrix/modules/main/include/prolog_before.php');
 use DorrBitt\ClassDebug\ClassDebug;
 use DorrBitt\dbapi\DGAPI;
@@ -17,13 +17,13 @@ try {
     if(empty($_SESSION["start_last"])){
         $_SESSION["start_last"]["{$user_ses}"]["start"] = $_REQUEST["last"]+1;
         $_SESSION["start_last"]["{$user_ses}"]["last"]  = $_SESSION["start_last"]["{$user_ses}"]["start"]+1;
-        $start = $_SESSION["start_last"]["{$user_ses}"]["start"]; 
+        $start = $_SESSION["start_last"]["{$user_ses}"]["start"];
         $last = $_SESSION["start_last"]["{$user_ses}"]["last"];
     }
     else{
         $_SESSION["start_last"]["{$user_ses}"]["start"] = $_SESSION["start_last"]["{$user_ses}"]["last"]+1;
         $_SESSION["start_last"]["{$user_ses}"]["last"]  = $_SESSION["start_last"]["{$user_ses}"]["start"]+1;
-        $start = $_SESSION["start_last"]["{$user_ses}"]["start"]; 
+        $start = $_SESSION["start_last"]["{$user_ses}"]["start"];
         $last = $_SESSION["start_last"]["{$user_ses}"]["last"];
     }
     /*ClassDebug::debug($_REQUEST);
@@ -51,7 +51,7 @@ try {
                 $ZAV_NOM2 = str_replace("*","",$result[$r][1]);
                 $PONUMBER2 = str_replace("*","",$result[$r][2]);
                 $XML_ID = $NLS_ID2."-".$ZAV_NOM2;
-    
+
                 $xmldata = [
                     "IBLOCK_ID"=>$IBLOCK_ID,
                     "XML_ID"=>$XML_ID,
@@ -60,12 +60,12 @@ try {
                 ];
                 $dataXmlID = BElements::elementXMLID($xmldata);
                 $dataXmlIDLen = count($dataXmlID);
-                //print("<div>dataXmlIDLen {$dataXmlIDLen}</div>");
-    
+                //print("<div>dataXmlIDLen {$dataXmlIDLen} {$XML_ID}</div>");
+
                 if($dataXmlIDLen > 0){
-    
+
                     $arrUpdateArray = Array(
-                        "MODIFIED_BY"    => $_SESSION["SESS_AUTH"]["USER_ID"], 
+                        "MODIFIED_BY"    => $_SESSION["SESS_AUTH"]["USER_ID"],
                         "PROPERTY_VALUES"=> $PROP,
                         "NAME"           => $dataXmlID[0]["NAME"],
                         "ACTIVE"         => "Y",
@@ -99,7 +99,7 @@ try {
                           ["{$table}.IBLOCK_ELEMENT_ID","=",$res]
                         ]
                       );
-    
+
                     /*if(!empty($NLS_ID)){
                         \CIBlockElement::SetPropertyValueCode($dataXmlID[0]["ID"], "NLS_ID", $NLS_ID);
                     }
@@ -126,14 +126,14 @@ try {
                 }
                 else{
                     $arFields = array(
-                        "ACTIVE" => "Y", 
+                        "ACTIVE" => "Y",
                         "IBLOCK_ID" => $IBLOCK_ID,
                         "ACTIVE_FROM"   => date('d.m.Y H:i:s'),
                         "NAME" => $NLS_ID2."-".$ZAV_NOM2,
                         "CODE" => $NLS_ID2."-".$ZAV_NOM2,
                         "XML_ID"=> $XML_ID,
                     );
-                    
+
                     if($res = $oElement->Add($arFields, false, false, true)){
                         $m = date('m');
                     $Y = date('Y');
@@ -226,7 +226,7 @@ try {
             $urlResult .= "&idfile={$idfile}";
             $urlResult .= "&clear=1";
             print $urlResult;
-            print("<div class=\"unloadVYResultMessage\" >Считывание данных файла и их обработка прошла успешна - 
+            print("<div class=\"unloadVYResultMessage\" >Считывание данных файла и их обработка прошла успешна -
                    <a href=\"{$urlResult}\" >Очистить стэш выгрузки.</a></div>");
         }
     }

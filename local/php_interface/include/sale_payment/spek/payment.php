@@ -12,7 +12,8 @@ $arData = array(
     'o.order_id' => CSalePaySystemAction::GetParamValue("ORDER_ID"),
     //'o.order_id' => $GLOBALS["SALE_INPUT_PARAMS"]["ORDER"]["ID"]
 );
-
 $url = $actionUrl.'?'.http_build_query($arData);
+/*pr($actionUrl);
+pr($arData);*/
 ?>
 <a href="<?=$url?>" class="btn btn-orange">Перейти к оплате</a>

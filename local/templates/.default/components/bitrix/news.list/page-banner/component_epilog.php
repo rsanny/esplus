@@ -1,12 +1,29 @@
 <? if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)die();
+use \OptimalGroup\Core;
+use DorrBitt\ClassDebug\ClassDebug;
+use DorrBitt\dbapi\BElements;
+use DorrBitt\dbCity\DBCITY;
+use DorrBitt\dbapi\DGAPI;
+$OptimalGroup = Core::Settings();
 $arTemplate = $arResult['arResult'];
+$obj = new BElements();
+$arParams = [
+    "IBLOCK_ID"=>6,
+    "arSelect"=>["ID","NAME"],
+    "arProperty"=>["CODE"=>"URL"],
+    "PROPERTYID"=>$OptimalGroup['DOMAIN'],
+];
+$branchID = $obj->elemList2($arParams);
+//ClassDebug::debug($branchID);
 ?>
 <section class="page-banner">
 <? foreach($arTemplate["ITEMS"] as $arItem):?>
 	<?
+    //ClassDebug::debug($arItem['PROPERTIES']["BRANCH_FILIAL"]["VALUE"]);
 	$this->AddEditAction($arItem['ID'], $arItem['EDIT_LINK'], CIBlock::GetArrayByID($arItem["IBLOCK_ID"], "ELEMENT_EDIT"));
 	$this->AddDeleteAction($arItem['ID'], $arItem['DELETE_LINK'], CIBlock::GetArrayByID($arItem["IBLOCK_ID"], "ELEMENT_DELETE"), array("CONFIRM" => GetMessage('CT_BNL_ELEMENT_DELETE_CONFIRM')));
 	?>
+    <?php if(DBCITY::inarray($arItem['PROPERTIES']["BRANCH_FILIAL"]["VALUE"],$branchID[0]["ID"]) == 1):?>
 	<div class="page-banner--item<? if ($arItem['PROPERTIES']['PAGE_CONTENT']['VALUE']):?> banner--content<? endif;?>" id="<?=$this->GetEditAreaId($arItem['ID']);?>">
         <div class="page-banner--item-vmiddle">
             <div class="container">
@@ -27,11 +44,12 @@ $arTemplate = $arResult['arResult'];
                         </div>
                         <? endif;?>
                     </div>
-                </div>                                                                    
+                </div>
             </div>
         </div>
         <div class="page-banner--img js-parallax" data-swiper-parallax="100%" style="background-image: url(<?=$arItem['PREVIEW_PICTURE']['SRC'];?>)"></div>
     <!--/index slide-->
     </div>
+<?php endif;?>
 <?endforeach;?>
 </section>

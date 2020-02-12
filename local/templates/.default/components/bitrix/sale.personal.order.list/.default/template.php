@@ -105,11 +105,15 @@ else
                                 $paymentCollection = $oborder->getPaymentCollection();
                                 if ($paymentCollection)
                                 {
+                                    /*if ($arItem['ID'] == 1552){
+                                        pr($payment);
+                                    }*/
                                     /** @var \Bitrix\Sale\Payment $paymentItem */
                                     $paymentItem = $paymentCollection->getItemById($payment['ID']);
                                     if ($paymentItem)
                                     {
                                         $initResult = $service->initiatePay($paymentItem, null, \Bitrix\Sale\PaySystem\BaseServiceHandler::STRING);
+                                        //pr($initResult);
                                         if ($initResult->isSuccess())
                                             $payment['BUFFERED_OUTPUT'] = $initResult->getTemplate();
                                         else
@@ -122,7 +126,6 @@ else
                 }
                 $arResult['PAYMENT_SYSTEM'][$arItem['ID']][] = $payment;
             }
-
             if(!!$payment['BUFFERED_OUTPUT'] && $payment['PAY_SYSTEM_ID']==4)
             {
                 if(preg_match('/href="([^"]+)"/', $payment['BUFFERED_OUTPUT'], $match))

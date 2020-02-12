@@ -9,6 +9,8 @@ use \Bitrix\Main\Page\Asset,
     \OptimalGroup\Template,
     \OptimalGroup\Core,
     \OptimalGroup\SiteSection;
+
+use DorrBitt\ClassDebug\ClassDebug;
 $arCssFiles = array(
 	'lib/grid',
     'reset',
@@ -114,6 +116,7 @@ CJSCore::Init(
                             $OptimalGroupCity = new \OptimalGroup\City;
                             $arBranchList = $OptimalGroupCity->GetBranchList();
                             foreach($arBranchList as $k=>$arItem):
+                                //ClassDebug::debug($arItem);
                                 $url = \OptimalGroup\Url::Make($arItem['URL'],array("type"=>"m"));
                                 $is_shop = false;
                                 if ($_REQUEST['list'] == "shop"){
@@ -122,7 +125,10 @@ CJSCore::Init(
                                 }
                                 if($arItem['REGION']){
                             ?>
+                               <?php if($arItem["ID"] == 12 || $arItem["ID"] == 14):?>
+                               <?php else:?>
                                 <li><a <? if ($url):?>href="<?=$url;?>"<? endif;?><?if ($is_shop):?> class="js-ChangeBranch notlined ws-nw" data-id="<?=$arItem['ID'];?>"<? else:?> class="notlined"<? endif;?>><?=$arItem['REGION'];?></a></li>
+                                <?php endif;?>
                             <? 
                                 }
                             endforeach;?>

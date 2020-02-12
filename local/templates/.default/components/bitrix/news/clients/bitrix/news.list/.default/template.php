@@ -79,6 +79,10 @@ $this->AddDeleteAction($arResult['ITEM']['ID'], $arResult['ITEM']['DELETE_LINK']
                 $fileType = "ppt";
             if (strpos($fileExt,"spreadsheetml") !== false || strpos($fileExt,"excel") !== false || strpos($fileExt,"xls") !== false)
                 $fileType = "exl";
+            if (strpos($fileExt,"compressed") !== false || strpos($fileExt,"zip") !== false || strpos($fileExt,"ZIP") !== false )
+                $fileType = "zip";
+            if (strpos($fileExt,"octet") !== false || strpos($fileExt,"stream") !== false || strpos($fileExt,"7z") !== false )
+                $fileType = "zip";
             ?>
             <a href="<?=$fileSrc;?>" class="file-item--small">
                 <span><i class="icon-file--<?=$fileType;?>"></i></span>

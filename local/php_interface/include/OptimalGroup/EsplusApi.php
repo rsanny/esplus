@@ -37,8 +37,13 @@ file_put_contents($_SERVER["DOCUMENT_ROOT"] . "/" . basename(__FILE__, '.php') .
     $arParams['sign'] = $this->MakeSign($arParams);
     $url = '/Handlers/API/GetAbonentInfo.ashx?'.http_build_query($arParams);
     
-    $res = file_get_contents($this->props['server'].$url);
-
+//    $res = file_get_contents($this->props['server'].$url);
+$ctx = stream_context_create(array('http'=>
+    array(
+        'timeout' => 10,
+    )
+));
+        $res = file_get_contents($this->props['server'].$url, false, $ctx);
     $arResult = json_decode($res, true);
 
     if($arResult['Code'] == 404)
@@ -59,8 +64,13 @@ file_put_contents($_SERVER["DOCUMENT_ROOT"] . "/" . basename(__FILE__, '.php') .
     $arParams['sign'] = $this->MakeSign($arParams);
     $url = '/Handlers/API/GetCountersInfo.ashx?'.http_build_query($arParams);
     
-    $res = file_get_contents($this->props['server'].$url);
-
+//    $res = file_get_contents($this->props['server'].$url);
+$ctx = stream_context_create(array('http'=>
+    array(
+        'timeout' => 10,
+    )
+));
+        $res = file_get_contents($this->props['server'].$url, false, $ctx);
     $arResult = json_decode($res, true);
     
     return $arResult;
@@ -77,8 +87,13 @@ file_put_contents($_SERVER["DOCUMENT_ROOT"] . "/" . basename(__FILE__, '.php') .
 
     $url = '/handlers/api/getbillstate.ashx?'.http_build_query($arParams);
     
-    $res = file_get_contents($this->props['server'].$url);
-
+//    $res = file_get_contents($this->props['server'].$url);
+$ctx = stream_context_create(array('http'=>
+    array(
+        'timeout' => 10,
+    )
+));
+        $res = file_get_contents($this->props['server'].$url, false, $ctx);
     $arResult = json_decode($res, true);
     
     return $arResult;
@@ -100,8 +115,13 @@ file_put_contents($_SERVER["DOCUMENT_ROOT"] . "/" . basename(__FILE__, '.php') .
 
     $url = '/handlers/api/sendrounds.ashx?'.http_build_query($arParams);
 
-    $res = file_get_contents($this->props['server'].$url);
-
+//    $res = file_get_contents($this->props['server'].$url);
+$ctx = stream_context_create(array('http'=>
+    array(
+        'timeout' => 10,
+    )
+));
+        $res = file_get_contents($this->props['server'].$url, false, $ctx);
     $arResult = json_decode($res, true);
     
     return $arResult;
@@ -126,38 +146,51 @@ file_put_contents($_SERVER["DOCUMENT_ROOT"] . "/" . basename(__FILE__, '.php') .
 
     $url = '/Handlers/API/MakePayment.ashx?'.http_build_query($arParams);
 
-    $res = file_get_contents($this->props['server'].$url);
-
-    $arResult = json_decode($res, true);
-    
-    return $arResult;
-  }
-
-  public function MakePaymentSplitter($nlsid, $amount, $ord, $email, $phoneNumber)
-  {
-    $arParams = array(
-      'nlsid' => $nlsid,
-      'amount' => $amount,
-      'ord' => $ord,
-      'cur' => 810,
-      'returnurl' => 'http://'.$_SERVER['SERVER_NAME'].'/payment_result.php?order='.$ord,
-      'host' => $_SERVER['REMOTE_ADDR'],
-      'email' => $email,
-      'phoneNumber' => $phoneNumber,
-      'appid' => $this->props['appid'],
-      'uid' => $this->props['uid'],
-      'format' => 'json'
-    );
-    $arParams['sign'] = $this->MakeSign($arParams);
-
-    $url = '/Handlers/API/MakePaymentSplitter.ashx?'.http_build_query($arParams);
-
-    $res = file_get_contents($this->props['server'].$url);
-
+//    $res = file_get_contents($this->props['server'].$url);
+$ctx = stream_context_create(array('http'=>
+    array(
+        'timeout' => 10,
+    )
+));
+        $res = file_get_contents($this->props['server'].$url, false, $ctx);
     $arResult = json_decode($res, true);
 
     return $arResult;
   }
+
+    public function MakePaymentSplitter($nlsid, $amount, $ord, $email, $phoneNumber, $json = "")
+    {
+        $arParams = array(
+            'nlsid' => $nlsid,
+            'amount' => $amount,
+            'ord' => $ord,
+            'cur' => 810,
+            'returnurl' => 'http://' . $_SERVER['SERVER_NAME'] . '/payment_result.php?order=' . $ord,
+            'host' => $_SERVER['REMOTE_ADDR'],
+            'email' => $email,
+            'phoneNumber' => $phoneNumber,
+            'appid' => $this->props['appid'],
+            'uid' => $this->props['uid'],
+            'format' => 'json'
+        );
+        $arParams['sign'] = $this->MakeSign($arParams);
+
+        $url = '/Handlers/API/MakePaymentSplitter.ashx?' . http_build_query($arParams);
+
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $this->props['server'] . $url);
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $json);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($ch, CURLOPT_HEADER, false);
+        $output = curl_exec($ch);
+        curl_close($ch);
+
+        $result = json_decode($output, true);
+
+        return $result;
+    }
 
   public function Registration($nlsid, $house, $litera, $flat, $extflat, $email, $password, $spamacception)
   {
@@ -170,8 +203,13 @@ file_put_contents($_SERVER["DOCUMENT_ROOT"] . "/" . basename(__FILE__, '.php') .
     $arParams['sign'] = $this->MakeSign($arParams);
 
     $url = '/Handlers/API/Mobile/Individuals/Registration.ashx?'.http_build_query($arParams);
-    $res = file_get_contents($this->props['server'].$url);
-
+//    $res = file_get_contents($this->props['server'].$url);
+$ctx = stream_context_create(array('http'=>
+    array(
+        'timeout' => 10,
+    )
+));
+        $res = file_get_contents($this->props['server'].$url, false, $ctx);
     $arResult = json_decode($res, true);
     
     return $arResult;
@@ -189,7 +227,13 @@ file_put_contents($_SERVER["DOCUMENT_ROOT"] . "/" . basename(__FILE__, '.php') .
 
     $url = '/Handlers/API/Mobile/Individuals/RecoveryPassword.ashx?'.http_build_query($arParams);
 
-    $res = file_get_contents($this->props['server'].$url);
+//    $res = file_get_contents($this->props['server'].$url);
+$ctx = stream_context_create(array('http'=>
+    array(
+        'timeout' => 10,
+    )
+));
+        $res = file_get_contents($this->props['server'].$url, false, $ctx);
 
     $arResult = json_decode($res, true);
     
@@ -208,7 +252,13 @@ file_put_contents($_SERVER["DOCUMENT_ROOT"] . "/" . basename(__FILE__, '.php') .
 
     $url = '/Handlers/API/GetPaymentState.ashx?'.http_build_query($arParams);
 
-    $res = file_get_contents($this->props['server'].$url);
+//    $res = file_get_contents($this->props['server'].$url);
+$ctx = stream_context_create(array('http'=>
+    array(
+        'timeout' => 10,
+    )
+));
+        $res = file_get_contents($this->props['server'].$url, false, $ctx);
 
     $arResult = json_decode($res, true);
     
@@ -225,8 +275,12 @@ file_put_contents($_SERVER["DOCUMENT_ROOT"] . "/" . basename(__FILE__, '.php') .
         $arParams['sign'] = $this->MakeSign($arParams);
 
         $url = '/handlers/api/ListPaymentSplitter.ashx?'.http_build_query($arParams);
-
-        $res = file_get_contents($this->props['server'].$url);
+$ctx = stream_context_create(array('http'=>
+    array(
+        'timeout' => 10,
+    )
+));
+        $res = file_get_contents($this->props['server'].$url, false, $ctx);
 
         $arResult = json_decode($res, true);
 

@@ -19,7 +19,7 @@ Class ClassDebug {
 Class LoginPassBasa {
 
     public static $stokLogin = "stock";
-    public static $stokPass  = "qwerty";
+    public static $stokPass  = "i6WwyTzKUX6fWvR2aT5r";
 
     public static function md5($str){
         return md5($str);

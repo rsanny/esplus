@@ -89,7 +89,6 @@ use \OptimalGroup\Url;
                 <li><a href="/service/post/">Как передать показания</a></li>
                 <li><a href="/service/pay/">Как оплатить</a></li>
                 <li><a href="/service/contract/">Заключить договор онлайн</a></li>
-                <li><a href="/service/pc/">Личный кабинет клиента</a></li>
             <? elseif ($OptimalGroup['SITE']['CODE'] == "home"): ?>
                 <li><a href="/service/post/">Передать показания</a></li>
                 <li><a href="/service/pay/">Оплатить</a></li>
@@ -116,7 +115,13 @@ use \OptimalGroup\Url;
                 <li><a href="/business/service/pay/">Как оплатить</a></li>
                 <li><a href="/business/service/doc/">Электронный документооборот</a></li>
                 <li><a href="/business/service/contract/">Заключить договор онлайн</a></li>
-                <li><a href="/business/service/pc/">Личный кабинет клиента</a></li>
+                <? if (
+                        ($OptimalGroup['DOMAIN'] != "oren" && $OptimalGroup['SITE']['CODE'] != "business")
+                        ||
+                        (in_array($OptimalGroup['DOMAIN'], array("ekb", "udm", "kirov")) && $OptimalGroup['SITE']['CODE'] == "business")
+                    ): ?>
+                    <li><a href="/business/service/pc/">Личный кабинет клиента</a></li>
+                <? endif; ?>
             <? endif; ?>
         </ul>
         <? if ($OptimalGroup['SITE']['CODE'] == "home" && $OptimalGroup['DOMAIN'] != "vladimir" || $OptimalGroup['SITE']['CODE'] == "shop"): ?>

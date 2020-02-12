@@ -1,0 +1,8 @@
+export default {
+      id: "icon-bx24-usage",
+      viewBox: "0 0 79 51",
+      url: __webpack_public_path__ + "C:\\Users\\web3r\\Documents\\projects\\de-bx24\\local\\templates\\delement\\frontend\\app\\icons\\icon-bx24.svg",
+      toString: function () {
+        return this.url;
+      }
+    }

@@ -1,4 +1,4 @@
-<?php 
+<?php
 namespace DorrBitt\SamaraObrabotkaUnload;
 use DorrBitt\ClassDebug\ClassDebug;
 use DorrBitt\dbapi\BElements;
@@ -16,7 +16,11 @@ Class SOU {
     public function error(){
         return "Лицевой счёт не найден. Подробности по телефону Контакт-центра.";
     }
-    
+
+    public function listCodeTime(){
+        return ["PERIOD_VY"];
+    }
+
     public function listElemProps($arr){
         //ClassDebug::debug($arr);
         $listcode = $this->listCode();
@@ -38,6 +42,25 @@ Class SOU {
         }
         return $resultDataLs;
     }
+
+    public function listElemPropsTime($arr){
+        //ClassDebug::debug($arr);
+        $listcode = $this->listCodeTime();
+        $resultDataLs = [];
+        if(is_array($arr) && !empty($arr)){
+            foreach($arr as $res){
+                    $resultDataLs[$res["XML_ID"]] = $res;
+                    for($i=0;$i<count($listcode);$i++){
+                        $dataCode = $this->obj->propertis($res["IBLOCK_ID"],$res["ID"],["CODE"=>$listcode[$i]]);
+                        if(is_array($dataCode) && !empty($dataCode) && count($dataCode) > 0){
+                            $resultDataLs[$res["XML_ID"]][$listcode[$i]] = $dataCode;
+                        }
+                    }
+            }
+        }
+        return $resultDataLs;
+    }
+
 }
 
 ?>

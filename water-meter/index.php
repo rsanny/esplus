@@ -3,8 +3,17 @@ require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
 $APPLICATION->SetTitle("Установка счетчиков воды");
 $APPLICATION->IncludeFile(INCLUDE_PATH . 'catalog-scripts.php', Array(), Array("SHOW_BORDER"=> false));
 OptimalGroup\Core::AddJs(array("optimalgroup/numbers"));
+use DorrBitt\dbCity\DBCITY;
+
+$dostupListDomen = [
+    "kirov",
+    "udm",
+    "ekb"
+];
+$act_region = (DBCITY::inarray($dostupListDomen,$OptimalGroup['DOMAIN']) == 1) ? 1 : 0;
+//if ($_REQUEST['show_config'] == "Y"):
+    if ($act_region == 1 || $_REQUEST['show_config'] == "Y"):
 ?>
-<? if ($_REQUEST['show_config'] == "Y"):?>
 <section class="index-section">
     <div class="container">
         <div class="section-title text-center"><span>Конфигуратор пакетного предложения</span></div>
@@ -65,10 +74,10 @@ OptimalGroup\Core::AddJs(array("optimalgroup/numbers"));
                 "SORT_ORDER2" => "ASC",
                 "STRICT_SECTION_CHECK" => "N"
             )
-        );?>   
-        
+        );?>
 
-        
+
+
     </div>
 </section>
 <? endif;?>
@@ -101,7 +110,17 @@ OptimalGroup\Core::AddJs(array("optimalgroup/numbers"));
                 <div class="easy-order">
                     <i class="no-border"><img src="<?=MEDIA_PATH;?>icons/installation-icon-4.png" alt=""><b>4</b></i>
                     <span>Выезд мастера</span>
-                    <div>Наш специалист при необходимости демонтирует старый прибор учета, установит новый и выполнит опломбировку счётчика горячей воды</div>
+                    <?php if($OptimalGroup['DOMAIN'] == "vladimir"):?>
+                        <div>Наш специалист при необходимости демонтирует старый прибор учета и установит новый</div>
+                    <?php elseif($OptimalGroup['DOMAIN'] == "udm"):?>
+                        <div>Наш специалист при необходимости демонтирует старый прибор учета, установит новый и выполнит его опломбировку</div>
+                    <?php elseif($OptimalGroup['DOMAIN'] == "kirov"):?>
+                        <div>Наш специалист при необходимости демонтирует старый прибор учета, установит новый и выполнит опломбировку*</div>
+                    <?php elseif($OptimalGroup['DOMAIN'] == "oren"):?>
+                        <div>Наш специалист демонтирует старый прибор учета, установит новый и выполнит опломбировку*</div>
+                    <?php else:?>
+                        <div>Наш специалист при необходимости демонтирует старый прибор учета, установит новый и выполнит опломбировку счётчика горячей воды</div>
+                    <?php endif;?>
                 </div>
             </div>
         </div>
@@ -171,59 +190,116 @@ OptimalGroup\Core::AddJs(array("optimalgroup/numbers"));
                         "STRICT_SECTION_CHECK" => "N"
                     )
                 );?>
-                
+
             </div>
-            <div class="col col-12 col-md-5 col-lg-4">  
+            <div class="col col-12 col-md-5 col-lg-4">
                 <? $APPLICATION->IncludeFile(INCLUDE_PATH . '/page/more-question.php', Array(), Array("MODE"=> "html"));?>
             </div>
         </div>
         <? \Optimalgroup\Template::OfferBanners(
             array(
                 "arSettings" => array(
-                    "NEWS_COUNT" => 2, 
+                    "NEWS_COUNT" => 2,
                     "BY_PAGE"=> "Y"
                 )
             )
         );?>
     </div>
-</section>   
+</section>
+<?php
+if($OptimalGroup['DOMAIN'] == "vladimir"){
+    $class_col = "col-lg-3-33";
+    $act_block = 0;
+}
+else{
+    $class_col = "col-lg-3";
+    $act_block = 1;
+}
+?>
+<?php
+if($OptimalGroup['DOMAIN'] == "vladimir"){
+    $class_col = "col-lg-3-33";
+    $act_block = 0;
+}
+else{
+    $class_col = "col-lg-3";
+    $act_block = 1;
+}
+
+?>
 <section class="index-section">
     <div class="container">
         <div class="section-title text-center"><span>Почему выбирают нас?</span></div>
         <div class="row text-center mb-50">
-            <div class="col col-12 col-md-6 col-lg-3 mt-30 mt-lg-0">
+            <div class="col col-12 col-md-6 <?=$class_col?> mt-30 mt-lg-0" >
                 <div class="why-we">
                     <i><img src="<?=MEDIA_PATH;?>icons/icon-why-we-1.png" alt=""></i>
                     <div>Экономия времени</div>
-                    <span>Услуга оказывается в согласованное с Вами время. Вам не придется идти в ресурсоснабжающую компанию, чтобы передать документы для ввода в эксплуатацию нового счетчика горячей воды – за Вас это сделает наш мастер, после оказания услуги.</span>
+                    <?php if($OptimalGroup['DOMAIN'] == "vladimir"):?>
+                        <span>
+                        Услуга оказывается в согласованное с Вами время
+                        </span>
+                    <?php elseif($OptimalGroup['DOMAIN'] == "udm"):?>
+                        <span>
+                        Услуга оказывается в согласованное с Вами время. Вам не придется идти в ресурсоснабжающую компанию, чтобы передать документы для ввода
+                        в эксплуатацию нового счетчика – за Вас это сделает наш мастер, после оказания услуги
+                        </span>
+                    <?php elseif($OptimalGroup['DOMAIN'] == "kirov"):?>
+                        <span>
+                        Услуга оказывается в согласованное с Вами время. Вам не придется идти в ресурсоснабжающую компанию, чтобы передать документы для ввода
+                        в эксплуатацию нового счетчика горячей воды* – за Вас это сделает наш мастер, после оказания услуги
+                        </span>
+                    <?php elseif($OptimalGroup['DOMAIN'] == "oren"):?>
+                        <span>
+                        Услуга оказывается в согласованное с Вами время. Вам не придется идти в ресурсоснабжающую компанию, чтобы передать документы для ввода в
+                        эксплуатацию нового счетчика горячей воды* – за Вас это сделает наш мастер, после оказания услуги
+                        </span>
+                    <?php else:?>
+                        <span>Услуга оказывается в согласованное с Вами время. Вам не придется идти в ресурсоснабжающую компанию, чтобы передать документы для ввода
+                              в эксплуатацию нового счетчика горячей воды – за Вас это сделает наш мастер, после оказания услуги</span>
+                    <?php endif;?>
+
                 </div>
             </div>
-            <div class="col col-12 col-md-6 col-lg-3 mt-30 mt-lg-0">
+            <div class="col col-12 col-md-6 <?=$class_col?> mt-30 mt-lg-0" >
                 <div class="why-we">
                     <i><img src="<?=MEDIA_PATH;?>icons/icon-why-we-2.png" alt=""></i>
                     <div>Безопасность</div>
-                    <span>Работы выполняются квалифицированными специалистами в соответствии с нормами законодательства при соблюдении техники безопасности и правил установки приборов учета.</span>
+                    <span>Работы выполняются квалифицированными специалистами в соответствии с нормами законодательства при соблюдении техники безопасности и
+                    правил установки приборов учета</span>
                 </div>
             </div>
-            <div class="col col-12 col-md-6 col-lg-3 mt-30 mt-lg-0">
+            <div class="col col-12 col-md-6 <?=$class_col?> mt-30 mt-lg-0" >
                 <div class="why-we">
                     <i><img src="<?=MEDIA_PATH;?>icons/icon-why-we-3.png" alt=""></i>
                     <div>Экономия денег</div>
-                    <span>Приобретая пакетное предложение (счетчик с услугой по установке/замене) Вы экономите еще больше.</span>
+                    <span>Приобретая пакетное предложение (счетчик с услугой по установке/замене) Вы экономите еще больше</span>
                 </div>
             </div>
+            <?php if($act_block == 1):?>
             <div class="col col-12 col-md-6 col-lg-3 mt-30 mt-lg-0">
                 <div class="why-we">
                     <i><img src="<?=MEDIA_PATH;?>icons/icon-why-we-4.png" alt=""></i>
                     <div>Опломбировка сразу</div>
-                    <span>После установки новый прибор учета в обязательном порядке опломбируется и вводится в эксплуатацию (только для счётчиков горячей воды).</span>
+                    <?php if($OptimalGroup['DOMAIN'] == "udm"):?>
+                    <span>После установки новый прибор учета в обязательном порядке опломбируется и вводится в эксплуатацию</span>
+                    <?php elseif($OptimalGroup['DOMAIN'] == "kirov"):?>
+                        <span>После установки новый прибор учета в обязательном порядке опломбируется* и вводится в эксплуатацию
+                        * - только счетчики горячей воды в г. Киров и Кирово-Чепецк</span>
+                    <?php elseif($OptimalGroup['DOMAIN'] == "oren"):?>
+                        <span>После установки новый прибор учета в обязательном порядке опломбируется* и вводится в эксплуатацию
+                              * - только счетчики горячей воды в г. Оренбург и Медногорск"</span>
+                    <?php else:?>
+                    <span>После установки новый прибор учета в обязательном порядке опломбируется и вводится в эксплуатацию (только для счётчиков горячей воды)</span>
+                    <?php endif;?>
                 </div>
             </div>
-        </div>       
+            <?php endif;?>
+        </div>
         <? \Optimalgroup\Template::OfferBanners(
             array(
                 "arSettings" => array(
-                    "NEWS_COUNT" => 2, 
+                    "NEWS_COUNT" => 2,
                     "BY_PAGE"=> "Y"
                 )
             )

@@ -27,13 +27,39 @@ if ($OptimalGroup['DOMAIN'] == "chuvashia"){
     }
 }
 
+if ($OptimalGroup['DOMAIN'] == "saratov"){
+    $menuType = "section-saratov";
+    $indexPage = "home";
+
+    if ($OptimalGroup['SITE']['CODE'] == "business"){
+        $menuType = "section-teplo-business";
+        $indexPage = "teplo-business";
+    }
+}
+
+if ($OptimalGroup['DOMAIN'] == "perm" && $OptimalGroup['SITE']['CODE'] == "business"){
+
+    $menuType = "section-perm-business";
+    $indexPage = "business";
+
+}
+
+if ($OptimalGroup['DOMAIN'] == "oren" && $OptimalGroup['SITE']['CODE'] == "business"){
+
+    $menuType = "section-oren-business";
+    $indexPage = "business";
+
+}
+
 if ($OptimalGroup['DOMAIN'] == "kirov"){
     $menuType = "section-kirov";  
     $indexPage = "kirov";
     
     if ($OptimalGroup['SITE']['CODE'] == "business"){
-        $menuType = "section-teplo-business";  
+        $menuType = "section-teplo-business"; 
+        $menuType = "section-business";  
         $indexPage = "teplo-business";
+        $indexPage = "business";
     }
 }
 
@@ -44,6 +70,7 @@ if ($OptimalGroup['DOMAIN'] == "vladimir"){
     if ($OptimalGroup['SITE']['CODE'] == "business"){
         $menuType = "section-vladimir-business";        
         $indexPage = "business";
+        $indexPage = "teplo-business";
     }
 
 }

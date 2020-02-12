@@ -1,6 +1,11 @@
 <?
 global $OptimalGroup;
-$IndexTitle = $OptimalGroup['BRANCH']['NAME']." филиал ЭнергосбыТ Плюс";
+use DorrBitt\seo\SEO;
+$objSEO = new SEO();
+$subDomenData = explode(".",$_SERVER["SERVER_NAME"])[0];
+$filialName = $objSEO->seoTitle($subDomenData);
+//$IndexTitle = $OptimalGroup['BRANCH']['NAME']." филиал ЭнергосбыТ Плюс";
+$IndexTitle = $filialName." филиал ЭнергосбыТ Плюс";
 $APPLICATION->SetTitle($IndexTitle);
 $APPLICATION->SetPageProperty('description', 'АО "ЭнергосбыТ Плюс" – объединенная энергосбытовая компания Группы "Т Плюс" с филиальной сетью из 13 региональных филиалов на территории Российской Федерации.');
 global $globalFilter;
@@ -69,7 +74,8 @@ if ($OptimalGroup['BRANCH']['URL'] == "vladimir")
     $IndexPath = INCLUDE_PATH . 'site/'.$OptimalGroup['SITE']['CODE'].'/index_vladimir.php';
 if ($OptimalGroup['BRANCH']['URL'] == "chuvashia")
     $IndexPath = INCLUDE_PATH . 'site/'.$OptimalGroup['SITE']['CODE'].'/index_chuvashia.php';
-
+if ($OptimalGroup['BRANCH']['URL'] == "saratov")
+    $IndexPath = INCLUDE_PATH . 'site/'.$OptimalGroup['SITE']['CODE'].'/index_saratov.php';
 if ($OptimalGroup['BRANCH']['URL'] == "kirov")
     $IndexPath = INCLUDE_PATH . 'site/'.$OptimalGroup['SITE']['CODE'].'/index_kirov.php';
 

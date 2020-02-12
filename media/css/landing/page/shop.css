@@ -1,0 +1,19 @@
+.service-shop--banner {
+    display: block;
+    height: 316px;
+    background: #fff;
+    border-radius: 5px;
+}
+.shop-bottom {}
+.shop-bottom .flex i {width: 78px;}
+@media (max-width: 767px){
+    .shop-bottom { align-items: flex-start !important;}
+    .shop-bottom .flex {
+        flex-direction: column;
+        text-align: center;
+    }
+    .shop-bottom .flex i {
+        height: 58px;
+        line-height: 58px;
+    }
+}

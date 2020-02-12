@@ -6,13 +6,15 @@ if ($OptimalGroup['BRANCH']['URL'] == "kirov") {
 }
 elseif ($OptimalGroup['BRANCH']['URL'] == "udm" || $OptimalGroup['BRANCH']['URL'] == "ekb" || $OptimalGroup['BRANCH']['URL'] == "oren"){
     $ul_z = "/upload/doc/".$OptimalGroup['BRANCH']['URL']."/UL_Z.doc";
+} elseif ($OptimalGroup['BRANCH']['URL'] == "perm") {
+    $ul_z = "/upload/doc/".$OptimalGroup['BRANCH']['URL']."/UL_Z.xlsx";
 }
 $ul_p = "";
 if ($OptimalGroup['BRANCH']['URL'] == "kirov") {
     $ul_p = "/upload/doc/kirov/Poryadok_podklyucheniya_k_servisu.pdf";
     $ul_p_name = "Кировского филиала";
 }
-elseif ($OptimalGroup['BRANCH']['URL'] == "udm" || $OptimalGroup['BRANCH']['URL'] == "ekb" || $OptimalGroup['BRANCH']['URL'] == "oren"){
+elseif ($OptimalGroup['BRANCH']['URL'] == "udm" || $OptimalGroup['BRANCH']['URL'] == "ekb" || $OptimalGroup['BRANCH']['URL'] == "oren" || $OptimalGroup['BRANCH']['URL'] == "perm"){
     $ul_p = "/upload/doc/".$OptimalGroup['BRANCH']['URL']."/UL_P.doc";
     if ($OptimalGroup['BRANCH']['URL'] == "udm")
         $ul_p_name = "Удмуртского филиала";
@@ -20,6 +22,11 @@ elseif ($OptimalGroup['BRANCH']['URL'] == "udm" || $OptimalGroup['BRANCH']['URL'
         $ul_p_name = "Свердловского филиала";
     if ($OptimalGroup['BRANCH']['URL'] == "oren")
         $ul_p_name = "Оренбургского филиала";
+
+    if ($OptimalGroup['BRANCH']['URL'] == "perm") {
+        $ul_p_name = "Пермского филиала";
+        $ul_p = "/upload/doc/".$OptimalGroup['BRANCH']['URL']."/UL_P.docx";
+    }
 }
 ?>
 <div class="service-form service-tabs">
@@ -45,7 +52,7 @@ elseif ($OptimalGroup['BRANCH']['URL'] == "udm" || $OptimalGroup['BRANCH']['URL'
             <div class="text-center fs-14 text-uppercase">Следить за Вашими<br>расходами</div>
         </div>
     </div>
-    <div class="use-pc text-center bg-success">
+    <div class="use-pc text-center bg-success" id="no-cabinet">
         <p class="fs-24 mb-30">Еще не используете Личный кабинет ЭнергосбыТ Плюс ?</p>
         <a href="<?=$ul_z;?>" class="btn btn-orange w-270"><span class="fa-angle-btn">Скачайте форму</span></a>
     </div>
@@ -54,7 +61,12 @@ elseif ($OptimalGroup['BRANCH']['URL'] == "udm" || $OptimalGroup['BRANCH']['URL'
             <? if ($ul_p):?>
             <div class="form-description bg-message bg-info fs-15">
                 <div class="mb-10 color-orange"><b>Порядок подключения</b><i class="icon-info--orange"></i></div>
-                <a href="<?=$ul_p;?>">Порядок подключения</a> к сервису «Web-кабинет для юридических лиц» для клиентов <?=$ul_p_name;?> ОАО «ЭнергосбыТ Плюс»
+                <a href="<?=$ul_p;?>">
+                <?if($OptimalGroup['DOMAIN'] == 'perm'){?>
+                    Порядок подключения</a> к личному кабинету для юридических лиц для клиентов Пермского филиала АО «ЭнергосбыТ Плюс»
+                <? } else { ?>
+                    Порядок подключения</a> к сервису «Web-кабинет для юридических лиц» для клиентов <?=$ul_p_name;?> ОАО «ЭнергосбыТ Плюс»
+                <? } ?>
             </div>
             <? else:?>
             <div class="form-description bg-message bg-info fs-15">

@@ -1,0 +1,78 @@
+.faq-list {}
+    .faq-item {
+        margin-bottom: 27px;
+    }
+        .faq-item--name {
+            position: relative;
+            line-height: 31px;
+            padding-left: 54px;
+            cursor: pointer;
+            display: inline-block;
+        }
+            .faq-item--name i {
+                height: 31px;
+                width: 31px;
+                border: 1px solid #d9e2e9;
+                position: absolute;
+                left: 0;
+                top: 0;
+            }
+            .faq-item--name i:before,
+            .faq-item--name i:after {
+                background: #62707d;
+                display: block;
+                position: absolute;
+                content: "";
+            }
+            .faq-item--name i:before {
+                height: 9px;
+                width: 1px;
+                top: 10px;
+                left: 50%;
+                transition: .2s;
+                transform-origin: center;
+                margin-left: 0px;
+            }
+            .faq-item--name i:after {
+                height: 1px;
+                width: 9px;
+                top: 14px;
+                left: 50%;
+                margin-left: -4px;
+            }
+            .faq-item--name span {
+                display: inline;
+                font-size: 24px;
+                font-weight: 400;
+                color: #383838;
+                border-bottom: 1px solid #383838;
+            }
+        .faq-item--name:hover span {border-bottom-color: transparent;}
+        .faq-item--text {
+            font-size: 14px;
+            line-height: 18px;
+            font-weight: 300;
+            color: #333;
+            border: 1px solid #d9e2e9;
+            padding: 53px 45px 53px 55px;
+            margin: 14px 0;
+        }
+        .is-opened .faq-item--name i:before {
+            transform: rotate(90deg);            
+        }
+        .is-opened .faq-item--name span {border-bottom-color: transparent;}
+@media (max-width: 767px){
+    .faq-item--name span {font-size: 20px;}
+    .faq-item--text {
+        padding: 20px;
+    }
+    .faq-item--name {
+        padding-left: 40px;
+    }
+    .faq-item--name i {
+        height: 21px;
+        width: 21px;
+    }
+    .faq-item--name i:before {top: 5px;}
+    .faq-item--name i:after {top: 9px;}
+}

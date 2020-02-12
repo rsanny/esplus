@@ -67,6 +67,9 @@ if(file_exists(dirname(__FILE__).'/include/DorrBitt/parsetype.php'))
 if(file_exists(dirname(__FILE__).'/include/DorrBitt/dataip.php'))
    require dirname(__FILE__).'/include/DorrBitt/dataip.php';
 
+if(file_exists(dirname(__FILE__).'/include/DorrBitt/1c.asufhd.php'))
+   require dirname(__FILE__).'/include/DorrBitt/1c.asufhd.php';
+
 if(file_exists(dirname(__FILE__).'/include/DorrBitt/dbdomen.php'))
    require dirname(__FILE__).'/include/DorrBitt/dbdomen.php';
 
@@ -78,6 +81,9 @@ if(file_exists(dirname(__FILE__).'/include/DorrBitt/files.php'))
 
 if(file_exists(dirname(__FILE__).'/include/DorrBitt/samara.obrabotka.unload.php'))
    require dirname(__FILE__).'/include/DorrBitt/samara.obrabotka.unload.php';
+
+if(file_exists(dirname(__FILE__).'/include/DorrBitt/seo.php'))
+   require dirname(__FILE__).'/include/DorrBitt/seo.php';
 
 
 //	
@@ -136,11 +142,16 @@ function RedirectAndSetRegion()
 {
     global $APPLICATION;
     $OptimalGroupCity = new \OptimalGroup\City;
-    $_REQUEST['type'] = 'm';
+
+    $region = explode('.',$_SERVER['HTTP_HOST']);
+    if(strpos($_SERVER['HTTP_HOST'],'promo') !== false  && $region[0] != $_SESSION['BXExtra']['REGION']['IBLOCK']['URL']){
+        unset($_SESSION['BXExtra']);
+    }
+
     $CurrentCity = $OptimalGroupCity->Init($_REQUEST['type']);
     $current = \OptimalGroup\SiteSection::Get();
     $domain = \OptimalGroup\SiteSection::GetSubDomain();
-    if ($domain == "shop"){
+        if ($domain == "shop" || $domain == "promo"){
         if ($current['CODE'] != $domain) {//Если не магазин то устанавливаем магазин
             $_REQUEST['site_section'] = $domain;
         }
@@ -158,11 +169,10 @@ function RedirectAndSetRegion()
     if (empty($checkIndex) && !\OptimalGroup\Main::isAjax() && $APPLICATION->GetCurDir() == "/"){
 
         $APPLICATION->RestartBuffer();
-        
         $APPLICATION->IncludeFile(INCLUDE_PATH . '/template/index.php', Array(), Array("SHOW_BORDER"=> false));
         die();
     }
-    
+
 }
 
 use DorrBitt\bloksite\BlokSite;
@@ -177,6 +187,22 @@ AddEventHandler("main", "OnBeforeProlog", "RedirectPoIP", 50);
 function RedirectPoIP() {
     $objRemoveIP = new RemoveIP();
     $objRemoveIP->tIPexit();
+}
+
+
+\Bitrix\Main\EventManager::getInstance()->addEventHandler(
+    'sale',
+    'OnGetCustomCashboxHandlers',
+    'onGetCustomCashboxHandlers'
+);
+function onGetCustomCashboxHandlers()
+{
+    return new \Bitrix\Main\EventResult(
+        \Bitrix\Main\EventResult::SUCCESS,
+        array(
+            '\Bitrix\Sale\Cashbox\Atol4Branch' => '/local/php_interface/include/Atol4Branch.php',
+        )
+    );
 }
 
 
@@ -331,74 +357,75 @@ AddEventHandler('form', 'onBeforeResultAdd', 'reCaptcha');
 function reCaptcha($WEB_FORM_ID, &$arFields, &$arrVALUES)
 {
 	global $APPLICATION;
-    $xda = 1;
-	if (
-	    $xda == 1
-        ||
-        // Не нашли ответ на свой вопрос?
-        $WEB_FORM_ID == 27
-        // Не нашли ответ на свой вопрос?
-        ||
-        $WEB_FORM_ID == 28
-        ||
-        // Подписка на извещения о закупках
-        $WEB_FORM_ID == 2
-        ||
-        // Обратная связь
-        $WEB_FORM_ID == 24
-        ||
-        // Оценить качество услуг
-        $WEB_FORM_ID == 4
-        /*||
-        // Отправить резюме
-        $WEB_FORM_ID == 8*/
-        ||
-        // Задать вопрос по закупочной деятельности
-        $WEB_FORM_ID == 3
-        ||
-        // Рассчитать стоимость услуги
-        $WEB_FORM_ID == 16
-        ||
-        // Оформить заказ
-        $WEB_FORM_ID == 26
-        /* ||
+    //if($WEB_FORM_ID != 34) {
+        $xda = 2;
+        if (
+            $xda == 1
+            ||
+            // Не нашли ответ на свой вопрос?
+            $WEB_FORM_ID == 27
+            // Не нашли ответ на свой вопрос?
+            ||
+            $WEB_FORM_ID == 28
+            ||
+            // Подписка на извещения о закупках
+            $WEB_FORM_ID == 2
+            ||
+            // Обратная связь
+            $WEB_FORM_ID == 24
+            ||
+            // Оценить качество услуг
+            $WEB_FORM_ID == 4
+            /*||
+            // Отправить резюме
+            $WEB_FORM_ID == 8*/
+            ||
+            // Задать вопрос по закупочной деятельности
+            $WEB_FORM_ID == 3
+            ||
+            // Рассчитать стоимость услуги
+            $WEB_FORM_ID == 16
+            ||
+            // Оформить заказ
+            $WEB_FORM_ID == 26
+            /* ||
 
-        // Задать вопрос ЖКУ
-        $WEB_FORM_ID == 31
-        ||
-        // Заявка на расчет стоимости
-        $WEB_FORM_ID == 7*/
-        ||
-        // Оставить заявку на установку ОДПУ
-        $WEB_FORM_ID == 29
+            // Задать вопрос ЖКУ
+            $WEB_FORM_ID == 31
+            ||
+            // Заявка на расчет стоимости
+            $WEB_FORM_ID == 7*/
+            ||
+            // Оставить заявку на установку ОДПУ
+            $WEB_FORM_ID == 29
 
-        )
-	{
-		if ($_POST['g-recaptcha-response']) {
-			$url = "https://www.google.com/recaptcha/api/siteverify";
-			$secret_code = G_SECRET_KEY;
-			$params = array(
-				'secret' => $secret_code,
-				'response' => $_POST['g-recaptcha-response'],
-				'remoteip' => $_SERVER['REMOTE_ADDR']
-			);
+        ) {
+            if ($_POST['g-recaptcha-response']) {
+                $url = "https://www.google.com/recaptcha/api/siteverify";
+                $secret_code = G_SECRET_KEY;
+                $params = array(
+                    'secret' => $secret_code,
+                    'response' => $_POST['g-recaptcha-response'],
+                    'remoteip' => $_SERVER['REMOTE_ADDR']
+                );
 
-			$curl = curl_init();
-			curl_setopt($curl, CURLOPT_URL, $url);
-			curl_setopt($curl, CURLOPT_USERAGENT, "Opera/10.00 (Windows NT 5.1; U; ru) Presto/2.2.0");
-			curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
-			curl_setopt($curl, CURLOPT_POST, true);
-			curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query($params));
+                $curl = curl_init();
+                curl_setopt($curl, CURLOPT_URL, $url);
+                curl_setopt($curl, CURLOPT_USERAGENT, "Opera/10.00 (Windows NT 5.1; U; ru) Presto/2.2.0");
+                curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+                curl_setopt($curl, CURLOPT_POST, true);
+                curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query($params));
 
-			$result = curl_exec($curl);
-			curl_close($curl);
-			$result = json_decode((string) $result, true);
-			if (!$result["success"]) {
-				$APPLICATION->ThrowException("Капча не пройдена");
-			}
-		} else {
-			$APPLICATION->ThrowException("Пройдите капчу");
-		}
-	}
+                $result = curl_exec($curl);
+                curl_close($curl);
+                $result = json_decode((string)$result, true);
+                if (!$result["success"]) {
+                    $APPLICATION->ThrowException("Капча не пройдена");
+                }
+            } else {
+                $APPLICATION->ThrowException("Пройдите капчу");
+            }
+        }
+    //}
 
 }

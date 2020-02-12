@@ -1,6 +1,7 @@
 <?
 namespace OptimalGroup;
 
+
 class Main {
     function isBot(){
 	    $bots = array(

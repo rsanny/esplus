@@ -21,6 +21,9 @@
                             <li><a href="/business/clients/kak-peredat-pokazaniya/">Как передать показания</a></li>
                             <li><a href="/business/service/contract/">Заключить договор онлайн</a></li>
                             <li><a href="/business/service/doc/">Электронный документооборот</a></li>
+                            <?if($OptimalGroup['DOMAIN'] == 'perm'){?>
+                                <li><a href="/business/service/pc/">Личный кабинет клиента</a></li>
+                            <?}?>
                         </ul>
                     </div>
                 </div>
@@ -70,6 +73,9 @@
                             <li><a href="/business/clients/kak-peredat-pokazaniya/">Как передать показания</a></li>
                             <li><a href="/business/service/contract/">Заключить договор онлайн</a></li>
                             <li><a href="/business/service/doc/">Электронный документооборот</a></li>
+                            <?if($OptimalGroup['DOMAIN'] == 'perm'){?>
+                                <li><a href="/business/service/pc/">Личный кабинет клиента</a></li>
+                            <?}?>
                         </ul>
                     </div>
                 </div>

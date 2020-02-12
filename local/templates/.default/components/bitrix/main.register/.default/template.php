@@ -82,7 +82,7 @@ endif;
     </div>
 <?endforeach?>
     <div class="form-group">
-        <div class="checkbox for-rules mt-10"><label><input type="checkbox" id="reg-agree" value="Y" checked=""><i></i><span>Нажимая кнопку "Зарегистрировать", я предоставляю персональные данные и соглашаюсь с обработкой моих персональных данных ОАО "ЭнергосбыТ Плюс" в соответствии с <a href="/privacy/" target="_blank">Политикой обработки персональных данных</a></span></label></div>
+        <div class="checkbox for-rules mt-10"><label><input type="checkbox" id="reg-agree" value="Y" checked=""><i></i><span>Нажимая кнопку "Зарегистрировать", я предоставляю персональные данные и соглашаюсь с обработкой моих персональных данных АО "ЭнергосбыТ Плюс" в соответствии с <a href="/privacy/" target="_blank">Политикой обработки персональных данных</a></span></label></div>
     </div>
     <div class="btn-action text-center">
         <p><button class="btn btn-grey w-200" type="submit" name="register_submit_button" value="Регистрация"><span class="fa-angle-btn">Регистрация</span></button></p>

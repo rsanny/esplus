@@ -42,6 +42,9 @@ foreach ($arResult['QUESTIONS'] as $code=>$arQuestion):
     if (isset($arResult['FORM_ERRORS'][$code])){
         $class .= " is-error";
     }
+    if (strpos(strtolower($inputLabel),'инн') !== false){
+        $dataQEINN[] = $code;
+    }
     if ($inputLabel == "Согласие"):
         $checkboxCheckCode = 'form_'.$formFieldInfo['FIELD_TYPE'].'_'.$code;
         $CheckSign = $inputPlaceholder;
@@ -153,6 +156,27 @@ foreach ($arResult['QUESTIONS'] as $code=>$arQuestion):
                 </div>
             </div>
         </div>         
+    <?php
+    elseif ($formFieldInfo['FIELD_TYPE'] == 'dropdown'):
+        $selectName = 'form_' . $formFieldInfo['FIELD_TYPE'] . '_' . $code;
+    ?>
+        <div class="row form-group flex-vertical">
+            <div class="col col-12 <?= $labelCol; ?>">
+                <label for="<?= $code; ?>"><?= $inputLabel; ?><? if ($arQuestion['REQUIRED'] == "Y"): ?> <span
+                            class="color-orange">*</span><? endif; ?></label>
+            </div>
+            <div class="col col-12 <?= $fieldCol; ?>">
+                <div class="form-select js-select<?= $class; ?>">
+                    <select id="<?= $code; ?>" name="<?= $selectName; ?>">
+                        <option selected disabled hidden value=""><?= $inputPlaceholder; ?></option>
+                        <? foreach ($arQuestion['STRUCTURE'] as $id => $arStructure): ?>
+                            <option value="<?= $arStructure['ID']; ?>"<? if ($arStructure['ID'] == $arResult['arrVALUES'][$selectName]): ?> selected<? endif; ?>><?= $arStructure['MESSAGE']; ?></option>
+                        <? endforeach; ?>
+                    </select>
+                    <i class="fa fa-chevron-down"></i>
+                </div>
+            </div>
+        </div>        
     <? else:?>
     <?php if($inputName == "form_text_853" || $inputName == "form_text_854" || $inputName == "form_text_856" || $inputName == "form_text_857" 
              || $inputName == "form_text_858" || $inputName == "form_text_859" || $inputName == "form_text_860" 
@@ -235,3 +259,9 @@ if (isset($arResult['FORM_ERRORS'])){?>
     </script>
 <?}
 ?>
+
+<script type="text/javascript">
+$(document).ready(function() {
+    $("#<?=$dataQEINN[0]?>").inputmask('Regex', {regex: "\\d*"});
+});
+</script>

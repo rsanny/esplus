@@ -62,7 +62,7 @@ $globalFilter = \OptimalGroup\SiteSection::FilterOr();
 		"STRICT_SECTION_CHECK" => "N"
 	)
 );?>
-<? if ($OptimalGroup['GROUP'] == "all" && $OptimalGroup['DOMAIN'] != "oren"):?>
+<? if (($OptimalGroup['GROUP'] == "all" && $OptimalGroup['DOMAIN'] != "oren") || $OptimalGroup['DOMAIN'] == 'perm'):?>
 <? $APPLICATION->IncludeFile(INCLUDE_PATH . '/template/inline-auth.php', Array(), Array("SHOW_BORDER"=> false));?>
 <? endif;?>
 

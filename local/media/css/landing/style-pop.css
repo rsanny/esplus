@@ -1,0 +1,255 @@
+#modals {
+
+	width: auto;
+	height: auto; /* а аАаЗаМаЕбб аДаОаЛаЖаНб аБббб баИаКбаИбаОаВаАаНб */
+	border-radius: 0px;
+	border: 0px #000 solid;
+	background: #fff;
+	position: fixed;  /*ббаОаБб аОаКаНаО аБбаЛаО аВ аВаИаДаИаМаОаЙ аЗаОаНаЕ аВ аЛбаБаОаМ аМаЕббаЕ */
+
+	top: 42%;  /*аОббббаПаАаЕаМ баВаЕббб 45%, аОббаАаЛбаНбаЕ 5% аПаОаДаВаИаНаЕб баКбаИаПб */
+	left: 50%;  /*аПаОаЛаОаВаИаНаА баКбаАаНаА баЛаЕаВаА */
+
+	-webkit-transform: translate(-50%, -40%);
+       -ms-transform: translate(-50%, -40%);
+        transform: translate(-50%, -40%);
+
+	/* ббб аВбб аМаАаГаИб баЕаНббаОаВаКаИ css, аОббббаПаАаЕаМ аВаЛаЕаВаО аИ аВаВаЕбб аМаИаНбб аПаОаЛаОаВаИаНб баИбаИаНб аИ аВббаОбб баОаОбаВаЕбббаВаЕаНаНаО =) */
+	display: none; /* аВ аОаБббаНаОаМ баОббаОбаНаИаИ аОаКаНаА аНаЕ аДаОаЛаЖаНаО аБббб */
+	opacity: 0; /* аПаОаЛаНаОбббб аПбаОаЗбаАбаНаО аДаЛб аАаНаИаМаИбаОаВаАаНаИб */
+	z-index: 50; /* аОаКаНаО аДаОаЛаЖаНаО аБббб аНаАаИаБаОаЛаЕаЕ аБаОаЛббаЕаМ баЛаОаЕ */
+	padding: 0px;
+}
+
+#modals #mw_close {
+	height: 50px;
+	width:50px;
+	position: absolute;
+	/*top: -30px;
+	right: 0px;*/
+	cursor: pointer;
+	border-radius:0px;
+	/*background: url('/upload/close/close-30-30.png') center no-repeat;*/
+    background: url('https://esplus.ru/upload/close/closewhite-2.png') center no-repeat;
+	color:#a92309; font-weight:bolder;
+	padding:0;
+	text-align:center;
+	z-index:1 !important;
+	border:0px solid #004a94;
+	margin:-14px 5px 0 650px;
+	/*right: 0px;*/
+	top: 0px;
+	/*display: none;*/
+	opacity:0.8
+}
+
+#modals #mw_close:hover {
+	opacity:0.5
+}
+
+
+/* ааОаДаЛаОаЖаКаА */
+#mw_overlay {
+	z-index: 30; /* аПаОаДаЛаОаЖаКаА аДаОаЛаЖаНаА аБббб аВббаЕ баЛаОаЕаВ баЛаЕаМаЕаНбаОаВ баАаЙбаА, аНаО аНаИаЖаЕ баЛаОб аМаОаДаАаЛбаНаОаГаО аОаКаНаА */
+	position: fixed; /* аВбаЕаГаДаА аПаЕбаЕаКббаВаАаЕб аВаЕбб баАаЙб */
+	background: #000 ; /* баЕбаНаАб */
+	opacity: 0.5; /* аНаО аНаЕаМаНаОаГаО аПбаОаЗбаАбаНаА */
+	width: 100%;
+	height: 100%; /* баАаЗаМаЕбаОаМ аВаО аВаЕбб баКбаАаН */
+	top: 0;
+	left: 0; /* баВаЕббб аИ баЛаЕаВаА 0, аОаБбаЗаАбаЕаЛбаНбаЕ баВаОаЙббаВаА! */
+	cursor: pointer;
+	display: none; /* аВ аОаБббаНаОаМ баОббаОбаНаИаИ аЕб аНаЕб) */
+}
+
+
+.soder-modal {
+	padding:20px 10px 30px 10px;
+	width:650px;
+}
+
+.soder-modal .title {
+	font: 28px 'Source Sans Pro';
+    color: #000;
+    /*text-transform: uppercase;*/
+	margin: 0px;
+	text-align:center;
+}
+
+.soder-modal .title2 {
+	font-size: 24px;
+	font-family: 'Source Sans Pro';
+    color: #f05b25;
+    /*text-transform: uppercase;*/
+	margin: 20px 0px;
+	text-align:center;
+}
+
+.soder-modal .data-content-re {
+	padding:10px;
+	font-family: 'Roboto','Source Sans Pro';
+}
+
+.soder-modal .data-content-re p {
+	font-size:16px;
+	color:#676767
+	text-align:justify;
+}
+
+.soder-modal .data-content-re p span {
+	font-size:16px;
+	color:#000;
+	background:none;
+	font-weight:bolder !important;
+	}
+
+.soder-modal .data-content-re p .mark {
+	font-size:18px;
+	color:#000;
+	background:none;
+	/*text-decoration:underline;*/
+	font-weight:bolder !important;
+	}
+
+.foot-data-re-blok {
+	width:300px;
+	height:80px;
+	position: fixed;
+    right: 30px;
+	bottom:30px;
+	display:none;
+	z-index:1000
+}
+
+.foot-data-re {
+	width:300px;
+	height:80px;
+	background:#ff7848;
+	border-radius:6px;
+    opacity:0.8;
+	position: fixed;
+    right: 30px;
+	bottom:30px;
+}
+
+
+.foot-data-re-2 {
+	width:300px;
+	height:77px;
+	border-radius:3px;
+	position: fixed;
+    right: 30px;
+	bottom:20px;
+	padding:3px 10px 5px 10px;
+
+	font-size: 18px;
+	font-family: 'Source Sans Pro';
+	font-weight:normal;
+	/*color: #D0CFD2;*/
+	color: #fff;
+	margin:-10px 0 0 0;
+	text-align:center;
+	cursor:pointer;
+	z-index:1000;
+}
+
+.foot-data-re-2 span {
+	display:block;
+	/*text-decoration:underline;*/
+	font-size:20px;
+	/*color: #D0CFD2;*/
+	color: #fff;
+	font-weight:bolder;
+}
+
+.foot-data-re-2 mark {
+	background:url("https://esplus.ru/upload/close/nexp-pre-right-white.png") 0px 0 no-repeat;
+	width:48px;
+	height:48px;
+	position:absolute;
+	z-index:1;
+	margin:2px 0 0 -50px;
+}
+
+/*
+@media (max-width: 760px) {
+  .soder-modal {
+	padding:20px 5% 30px 5%;
+	width:100%;
+    }
+	}
+*/
+#popup-form-send .section--contact .section__form-img {
+    width: 40%;
+    margin:  0 auto ;
+}
+#popup-form-send .section--contact .section__form-text {
+    width: 100% ;
+}
+
+#popup-form-send .section__form-head {
+    text-align: center;
+}
+
+@media (min-width: 320px) and (max-width: 480px) {
+	.soder-modal {
+		padding:20px 1% 30px 1%;
+		width:320px !important;
+		height:400px !important;
+		overflow: scroll;
+		}
+
+	#modals #mw_close {
+		height: 50px;
+		width:50px;
+		position: absolute;
+		/*top: -30px;
+		right: 0px;*/
+		cursor: pointer;
+		border-radius:0px;
+		/*background: url('/upload/close/close-30-30.png') center no-repeat;*/
+		background: url('https://esplus.ru/upload/close/closewhite-2.png ') center no-repeat;
+		color:#a92309; font-weight:bolder;
+		padding:0;
+		text-align:center;
+		z-index:1 !important;
+		border:0px solid #004a94;
+		margin:-44px 5px 0 280px;
+		/*right: 0px;*/
+		top: 0px;
+		display: block;
+		opacity:0.8
+	}
+	}
+
+
+@media (min-width: 640px) and (max-width: 900px) {
+	.soder-modal {
+		padding:20px 1% 30px 1%;
+		width:560px !important;
+		height:220px !important;
+		overflow: scroll;
+		}
+
+	#modals #mw_close {
+		height: 50px;
+		width:50px;
+		position: absolute;
+		/*top: -30px;
+		right: 0px;*/
+		cursor: pointer;
+		border-radius:0px;
+		/*background: url('/upload/close/close-30-30.png') center no-repeat;*/
+		background: url('https://esplus.ru/upload/close/closewhite-2.png ') center no-repeat;
+		color:#a92309; font-weight:bolder;
+		padding:0;
+		text-align:center;
+		z-index:100 !important;
+		border:0px solid #000;
+		margin:-50px 5px 0 520px;
+		/*right: 0px;*/
+		top: 0px;
+		display: block;
+		opacity:0.8
+	}
+	}

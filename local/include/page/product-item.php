@@ -6,6 +6,10 @@ use DorrBitt\catalogPriceType\CatalogPriceType;
 //$dev = DGAPI::dev("b3610fdad09a4e64ba1cfd3e9f1791eb");
 //print $dev;
 
+$enameserver = explode(".",$_SERVER["SERVER_NAME"]);
+//ClassDebug::debug($enameserver);
+$act_cart = (count($enameserver) == 3 & $enameserver[0] == "shop") ? 1 : 0;
+
 $product_picture_id = false;
 if ($arItem['DETAIL_PICTURE'])
     $product_picture_id = $arItem['DETAIL_PICTURE'];
@@ -91,10 +95,16 @@ if(is_array($arItem['ITEM_PRICES']) && empty($arItem['ITEM_PRICES'])){
         <a class="btn btn-orange btn-small w-44 js-AddToCart"><i class="fa fa-shopping-cart"></i></a>
     </div>
     <? if ($arItem['STOCK_AVAILABILITY']):?>
-    <div class="product-item--action<? if ($countInCart):?> is-in_cart<? endif;?>">
-        <a href="/cart/" class="product-item--cart btn-orange btn"><span>В корзине <small><?=$countInCart;?></small> шт.<br><b>Перейти</b> <i class="fa fa-angle-right"></i></a>
-        <a href="#" class="product-item--buy btn btn-grey js-AddToCart"><? if ($countInCart):?>+1<? else:?>В корзину<? endif;?></a>
-    </div>
+        <?php if($act_cart == 1):?>
+            <div class="product-item--action<? if ($countInCart):?> is-in_cart<? endif;?>">
+                <a href="/cart/" class="product-item--cart btn-orange btn"><span>В корзине <small><?=$countInCart;?></small> шт.<br><b>Перейти</b> <i class="fa fa-angle-right"></i></a>
+                <a href="#" class="product-item--buy btn btn-grey js-AddToCart"><? if ($countInCart):?>+1<? else:?>В корзину<? endif;?></a>
+            </div>
+        <?php else:?>
+            <div class="product-item--action">
+                <a href="<?=$link?>" class="product-item--buy btn btn-grey">Заказать</a>
+            </div>
+        <?php endif;?>
     <? else:?>
     <div class="product-item--action">
         <a href="#" class="product-item--buy btn btn-orange js-popUpData" data-fancybox-href="<?=AJAX_PATH;?>form/product-order.php" data-url="<?=$arItem['DETAIL_PAGE_URL']?>" data-product="<?=$arItem['NAME'];?>">Заказать</a>

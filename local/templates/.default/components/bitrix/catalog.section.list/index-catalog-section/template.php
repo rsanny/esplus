@@ -20,22 +20,26 @@ $idCity = DBCITY::idcity();
     $this->AddDeleteAction($arSection['ID'], $arSection['DELETE_LINK'], $strSectionDelete, $arSectionDeleteParams);
     $blokID = 1934;
 ?>
-<?php if($arSection['ID'] == $blokID): ?>
-<?php if($idCity == 23): ?>
-<div>
-    <a href="<?=$arSection['SECTION_PAGE_URL']; ?>" class="shop-section--link"  data-mh="slide-height">
-        <i><img src="<?=$arSection['PICTURE']['SRC'];?>" alt=""></i>
-        <span><?=$arSection['NAME']; ?></span>
-    </a>
-</div>
-<?php endif; ?> 
-<?php else:?>
-<div>
-    <a href="<?=$arSection['SECTION_PAGE_URL']; ?>" class="shop-section--link"  data-mh="slide-height">
-        <i><img src="<?=$arSection['PICTURE']['SRC'];?>" alt=""></i>
-        <span><?=$arSection['NAME']; ?></span>
-    </a>
-</div>
-<?php endif; ?> 
+<?php if($arSection['ID'] == $blokID) { ?>
+    <?php if($idCity == 23): ?>
+    <div>
+        <a href="<?=$arSection['SECTION_PAGE_URL']; ?>" class="shop-section--link"  data-mh="slide-height">
+            <i><img src="<?=$arSection['PICTURE']['SRC'];?>" alt=""></i>
+            <span><?=$arSection['NAME']; ?></span>
+        </a>
+    </div>
+    <?php endif; ?>
+<?php
+// На сайте Владимирского филиала https://shop.esplus.ru/ из блока "Каталог товаров" убран подраздел "Светодиодные лампы"
+} elseif ($idCity == 11 && $arSection['ID'] == 613) {
+    
+} else { ?>
+    <div>
+        <a href="<?=$arSection['SECTION_PAGE_URL']; ?>" class="shop-section--link"  data-mh="slide-height">
+            <i><img src="<?=$arSection['PICTURE']['SRC'];?>" alt=""></i>
+            <span><?=$arSection['NAME']; ?></span>
+        </a>
+    </div>
+<?php } ?>
 <? endforeach;?>
 </div>

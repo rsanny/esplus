@@ -6,7 +6,8 @@ if ($OptimalGroup['DOMAIN'] == "vladimir")
     $HeaderMenuPath = INCLUDE_PATH . 'site/'.$OptimalGroup['SITE']['CODE'].'/header/menu-vladimir.php';
 if ($OptimalGroup['DOMAIN'] == "chuvashia")
     $HeaderMenuPath = INCLUDE_PATH . 'site/'.$OptimalGroup['SITE']['CODE'].'/header/menu-chuvashia.php';
-
+if ($OptimalGroup['DOMAIN'] == "saratov")
+    $HeaderMenuPath = INCLUDE_PATH . 'site/'.$OptimalGroup['SITE']['CODE'].'/header/menu-saratov.php';
 if ($OptimalGroup['DOMAIN'] == "kirov")
     $HeaderMenuPath = INCLUDE_PATH . 'site/'.$OptimalGroup['SITE']['CODE'].'/header/menu-kirov.php';
 

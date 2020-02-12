@@ -5,7 +5,8 @@ use DorrBitt\dbapi\DGAPI;
 use DorrBitt\DataArefmetikaCapchy\DataArefmetikaCapchy;
 use DorrBitt\IB\IBOT;
 use OptimalGroup\Core;
-
+//print DGAPI::ses()."<br>";
+$ev = DGAPI::dev("4805c7621bc280bb538bce47a4bcb91a");
 $OptimalGroup = Core::Settings();
 $REQUEST_URI = trim(explode("?",$_SERVER["REQUEST_URI"])[0]);
 define("POST_FORM_ACTION_URI_ABS",$REQUEST_URI);
@@ -31,9 +32,12 @@ if (CModule::IncludeModule("form"))
 
 
 	$provBota = DataArefmetikaCapchy::arf_proverka();
-    /*print $provBota;
-	ClassDebug::debug($_REQUEST);
-	print $ariResult;*/
+	if($ev == 1){
+		//print $provBota;
+		//ClassDebug::debug($_REQUEST);
+		//print $ariResult;
+	}
+
 
 	//if($_POST["form_text_853"] == "capcha" || $provBota == 0) $_POST["form_text_853"] = "";
 	if($_POST["form_text_853"] == "capcha" || $provBota == 0){
@@ -188,6 +192,15 @@ if (CModule::IncludeModule("form"))
 		unset($_SESSION[$solgo]);
 	}
 	
+	if($ev == 1){
+		/*print $provBota;
+		print("asd =axASX ");
+		print($form_text_data);
+		print("asd =axASX ]");
+		ClassDebug::debug($_REQUEST);
+		print $ariResult;*/
+	}
+
 	foreach ($arDefaultComponentParameters as $key => $value) if (!is_set($arParams, $key)) $arParams[$key] = $value;
 
 	$arDefaultUrl = array(
@@ -351,14 +364,16 @@ if (CModule::IncludeModule("form"))
 		}
 	}
 
-	
+
 	if (strlen($arResult["ERROR"]) <= 0)
 	{  
 		// ************************************************************* //
 		// ****************** get/post processing ********************** //
 		// ************************************************************* //
 		$arResult["arrVALUES"] = array();
-		
+		if($ev == 1){ //print("ERROR");
+			//ClassDebug::debug($arResult["ERROR"]);
+			}
 		if(isset($_REQUEST["ERROR"])){
 			$arResult = $_SESSION[$solgo]["arResult"];
 			unset($_SESSION[$solgo]["arResult"]);
@@ -367,24 +382,38 @@ if (CModule::IncludeModule("form"))
 		if (($_POST['WEB_FORM_ID'] == $arParams['WEB_FORM_ID'] || $_POST['WEB_FORM_ID'] == $arResult['arForm']['SID']) && (strlen($_REQUEST["web_form_submit"])>0 || strlen($_REQUEST["web_form_apply"])>0))
 		{
 			$arResult["arrVALUES"] = $_REQUEST;
+			if($ev == 1){ //print("arrVALUES");
 			//ClassDebug::debug($arResult["arrVALUES"]);
+			}
 			// check errors
 			$arResult["FORM_ERRORS"] = CForm::Check($arParams["WEB_FORM_ID"], $arResult["arrVALUES"], false, "Y", $arParams['USE_EXTENDED_ERRORS']);
-
+			
 			if (
 				$arParams['USE_EXTENDED_ERRORS'] == 'Y' && (!is_array($arResult["FORM_ERRORS"]) || count($arResult["FORM_ERRORS"]) <= 0)
 				||
 				$arParams['USE_EXTENDED_ERRORS'] != 'Y' && strlen($arResult["FORM_ERRORS"]) <= 0
 			)
 			{
+
+				if($ev == 1){ //print("FORM_ERRORS = [");
+					//ClassDebug::debug($arResult["FORM_ERRORS"]);
+					//print("FORM_ERRORS = ] ");
+					}
 				// check user session
 				if (check_bitrix_sessid())
 				{
 					$return = false;
-                    //ClassDebug::debug($arResult["arrVALUES"]);
+					if($ev == 1){ //print("arrVALUES 2");
+						//ClassDebug::debug($arResult["arrVALUES"]);
+						//ClassDebug::debug($arParams["WEB_FORM_ID"]);
+						}
 					// add result
 					if($RESULT_ID = CFormResult::Add($arParams["WEB_FORM_ID"], $arResult["arrVALUES"]))
 					{
+
+						if($ev == 1){ 
+                            //print("RESULTID = {$RESULT_ID}");
+						}
 						//$arResult["FORM_NOTE"] = GetMessage("FORM_DATA_SAVED1").$RESULT_ID.GetMessage("FORM_DATA_SAVED2");
 						$arResult["FORM_RESULT"] = 'addok';
 						// send email notifications
@@ -544,6 +573,10 @@ if (CModule::IncludeModule("form"))
 							/*ClassDebug::debug($arResult["FORM_ERRORS"]);
 							ClassDebug::debug($_REQUEST);
 							print $ariResult;*/
+
+							if($ev == 1){ 
+								//ClassDebug::debug($arResult["FORM_ERRORS"]);
+							}
 
 						/*$_SESSION[$solgo]["arResult"] = $arResult; $arResult = [];
 						$data_error = "";

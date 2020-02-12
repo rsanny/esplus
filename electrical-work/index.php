@@ -3,12 +3,39 @@ require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
 $APPLICATION->SetTitle("Электромонтажные работы");
 global $OptimalGroup;
 OptimalGroup\Core::AddJs(array("optimalgroup/numbers"));
+$prefDomen = (!empty($OptimalGroup['DOMAIN'])) ? $OptimalGroup['DOMAIN'] : "ekb";
+$prefDomenData = mb_strtoupper($prefDomen, 'UTF-8');
+$parDomPrice = "PRICE_{$prefDomenData}";
 use DorrBitt\ClassDebug\ClassDebug;
 use DorrBitt\dbapi\DGAPI;
-//print DGAPI::ses(); 
-$dev = (DGAPI::dev("9f4ad06d43eafc5db612fe4b90f0860f") == 1) ? 1 : 0;
-//print $dev;
-//if($dev == 1) ClassDebug::debug($OptimalGroup);
+use DorrBitt\dbapi\ClassDBase;
+$objRubBasa = new ClassDBase();
+/*
+** array
+** Определение минимальной суммы заказа по iD товара. ID = 236485
+*/
+$tovarIDDefault = 236485;
+$tovarIDDefaultPrice = $objRubBasa->initQuery4(
+    "b_catalog_price,b_catalog_group",
+    [
+        "b_catalog_price.PRICE as PRICE",
+        "b_catalog_price.CURRENCY as CURRENCY",
+        "b_catalog_price.PRICE_SCALE as PRICE_SCALE",
+    ],
+    [
+        ["b_catalog_group.NAME","=",$parDomPrice],  
+        ["b_catalog_price.PRODUCT_ID","=",$tovarIDDefault],
+        ["b_catalog_group.ID","=","b_catalog_price.CATALOG_GROUP_ID"], 
+    ],
+    []
+  );
+  $price_region_min = 0;
+  if(is_array($tovarIDDefaultPrice) && count($tovarIDDefaultPrice) > 0){
+      if($tovarIDDefaultPrice[0]["CURRENCY"] == "RUB"){
+          $price_region_min = $tovarIDDefaultPrice[0]["PRICE"]; 
+          $price_region_min = number_format($price_region_min, 0, '', '');
+      }
+  }
 ?>
 <main class="content">
     <div class="container">
@@ -32,8 +59,13 @@ $dev = (DGAPI::dev("9f4ad06d43eafc5db612fe4b90f0860f") == 1) ? 1 : 0;
                 <? $APPLICATION->IncludeFile(INCLUDE_PATH . '/site/shop/sidebar/links.php', Array("arSettings"=>$arSettings), Array("SHOW_BORDER"=> false));?>
             </aside>
             <section class="col col-12 col-md-8 col-lg-9">
-                <? if ($OptimalGroup['BRANCH']['SHOP_SERVICE_TEXT']['TEXT']):?>
-                <div class="catalog-section--title"><?=$OptimalGroup['BRANCH']['SHOP_SERVICE_TEXT']['TEXT'];?></div>
+            <? if ($OptimalGroup['BRANCH']['SHOP_SERVICE_TEXT']['TEXT']):?>
+                <?php if($price_region_min > 0):?>
+                    <?php $SHOP_SERVICE_TEXT = "<span class=\"color-orange\">Минимальная сумма заказа: {$price_region_min} руб.</span>"; ?>
+                <?php else:?>
+                    <?php $SHOP_SERVICE_TEXT = $OptimalGroup['BRANCH']['SHOP_SERVICE_TEXT']['TEXT']; ?>
+                <?php endif;?>
+                <div class="catalog-section--title"><?=$SHOP_SERVICE_TEXT;?></div>
                 <? endif;?>
                 <?
                 global $arrServiceFilter;
